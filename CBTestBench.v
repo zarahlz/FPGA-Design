@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module CBTestBench;
+    reg [68:0] prog = 69'b11101110111011100_01100100010101000111001101010001_00000000000000000000;
     
     // Inputs
     reg prog_in;
@@ -18,6 +19,11 @@ module CBTestBench;
     wire [3:0] out2;
     wire [3:0] out3;
     wire [3:0] out4;
+    
+    wire [3:0] exp_out1;
+    wire [3:0] exp_out2;
+    wire [3:0] exp_out3;
+    wire [3:0] exp_out4;
 
     // Instantiate the Unit Under Test (UUT)
     CBModule uut (
@@ -30,6 +36,20 @@ module CBTestBench;
         .in3(in3),
         .in4(in4),
         .prog_out(prog_out),
+        .out1(out1),
+        .out2(out2),
+        .out3(out3),
+        .out4(out4)
+    );
+    
+    // Instantiate the Unit Under Test (UUT)
+    CBTest uut1 (
+        .prog(prog),
+        .clb_clk(clb_clk),
+        .in1(in1),
+        .in2(in2),
+        .in3(in3),
+        .in4(in4),
         .out1(out1),
         .out2(out2),
         .out3(out3),
@@ -54,11 +74,6 @@ module CBTestBench;
         end
     endtask
     
-    task analyse;
-        begin
-        end
-    endtask
-    
     // Task to test the CB with the given test cases for CLB and SB
     task test_cb;
         begin
@@ -69,7 +84,7 @@ module CBTestBench;
             in4 = 4'b0011;
             @(posedge clb_clk);
             #10; // Wait for output to stabilize
-            $display("Expected Output: 1111_0001_0011_0001, Output: %b_%b_%b_%b", out4, out3, out2, out1);
+            $display("Expected Output: %b_%b_%b_%b, Output: %b_%b_%b_%b", exp_out4, exp_out3, exp_out2, exp_out1, out4, out3, out2, out1);
         end
     endtask
 

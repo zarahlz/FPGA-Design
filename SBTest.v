@@ -1,15 +1,15 @@
 `timescale 1ns / 1ps
 
-module SBModule (
+module SBTest (
     input [3:0] in1,      
     input [3:0] in2,     
     input [3:0] in3,      
     input [3:0] in4,      
-    input [31:0] prog       
+    input [31:0] prog,
     output [3:0] out1,   
     output [3:0] out2,    
     output [3:0] out3,    
-    output [3:0] out4,       
+    output [3:0] out4  
 );
     MUX4to1 mux1_0 (.MUX_in({in2[0], in3[0], in4[0], in4[0]}), .MUX_sel(prog[31:30]), .MUX_out(out1[0]));
     MUX4to1 mux1_1 (.MUX_in({in2[1], in3[1], in4[1], in4[1]}), .MUX_sel(prog[29:28]), .MUX_out(out1[1]));

@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module CLBModule (
+module CLBTest (
     input wire [16:0] prog,
     input wire clb_clk,
     input wire [3:0] clb_input,
