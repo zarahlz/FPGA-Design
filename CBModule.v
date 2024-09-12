@@ -29,14 +29,14 @@ module CBModule(
     wire [3:0] sb_out4;           // Switch box output 4
     
     // Muxes to route input/output signals through the switch box
-    wire [7:0] clb_in_mux = {out1[0], in1[0], out1[1], in1[1], out1[2], in1[2], out1[3], in1[3]};
-    wire [1:0] out3_mux = {sb_out4[3], clb_out};
+    wire [7:0] clb_in_mux = {out1[3], in1[3], out1[2], in1[2], out1[1], in1[1], out1[0], in1[0]};
+    wire [1:0] out3_mux = {clb_out, sb_out4[3]};
     wire [1:0] in3_mux = {clb_out, in4[3]};
-    wire [1:0] out2_mux = {sb_out4[2], clb_out};
+    wire [1:0] out2_mux = {clb_out, sb_out4[2]};
     wire [1:0] in2_mux = {clb_out, in4[2]};
-    wire [1:0] out1_mux = {sb_out4[1], clb_out};
+    wire [1:0] out1_mux = {clb_out, sb_out4[1]};
     wire [1:0] in1_mux = {clb_out, in4[1]};
-    wire [1:0] out0_mux = {sb_out4[0], clb_out};
+    wire [1:0] out0_mux = {clb_out, sb_out4[0]};
     wire [1:0] in0_mux = {clb_out, in4[0]};
     
     // 20-bit shift register used for configuration
