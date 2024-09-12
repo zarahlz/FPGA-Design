@@ -1,7 +1,6 @@
 `timescale 1ns / 1ps
 
-// If shift == 0 => prog_in enters from the left side of the shift register, hence, use shift_reg; else use shift_reg1
-module CLBModule #(parameter shift=0) (
+module CLBModule (
     input wire prog_in,
     input wire prog_en,
     input wire prog_clk,
@@ -13,7 +12,6 @@ module CLBModule #(parameter shift=0) (
 
     // 17-bit shift register
     reg [16:0] shift_reg;
-    reg [16:0] shift_reg1;
     
     // LUT output
     wire lut_out;
@@ -27,13 +25,12 @@ module CLBModule #(parameter shift=0) (
     
     initial begin
         shift_reg = 17'b0;
-        shift_reg1 = 17'b0;
     end
     
     // LUT instanciation
     LUT16to1 lut16to1 (
         .LUT_sel(clb_input),
-        .LUT_input(!shift ? shift_reg[16:1] : shift_reg1[16:1]),
+        .LUT_input(shift_reg[16:1]),
         .LUT_output(lut_out)
     );
     
@@ -46,7 +43,7 @@ module CLBModule #(parameter shift=0) (
     
     // MUX instantiation
     MUX2to1 mux2to1 (
-        .MUX_sel(!shift ? shift_reg[0] : shift_reg1[0]),
+        .MUX_sel(shift_reg[0]),
         .MUX_in(mux_in),
         .MUX_out(mux_out)
     );
@@ -55,12 +52,11 @@ module CLBModule #(parameter shift=0) (
     always @(posedge prog_clk) begin
         if (prog_en) begin
             shift_reg <= {prog_in, shift_reg[16:1]};
-            shift_reg1 <= {shift_reg1[15:0], prog_in};
         end
     end
     
     // Prog out logic
-    assign prog_out = !shift ? shift_reg[0] : shift_reg1[16];
+    assign prog_out = shift_reg[0];
     
     // Output logic
     assign clb_output = !prog_en ? mux_out : 0;
