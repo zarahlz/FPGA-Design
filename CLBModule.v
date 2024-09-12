@@ -59,6 +59,6 @@ module CLBModule (
     assign prog_out = shift_reg[0];
     
     // Output logic
-    assign clb_output = !prog_en? mux_out:0;
+    assign clb_output = mux_out;
 
 endmodule

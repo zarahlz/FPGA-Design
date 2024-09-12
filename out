@@ -1,0 +1,2151 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000017dddb04e70 .scope module, "CBTestBench" "CBTestBench" 2 3;
+ .timescale -9 -12;
+v0000017dddd03c50_0 .var "clb_clk", 0 0;
+v0000017dddd04290_0 .net "exp_out1", 3 0, L_0000017dddd1b230;  1 drivers
+v0000017dddd03750_0 .net "exp_out2", 3 0, L_0000017dddd1af10;  1 drivers
+v0000017dddd039d0_0 .net "exp_out3", 3 0, L_0000017dddd2b370;  1 drivers
+v0000017dddd043d0_0 .net "exp_out4", 3 0, L_0000017dddd1ecf0;  1 drivers
+v0000017dddd04790_0 .var "in1", 3 0;
+v0000017dddd031b0_0 .var "in2", 3 0;
+v0000017dddd03070_0 .var "in3", 3 0;
+v0000017dddd032f0_0 .var "in4", 3 0;
+v0000017dddd03a70_0 .net "out1", 3 0, L_0000017dddd0a7f0;  1 drivers
+v0000017dddd03b10_0 .net "out2", 3 0, L_0000017dddd0af70;  1 drivers
+v0000017dddd02c10_0 .net "out3", 3 0, L_0000017dddd1d350;  1 drivers
+v0000017dddd025d0_0 .net "out4", 3 0, L_0000017dddd1c9f0;  1 drivers
+v0000017dddd02490_0 .var "prog", 68 0;
+v0000017dddd04970_0 .var "prog_clk", 0 0;
+v0000017dddd04330_0 .var "prog_en", 0 0;
+v0000017dddd03570_0 .var "prog_in", 0 0;
+v0000017dddd04830_0 .net "prog_out", 0 0, L_0000017dddd1d0d0;  1 drivers
+S_0000017dddb6aad0 .scope task, "program_cb" "program_cb" 2 64, 2 64 0, S_0000017dddb04e70;
+ .timescale -9 -12;
+v0000017dddc911a0_0 .var "bitstream", 68 0;
+v0000017dddc8efe0_0 .var/i "i", 31 0;
+E_0000017dddc5f770 .event posedge, v0000017dddc90c00_0;
+TD_CBTestBench.program_cb ;
+    %vpi_call 2 67 "$display", "Programming CB..." {0 0 0};
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000017dddd04330_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000017dddc8efe0_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0000017dddc8efe0_0;
+    %cmpi/s 68, 0, 32;
+    %flag_or 5, 4;
+    %jmp/0xz T_0.1, 5;
+    %load/vec4 v0000017dddc911a0_0;
+    %load/vec4 v0000017dddc8efe0_0;
+    %part/s 1;
+    %store/vec4 v0000017dddd03570_0, 0, 1;
+    %wait E_0000017dddc5f770;
+    %load/vec4 v0000017dddc8efe0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000017dddc8efe0_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000017dddd04330_0, 0, 1;
+    %end;
+S_0000017dddb41410 .scope task, "test_cb" "test_cb" 2 78, 2 78 0, S_0000017dddb04e70;
+ .timescale -9 -12;
+E_0000017dddc5f1b0 .event posedge, v0000017dddc8f440_0;
+TD_CBTestBench.test_cb ;
+    %vpi_call 2 80 "$display", "Testing CB..." {0 0 0};
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0000017dddd04790_0, 0, 4;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v0000017dddd031b0_0, 0, 4;
+    %pushi/vec4 9, 0, 4;
+    %store/vec4 v0000017dddd03070_0, 0, 4;
+    %pushi/vec4 3, 0, 4;
+    %store/vec4 v0000017dddd032f0_0, 0, 4;
+    %wait E_0000017dddc5f1b0;
+    %delay 10000, 0;
+    %vpi_call 2 87 "$display", "Expected Output: %b_%b_%b_%b, Output: %b_%b_%b_%b", v0000017dddd043d0_0, v0000017dddd039d0_0, v0000017dddd03750_0, v0000017dddd04290_0, v0000017dddd025d0_0, v0000017dddd02c10_0, v0000017dddd03b10_0, v0000017dddd03a70_0 {0 0 0};
+    %end;
+S_0000017dddb415a0 .scope module, "uut" "CBModule" 2 29, 3 7 0, S_0000017dddb04e70;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 4 "in1";
+    .port_info 5 /INPUT 4 "in2";
+    .port_info 6 /INPUT 4 "in3";
+    .port_info 7 /INPUT 4 "in4";
+    .port_info 8 /OUTPUT 1 "prog_out";
+    .port_info 9 /OUTPUT 4 "out1";
+    .port_info 10 /OUTPUT 4 "out2";
+    .port_info 11 /OUTPUT 4 "out3";
+    .port_info 12 /OUTPUT 4 "out4";
+v0000017dddcf0140_0 .net *"_ivl_1", 0 0, L_0000017dddd0f2f0;  1 drivers
+v0000017dddcf15e0_0 .net *"_ivl_11", 0 0, L_0000017dddd0fd90;  1 drivers
+v0000017dddcf1e00_0 .net *"_ivl_13", 0 0, L_0000017dddd10970;  1 drivers
+v0000017dddcf0b40_0 .net *"_ivl_15", 0 0, L_0000017dddd0edf0;  1 drivers
+v0000017dddcf17c0_0 .net *"_ivl_19", 0 0, L_0000017dddd0fb10;  1 drivers
+v0000017dddcf1ea0_0 .net *"_ivl_23", 0 0, L_0000017dddd0fed0;  1 drivers
+v0000017dddcf1f40_0 .net *"_ivl_27", 0 0, L_0000017dddd0fe30;  1 drivers
+v0000017dddcf0e60_0 .net *"_ivl_3", 0 0, L_0000017dddd0f9d0;  1 drivers
+v0000017dddcf0f00_0 .net *"_ivl_31", 0 0, L_0000017dddd0f430;  1 drivers
+v0000017dddcf0fa0_0 .net *"_ivl_35", 0 0, L_0000017dddd10790;  1 drivers
+v0000017dddcf1360_0 .net *"_ivl_39", 0 0, L_0000017dddd105b0;  1 drivers
+v0000017dddcf1860_0 .net *"_ivl_43", 0 0, L_0000017dddd10a10;  1 drivers
+v0000017dddcf1220_0 .net *"_ivl_47", 0 0, L_0000017dddd0f930;  1 drivers
+v0000017dddcf1900_0 .net *"_ivl_5", 0 0, L_0000017dddd10bf0;  1 drivers
+v0000017dddcefc40_0 .net *"_ivl_7", 0 0, L_0000017dddd10510;  1 drivers
+v0000017dddcf12c0_0 .net *"_ivl_9", 0 0, L_0000017dddd106f0;  1 drivers
+v0000017dddcf19a0_0 .net "clb_clk", 0 0, v0000017dddd03c50_0;  1 drivers
+v0000017dddcf1a40_0 .net "clb_in", 3 0, L_0000017dddd1d030;  1 drivers
+v0000017dddcf1fe0_0 .net "clb_in_mux", 7 0, L_0000017dddd0f070;  1 drivers
+v0000017dddcf2080_0 .net "clb_out", 0 0, L_0000017dddc79470;  1 drivers
+v0000017dddcf0280_0 .net "in0_mux", 1 0, L_0000017dddd0f610;  1 drivers
+v0000017dddcf2120_0 .net "in1", 3 0, v0000017dddd04790_0;  1 drivers
+v0000017dddcf21c0_0 .net "in1_mux", 1 0, L_0000017dddd10650;  1 drivers
+v0000017dddcefce0_0 .net "in2", 3 0, v0000017dddd031b0_0;  1 drivers
+v0000017dddcefd80_0 .net "in2_mux", 1 0, L_0000017dddd10c90;  1 drivers
+v0000017dddcefe20_0 .net "in3", 3 0, v0000017dddd03070_0;  1 drivers
+v0000017dddcf0320_0 .net "in3_mux", 1 0, L_0000017dddd10330;  1 drivers
+v0000017dddcf03c0_0 .net "in4", 3 0, v0000017dddd032f0_0;  1 drivers
+v0000017dddcf68b0_0 .net "out0_mux", 1 0, L_0000017dddd0f570;  1 drivers
+v0000017dddcf7670_0 .net "out1", 3 0, L_0000017dddd0a7f0;  alias, 1 drivers
+v0000017dddcf7170_0 .net "out1_mux", 1 0, L_0000017dddd0ff70;  1 drivers
+v0000017dddcf6b30_0 .net "out2", 3 0, L_0000017dddd0af70;  alias, 1 drivers
+v0000017dddcf72b0_0 .net "out2_mux", 1 0, L_0000017dddd0f390;  1 drivers
+v0000017dddcf6bd0_0 .net "out3", 3 0, L_0000017dddd1d350;  alias, 1 drivers
+v0000017dddcf7210_0 .net "out3_mux", 1 0, L_0000017dddd0ee90;  1 drivers
+v0000017dddcf6e50_0 .net "out4", 3 0, L_0000017dddd1c9f0;  alias, 1 drivers
+v0000017dddcf6450_0 .net "prog_clk", 0 0, v0000017dddd04970_0;  1 drivers
+v0000017dddcf6950_0 .net "prog_en", 0 0, v0000017dddd04330_0;  1 drivers
+v0000017dddcf69f0_0 .net "prog_in", 0 0, v0000017dddd03570_0;  1 drivers
+v0000017dddcf7710_0 .net "prog_out", 0 0, L_0000017dddd1d0d0;  alias, 1 drivers
+v0000017dddcf6ef0_0 .net "sb_in4", 3 0, L_0000017dddd1de90;  1 drivers
+v0000017dddcf7a30_0 .net "sb_out4", 3 0, L_0000017dddd1da30;  1 drivers
+v0000017dddcf7350_0 .net "sb_prog_in", 0 0, L_0000017dddd110f0;  1 drivers
+v0000017dddcf6630_0 .net "sb_prog_out", 0 0, L_0000017dddd10f10;  1 drivers
+v0000017dddcf6c70_0 .var "shift_reg", 19 0;
+L_0000017dddd0f2f0 .part L_0000017dddd0a7f0, 3, 1;
+L_0000017dddd0f9d0 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd10bf0 .part L_0000017dddd0a7f0, 2, 1;
+L_0000017dddd10510 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd106f0 .part L_0000017dddd0a7f0, 1, 1;
+L_0000017dddd0fd90 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd10970 .part L_0000017dddd0a7f0, 0, 1;
+L_0000017dddd0edf0 .part v0000017dddd04790_0, 0, 1;
+LS_0000017dddd0f070_0_0 .concat [ 1 1 1 1], L_0000017dddd0edf0, L_0000017dddd10970, L_0000017dddd0fd90, L_0000017dddd106f0;
+LS_0000017dddd0f070_0_4 .concat [ 1 1 1 1], L_0000017dddd10510, L_0000017dddd10bf0, L_0000017dddd0f9d0, L_0000017dddd0f2f0;
+L_0000017dddd0f070 .concat [ 4 4 0 0], LS_0000017dddd0f070_0_0, LS_0000017dddd0f070_0_4;
+L_0000017dddd0fb10 .part L_0000017dddd1da30, 3, 1;
+L_0000017dddd0ee90 .concat [ 1 1 0 0], L_0000017dddd0fb10, L_0000017dddc79470;
+L_0000017dddd0fed0 .part v0000017dddd032f0_0, 3, 1;
+L_0000017dddd10330 .concat [ 1 1 0 0], L_0000017dddd0fed0, L_0000017dddc79470;
+L_0000017dddd0fe30 .part L_0000017dddd1da30, 2, 1;
+L_0000017dddd0f390 .concat [ 1 1 0 0], L_0000017dddd0fe30, L_0000017dddc79470;
+L_0000017dddd0f430 .part v0000017dddd032f0_0, 2, 1;
+L_0000017dddd10c90 .concat [ 1 1 0 0], L_0000017dddd0f430, L_0000017dddc79470;
+L_0000017dddd10790 .part L_0000017dddd1da30, 1, 1;
+L_0000017dddd0ff70 .concat [ 1 1 0 0], L_0000017dddd10790, L_0000017dddc79470;
+L_0000017dddd105b0 .part v0000017dddd032f0_0, 1, 1;
+L_0000017dddd10650 .concat [ 1 1 0 0], L_0000017dddd105b0, L_0000017dddc79470;
+L_0000017dddd10a10 .part L_0000017dddd1da30, 0, 1;
+L_0000017dddd0f570 .concat [ 1 1 0 0], L_0000017dddd10a10, L_0000017dddc79470;
+L_0000017dddd0f930 .part v0000017dddd032f0_0, 0, 1;
+L_0000017dddd0f610 .concat [ 1 1 0 0], L_0000017dddd0f930, L_0000017dddc79470;
+L_0000017dddd1cef0 .part v0000017dddcf6c70_0, 17, 3;
+L_0000017dddd1d8f0 .part v0000017dddcf6c70_0, 14, 3;
+L_0000017dddd1dad0 .part v0000017dddcf6c70_0, 11, 3;
+L_0000017dddd1c590 .part v0000017dddcf6c70_0, 8, 3;
+L_0000017dddd1d030 .concat8 [ 1 1 1 1], L_0000017dddd1ea70, L_0000017dddd1e9d0, L_0000017dddd1d850, L_0000017dddd1e750;
+L_0000017dddd1cdb0 .part v0000017dddcf6c70_0, 7, 1;
+L_0000017dddd1d990 .part v0000017dddcf6c70_0, 6, 1;
+L_0000017dddd1ddf0 .part v0000017dddcf6c70_0, 5, 1;
+L_0000017dddd1c6d0 .part v0000017dddcf6c70_0, 4, 1;
+L_0000017dddd1e7f0 .part v0000017dddcf6c70_0, 3, 1;
+L_0000017dddd1db70 .part v0000017dddcf6c70_0, 2, 1;
+L_0000017dddd1d490 .part v0000017dddcf6c70_0, 1, 1;
+L_0000017dddd1c9f0 .concat8 [ 1 1 1 1], L_0000017dddd1c950, L_0000017dddd1c810, L_0000017dddd1dd50, L_0000017dddd1e890;
+L_0000017dddd1cd10 .part v0000017dddcf6c70_0, 0, 1;
+L_0000017dddd1de90 .concat8 [ 1 1 1 1], L_0000017dddd1cc70, L_0000017dddd1c8b0, L_0000017dddd1c630, L_0000017dddd1d530;
+L_0000017dddd1d0d0 .part v0000017dddcf6c70_0, 0, 1;
+S_0000017dddb3ec30 .scope module, "clb" "CLBModule" 3 51, 4 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 4 "clb_input";
+    .port_info 5 /OUTPUT 1 "prog_out";
+    .port_info 6 /OUTPUT 1 "clb_output";
+L_0000017dddc79470 .functor BUFZ 1, L_0000017dddd0fbb0, C4<0>, C4<0>, C4<0>;
+v0000017dddc902a0_0 .net "clb_clk", 0 0, v0000017dddd03c50_0;  alias, 1 drivers
+v0000017dddc903e0_0 .net "clb_input", 3 0, L_0000017dddd1d030;  alias, 1 drivers
+v0000017dddc8ecc0_0 .net "clb_output", 0 0, L_0000017dddc79470;  alias, 1 drivers
+v0000017dddc907a0_0 .net "ff_out", 0 0, v0000017dddc908e0_0;  1 drivers
+v0000017dddc90f20_0 .net "lut_out", 0 0, L_0000017dddd0f6b0;  1 drivers
+v0000017dddc8f760_0 .net "mux_in", 1 0, L_0000017dddd10d30;  1 drivers
+v0000017dddc91060_0 .net "mux_out", 0 0, L_0000017dddd0fbb0;  1 drivers
+v0000017dddc90c00_0 .net "prog_clk", 0 0, v0000017dddd04970_0;  alias, 1 drivers
+v0000017dddc8fbc0_0 .net "prog_en", 0 0, v0000017dddd04330_0;  alias, 1 drivers
+v0000017dddc90660_0 .net "prog_in", 0 0, v0000017dddd03570_0;  alias, 1 drivers
+v0000017dddc90480_0 .net "prog_out", 0 0, L_0000017dddd110f0;  alias, 1 drivers
+v0000017dddc90840_0 .var "shift_reg", 16 0;
+L_0000017dddd10d30 .concat [ 1 1 0 0], L_0000017dddd0f6b0, v0000017dddc908e0_0;
+L_0000017dddd0f7f0 .part v0000017dddc90840_0, 1, 16;
+L_0000017dddd10010 .part v0000017dddc90840_0, 0, 1;
+L_0000017dddd110f0 .part v0000017dddc90840_0, 0, 1;
+S_0000017dddb3edc0 .scope module, "d" "DFlipFlop" 4 38, 5 3 0, S_0000017dddb3ec30;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "d";
+    .port_info 2 /OUTPUT 1 "q";
+v0000017dddc8f440_0 .net "clk", 0 0, v0000017dddd03c50_0;  alias, 1 drivers
+v0000017dddc8f580_0 .net "d", 0 0, L_0000017dddd0f6b0;  alias, 1 drivers
+v0000017dddc908e0_0 .var "q", 0 0;
+S_0000017dddb3a780 .scope module, "lut16to1" "LUT16to1" 4 31, 6 3 0, S_0000017dddb3ec30;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 4 "LUT_sel";
+    .port_info 1 /INPUT 16 "LUT_input";
+    .port_info 2 /OUTPUT 1 "LUT_output";
+v0000017dddc8f4e0_0 .net "LUT_input", 15 0, L_0000017dddd0f7f0;  1 drivers
+v0000017dddc8f620_0 .net "LUT_output", 0 0, L_0000017dddd0f6b0;  alias, 1 drivers
+v0000017dddc90a20_0 .net "LUT_sel", 3 0, L_0000017dddd1d030;  alias, 1 drivers
+L_0000017dddd0f6b0 .part/v L_0000017dddd0f7f0, L_0000017dddd1d030, 1;
+S_0000017dddb3a910 .scope module, "mux2to1" "MUX2to1" 4 45, 7 3 0, S_0000017dddb3ec30;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc90ac0_0 .net "MUX_in", 1 0, L_0000017dddd10d30;  alias, 1 drivers
+v0000017dddc8f6c0_0 .net "MUX_out", 0 0, L_0000017dddd0fbb0;  alias, 1 drivers
+v0000017dddc8f8a0_0 .net "MUX_sel", 0 0, L_0000017dddd10010;  1 drivers
+L_0000017dddd0fbb0 .part/v L_0000017dddd10d30, L_0000017dddd10010, 1;
+S_0000017dddb37ad0 .scope module, "mux_clb_in0" "MUX8to1" 3 81, 8 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8f940_0 .net "MUX_in", 7 0, L_0000017dddd0f070;  alias, 1 drivers
+v0000017dddc8fe40_0 .net "MUX_out", 0 0, L_0000017dddd1ea70;  1 drivers
+v0000017dddc8fd00_0 .net "MUX_sel", 2 0, L_0000017dddd1c590;  1 drivers
+L_0000017dddd1ea70 .part/v L_0000017dddd0f070, L_0000017dddd1c590, 1;
+S_0000017dddb37c60 .scope module, "mux_clb_in1" "MUX8to1" 3 80, 8 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8eb80_0 .net "MUX_in", 7 0, L_0000017dddd0f070;  alias, 1 drivers
+v0000017dddc90980_0 .net "MUX_out", 0 0, L_0000017dddd1e9d0;  1 drivers
+v0000017dddc8ed60_0 .net "MUX_sel", 2 0, L_0000017dddd1dad0;  1 drivers
+L_0000017dddd1e9d0 .part/v L_0000017dddd0f070, L_0000017dddd1dad0, 1;
+S_0000017dddb33d40 .scope module, "mux_clb_in2" "MUX8to1" 3 79, 8 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8ee00_0 .net "MUX_in", 7 0, L_0000017dddd0f070;  alias, 1 drivers
+v0000017dddc8ef40_0 .net "MUX_out", 0 0, L_0000017dddd1d850;  1 drivers
+v0000017dddc90520_0 .net "MUX_sel", 2 0, L_0000017dddd1d8f0;  1 drivers
+L_0000017dddd1d850 .part/v L_0000017dddd0f070, L_0000017dddd1d8f0, 1;
+S_0000017dddb33ed0 .scope module, "mux_clb_in3" "MUX8to1" 3 78, 8 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc905c0_0 .net "MUX_in", 7 0, L_0000017dddd0f070;  alias, 1 drivers
+v0000017dddc90b60_0 .net "MUX_out", 0 0, L_0000017dddd1e750;  1 drivers
+v0000017dddc90020_0 .net "MUX_sel", 2 0, L_0000017dddd1cef0;  1 drivers
+L_0000017dddd1e750 .part/v L_0000017dddd0f070, L_0000017dddd1cef0, 1;
+S_0000017dddb27340 .scope module, "mux_in0" "MUX2to1" 3 91, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8fda0_0 .net "MUX_in", 1 0, L_0000017dddd0f610;  alias, 1 drivers
+v0000017dddc8eae0_0 .net "MUX_out", 0 0, L_0000017dddd1cc70;  1 drivers
+v0000017dddc90ca0_0 .net "MUX_sel", 0 0, L_0000017dddd1cd10;  1 drivers
+L_0000017dddd1cc70 .part/v L_0000017dddd0f610, L_0000017dddd1cd10, 1;
+S_0000017dddb274d0 .scope module, "mux_in1" "MUX2to1" 3 89, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc90d40_0 .net "MUX_in", 1 0, L_0000017dddd10650;  alias, 1 drivers
+v0000017dddc8fb20_0 .net "MUX_out", 0 0, L_0000017dddd1c8b0;  1 drivers
+v0000017dddc8ec20_0 .net "MUX_sel", 0 0, L_0000017dddd1db70;  1 drivers
+L_0000017dddd1c8b0 .part/v L_0000017dddd10650, L_0000017dddd1db70, 1;
+S_0000017dddb13070 .scope module, "mux_in2" "MUX2to1" 3 87, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc90340_0 .net "MUX_in", 1 0, L_0000017dddd10c90;  alias, 1 drivers
+v0000017dddc90160_0 .net "MUX_out", 0 0, L_0000017dddd1c630;  1 drivers
+v0000017dddc90de0_0 .net "MUX_sel", 0 0, L_0000017dddd1c6d0;  1 drivers
+L_0000017dddd1c630 .part/v L_0000017dddd10c90, L_0000017dddd1c6d0, 1;
+S_0000017dddce8d90 .scope module, "mux_in3" "MUX2to1" 3 85, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc900c0_0 .net "MUX_in", 1 0, L_0000017dddd10330;  alias, 1 drivers
+v0000017dddc8f9e0_0 .net "MUX_out", 0 0, L_0000017dddd1d530;  1 drivers
+v0000017dddc8f800_0 .net "MUX_sel", 0 0, L_0000017dddd1d990;  1 drivers
+L_0000017dddd1d530 .part/v L_0000017dddd10330, L_0000017dddd1d990, 1;
+S_0000017dddce8f20 .scope module, "mux_out0" "MUX2to1" 3 90, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8eea0_0 .net "MUX_in", 1 0, L_0000017dddd0f570;  alias, 1 drivers
+v0000017dddc91100_0 .net "MUX_out", 0 0, L_0000017dddd1c950;  1 drivers
+v0000017dddc8ea40_0 .net "MUX_sel", 0 0, L_0000017dddd1d490;  1 drivers
+L_0000017dddd1c950 .part/v L_0000017dddd0f570, L_0000017dddd1d490, 1;
+S_0000017dddce9a10 .scope module, "mux_out1" "MUX2to1" 3 88, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8f080_0 .net "MUX_in", 1 0, L_0000017dddd0ff70;  alias, 1 drivers
+v0000017dddc90e80_0 .net "MUX_out", 0 0, L_0000017dddd1c810;  1 drivers
+v0000017dddc8fa80_0 .net "MUX_sel", 0 0, L_0000017dddd1e7f0;  1 drivers
+L_0000017dddd1c810 .part/v L_0000017dddd0ff70, L_0000017dddd1e7f0, 1;
+S_0000017dddce8c00 .scope module, "mux_out2" "MUX2to1" 3 86, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8fee0_0 .net "MUX_in", 1 0, L_0000017dddd0f390;  alias, 1 drivers
+v0000017dddc90fc0_0 .net "MUX_out", 0 0, L_0000017dddd1dd50;  1 drivers
+v0000017dddc8f120_0 .net "MUX_sel", 0 0, L_0000017dddd1ddf0;  1 drivers
+L_0000017dddd1dd50 .part/v L_0000017dddd0f390, L_0000017dddd1ddf0, 1;
+S_0000017dddce93d0 .scope module, "mux_out3" "MUX2to1" 3 84, 7 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8ff80_0 .net "MUX_in", 1 0, L_0000017dddd0ee90;  alias, 1 drivers
+v0000017dddc90200_0 .net "MUX_out", 0 0, L_0000017dddd1e890;  1 drivers
+v0000017dddc8f1c0_0 .net "MUX_sel", 0 0, L_0000017dddd1cdb0;  1 drivers
+L_0000017dddd1e890 .part/v L_0000017dddd0ee90, L_0000017dddd1cdb0, 1;
+S_0000017dddce9240 .scope module, "sb" "SBModule" 3 62, 9 3 0, S_0000017dddb415a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 4 "in1";
+    .port_info 1 /INPUT 4 "in2";
+    .port_info 2 /INPUT 4 "in3";
+    .port_info 3 /INPUT 4 "in4";
+    .port_info 4 /INPUT 1 "prog_in";
+    .port_info 5 /INPUT 1 "prog_clk";
+    .port_info 6 /INPUT 1 "prog_en";
+    .port_info 7 /OUTPUT 4 "out1";
+    .port_info 8 /OUTPUT 4 "out2";
+    .port_info 9 /OUTPUT 4 "out3";
+    .port_info 10 /OUTPUT 4 "out4";
+    .port_info 11 /OUTPUT 1 "prog_out";
+v0000017dddc2b680_0 .net *"_ivl_104", 0 0, L_0000017dddd0b0b0;  1 drivers
+v0000017dddc2b180_0 .net *"_ivl_106", 0 0, L_0000017dddd0ba10;  1 drivers
+v0000017dddc20600_0 .net *"_ivl_108", 0 0, L_0000017dddd0bab0;  1 drivers
+v0000017dddc65d50_0 .net *"_ivl_11", 0 0, L_0000017dddd11190;  1 drivers
+v0000017dddcf32a0_0 .net *"_ivl_110", 0 0, L_0000017dddd0bbf0;  1 drivers
+v0000017dddcf24e0_0 .net *"_ivl_119", 0 0, L_0000017dddd0c2d0;  1 drivers
+v0000017dddcf2580_0 .net *"_ivl_121", 0 0, L_0000017dddd0acf0;  1 drivers
+v0000017dddcf2f80_0 .net *"_ivl_123", 0 0, L_0000017dddd0a1b0;  1 drivers
+v0000017dddcf2620_0 .net *"_ivl_125", 0 0, L_0000017dddd0c370;  1 drivers
+v0000017dddcf2ee0_0 .net *"_ivl_133", 0 0, L_0000017dddd09e90;  1 drivers
+v0000017dddcf3020_0 .net *"_ivl_135", 0 0, L_0000017dddd0b010;  1 drivers
+v0000017dddcf2bc0_0 .net *"_ivl_137", 0 0, L_0000017dddd0a750;  1 drivers
+v0000017dddcf30c0_0 .net *"_ivl_139", 0 0, L_0000017dddd0abb0;  1 drivers
+v0000017dddcf3160_0 .net *"_ivl_147", 0 0, L_0000017dddd0a250;  1 drivers
+v0000017dddcf2a80_0 .net *"_ivl_149", 0 0, L_0000017dddd09fd0;  1 drivers
+v0000017dddcf2b20_0 .net *"_ivl_151", 0 0, L_0000017dddd0a610;  1 drivers
+v0000017dddcf28a0_0 .net *"_ivl_153", 0 0, L_0000017dddd0b330;  1 drivers
+v0000017dddcf2e40_0 .net *"_ivl_161", 0 0, L_0000017dddd0ab10;  1 drivers
+v0000017dddcf3980_0 .net *"_ivl_163", 0 0, L_0000017dddd0ac50;  1 drivers
+v0000017dddcf3200_0 .net *"_ivl_165", 0 0, L_0000017dddd1e2f0;  1 drivers
+v0000017dddcf3840_0 .net *"_ivl_167", 0 0, L_0000017dddd1e430;  1 drivers
+v0000017dddcf2c60_0 .net *"_ivl_176", 0 0, L_0000017dddd1ebb0;  1 drivers
+v0000017dddcf26c0_0 .net *"_ivl_178", 0 0, L_0000017dddd1d710;  1 drivers
+v0000017dddcf3340_0 .net *"_ivl_180", 0 0, L_0000017dddd1d5d0;  1 drivers
+v0000017dddcf2760_0 .net *"_ivl_182", 0 0, L_0000017dddd1ca90;  1 drivers
+v0000017dddcf38e0_0 .net *"_ivl_19", 0 0, L_0000017dddd11b90;  1 drivers
+v0000017dddcf33e0_0 .net *"_ivl_190", 0 0, L_0000017dddd1ec50;  1 drivers
+v0000017dddcf2940_0 .net *"_ivl_192", 0 0, L_0000017dddd1c770;  1 drivers
+v0000017dddcf3a20_0 .net *"_ivl_194", 0 0, L_0000017dddd1e570;  1 drivers
+v0000017dddcf3660_0 .net *"_ivl_196", 0 0, L_0000017dddd1cb30;  1 drivers
+v0000017dddcf3480_0 .net *"_ivl_204", 0 0, L_0000017dddd1e110;  1 drivers
+v0000017dddcf3520_0 .net *"_ivl_206", 0 0, L_0000017dddd1df30;  1 drivers
+v0000017dddcf3ac0_0 .net *"_ivl_208", 0 0, L_0000017dddd1e1b0;  1 drivers
+v0000017dddcf35c0_0 .net *"_ivl_21", 0 0, L_0000017dddd11af0;  1 drivers
+v0000017dddcf2d00_0 .net *"_ivl_210", 0 0, L_0000017dddd1e610;  1 drivers
+v0000017dddcf3700_0 .net *"_ivl_218", 0 0, L_0000017dddd1dcb0;  1 drivers
+v0000017dddcf2800_0 .net *"_ivl_220", 0 0, L_0000017dddd1dfd0;  1 drivers
+v0000017dddcf37a0_0 .net *"_ivl_222", 0 0, L_0000017dddd1d7b0;  1 drivers
+v0000017dddcf2da0_0 .net *"_ivl_224", 0 0, L_0000017dddd1d670;  1 drivers
+v0000017dddcf2440_0 .net *"_ivl_23", 0 0, L_0000017dddd11870;  1 drivers
+v0000017dddcf29e0_0 .net *"_ivl_25", 0 0, L_0000017dddd115f0;  1 drivers
+v0000017dddcf1180_0 .net *"_ivl_33", 0 0, L_0000017dddd11910;  1 drivers
+v0000017dddcf2300_0 .net *"_ivl_35", 0 0, L_0000017dddd11a50;  1 drivers
+v0000017dddcf1400_0 .net *"_ivl_37", 0 0, L_0000017dddd117d0;  1 drivers
+v0000017dddcf0460_0 .net *"_ivl_39", 0 0, L_0000017dddd0b3d0;  1 drivers
+v0000017dddcf00a0_0 .net *"_ivl_47", 0 0, L_0000017dddd0a2f0;  1 drivers
+v0000017dddcf06e0_0 .net *"_ivl_49", 0 0, L_0000017dddd0bb50;  1 drivers
+v0000017dddcf0be0_0 .net *"_ivl_5", 0 0, L_0000017dddd10ab0;  1 drivers
+v0000017dddcf1040_0 .net *"_ivl_51", 0 0, L_0000017dddd0ae30;  1 drivers
+v0000017dddcf0500_0 .net *"_ivl_53", 0 0, L_0000017dddd0c190;  1 drivers
+v0000017dddcf1b80_0 .net *"_ivl_62", 0 0, L_0000017dddd0bd30;  1 drivers
+v0000017dddcf1c20_0 .net *"_ivl_64", 0 0, L_0000017dddd0aed0;  1 drivers
+v0000017dddcf05a0_0 .net *"_ivl_66", 0 0, L_0000017dddd0a070;  1 drivers
+v0000017dddcf0d20_0 .net *"_ivl_68", 0 0, L_0000017dddd0a110;  1 drivers
+v0000017dddcf08c0_0 .net *"_ivl_7", 0 0, L_0000017dddd10fb0;  1 drivers
+v0000017dddcf1680_0 .net *"_ivl_76", 0 0, L_0000017dddd0b650;  1 drivers
+v0000017dddcf14a0_0 .net *"_ivl_78", 0 0, L_0000017dddd0b5b0;  1 drivers
+v0000017dddcf0a00_0 .net *"_ivl_80", 0 0, L_0000017dddd0a890;  1 drivers
+v0000017dddcf0c80_0 .net *"_ivl_82", 0 0, L_0000017dddd0a930;  1 drivers
+v0000017dddcf23a0_0 .net *"_ivl_9", 0 0, L_0000017dddd11050;  1 drivers
+v0000017dddcefec0_0 .net *"_ivl_90", 0 0, L_0000017dddd0b970;  1 drivers
+v0000017dddcf01e0_0 .net *"_ivl_92", 0 0, L_0000017dddd0a390;  1 drivers
+v0000017dddceff60_0 .net *"_ivl_94", 0 0, L_0000017dddd09df0;  1 drivers
+v0000017dddcf0820_0 .net *"_ivl_96", 0 0, L_0000017dddd0a430;  1 drivers
+v0000017dddcf2260_0 .net "in1", 3 0, v0000017dddd04790_0;  alias, 1 drivers
+v0000017dddcf0000_0 .net "in2", 3 0, v0000017dddd031b0_0;  alias, 1 drivers
+v0000017dddcf0780_0 .net "in3", 3 0, v0000017dddd03070_0;  alias, 1 drivers
+v0000017dddcf1720_0 .net "in4", 3 0, L_0000017dddd1de90;  alias, 1 drivers
+v0000017dddcf1cc0_0 .net "out1", 3 0, L_0000017dddd0a7f0;  alias, 1 drivers
+v0000017dddcf1d60_0 .net "out2", 3 0, L_0000017dddd0af70;  alias, 1 drivers
+v0000017dddcf0640_0 .net "out3", 3 0, L_0000017dddd1d350;  alias, 1 drivers
+v0000017dddcf0dc0_0 .net "out4", 3 0, L_0000017dddd1da30;  alias, 1 drivers
+v0000017dddcf0960_0 .net "prog_clk", 0 0, v0000017dddd04970_0;  alias, 1 drivers
+v0000017dddcf10e0_0 .net "prog_en", 0 0, v0000017dddd04330_0;  alias, 1 drivers
+v0000017dddcf0aa0_0 .net "prog_in", 0 0, L_0000017dddd110f0;  alias, 1 drivers
+v0000017dddcf1540_0 .net "prog_out", 0 0, L_0000017dddd10f10;  alias, 1 drivers
+v0000017dddcf1ae0_0 .var "shift_reg", 31 0;
+L_0000017dddd10f10 .part v0000017dddcf1ae0_0, 0, 1;
+L_0000017dddd10b50 .part v0000017dddcf1ae0_0, 30, 2;
+L_0000017dddd10ab0 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd10fb0 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd11050 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd11190 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd11230 .concat [ 1 1 1 1], L_0000017dddd11190, L_0000017dddd11050, L_0000017dddd10fb0, L_0000017dddd10ab0;
+L_0000017dddd11550 .part v0000017dddcf1ae0_0, 28, 2;
+L_0000017dddd11b90 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd11af0 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd11870 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd115f0 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd11690 .concat [ 1 1 1 1], L_0000017dddd115f0, L_0000017dddd11870, L_0000017dddd11af0, L_0000017dddd11b90;
+L_0000017dddd11730 .part v0000017dddcf1ae0_0, 26, 2;
+L_0000017dddd11910 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd11a50 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd117d0 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0b3d0 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0b150 .concat [ 1 1 1 1], L_0000017dddd0b3d0, L_0000017dddd117d0, L_0000017dddd11a50, L_0000017dddd11910;
+L_0000017dddd09d50 .part v0000017dddcf1ae0_0, 24, 2;
+L_0000017dddd0a2f0 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd0bb50 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd0ae30 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd0c190 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd0ad90 .concat [ 1 1 1 1], L_0000017dddd0c190, L_0000017dddd0ae30, L_0000017dddd0bb50, L_0000017dddd0a2f0;
+L_0000017dddd0a7f0 .concat8 [ 1 1 1 1], L_0000017dddd100b0, L_0000017dddd114b0, L_0000017dddd119b0, L_0000017dddd0b290;
+L_0000017dddd0b830 .part v0000017dddcf1ae0_0, 22, 2;
+L_0000017dddd0bd30 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd0aed0 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd0a070 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd0a110 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd0c050 .concat [ 1 1 1 1], L_0000017dddd0a110, L_0000017dddd0a070, L_0000017dddd0aed0, L_0000017dddd0bd30;
+L_0000017dddd0c230 .part v0000017dddcf1ae0_0, 20, 2;
+L_0000017dddd0b650 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd0b5b0 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd0a890 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd0a930 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd0b790 .concat [ 1 1 1 1], L_0000017dddd0a930, L_0000017dddd0a890, L_0000017dddd0b5b0, L_0000017dddd0b650;
+L_0000017dddd0bdd0 .part v0000017dddcf1ae0_0, 18, 2;
+L_0000017dddd0b970 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd0a390 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd09df0 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0a430 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0b8d0 .concat [ 1 1 1 1], L_0000017dddd0a430, L_0000017dddd09df0, L_0000017dddd0a390, L_0000017dddd0b970;
+L_0000017dddd0a570 .part v0000017dddcf1ae0_0, 16, 2;
+L_0000017dddd0b0b0 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd0ba10 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd0bab0 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd0bbf0 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd0bc90 .concat [ 1 1 1 1], L_0000017dddd0bbf0, L_0000017dddd0bab0, L_0000017dddd0ba10, L_0000017dddd0b0b0;
+L_0000017dddd0af70 .concat8 [ 1 1 1 1], L_0000017dddd0b510, L_0000017dddd0c0f0, L_0000017dddd0b6f0, L_0000017dddd0bf10;
+L_0000017dddd0bfb0 .part v0000017dddcf1ae0_0, 14, 2;
+L_0000017dddd0c2d0 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd0acf0 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd0a1b0 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd0c370 .part L_0000017dddd1de90, 0, 1;
+L_0000017dddd09f30 .concat [ 1 1 1 1], L_0000017dddd0c370, L_0000017dddd0a1b0, L_0000017dddd0acf0, L_0000017dddd0c2d0;
+L_0000017dddd09cb0 .part v0000017dddcf1ae0_0, 12, 2;
+L_0000017dddd09e90 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd0b010 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd0a750 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd0abb0 .part L_0000017dddd1de90, 1, 1;
+L_0000017dddd0b1f0 .concat [ 1 1 1 1], L_0000017dddd0abb0, L_0000017dddd0a750, L_0000017dddd0b010, L_0000017dddd09e90;
+L_0000017dddd0a9d0 .part v0000017dddcf1ae0_0, 10, 2;
+L_0000017dddd0a250 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd09fd0 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd0a610 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0b330 .part L_0000017dddd1de90, 2, 1;
+L_0000017dddd0a6b0 .concat [ 1 1 1 1], L_0000017dddd0b330, L_0000017dddd0a610, L_0000017dddd09fd0, L_0000017dddd0a250;
+L_0000017dddd0b470 .part v0000017dddcf1ae0_0, 8, 2;
+L_0000017dddd0ab10 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd0ac50 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd1e2f0 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd1e430 .part L_0000017dddd1de90, 3, 1;
+L_0000017dddd1cf90 .concat [ 1 1 1 1], L_0000017dddd1e430, L_0000017dddd1e2f0, L_0000017dddd0ac50, L_0000017dddd0ab10;
+L_0000017dddd1d350 .concat8 [ 1 1 1 1], L_0000017dddd0be70, L_0000017dddd0c410, L_0000017dddd0a4d0, L_0000017dddd0aa70;
+L_0000017dddd1e4d0 .part v0000017dddcf1ae0_0, 6, 2;
+L_0000017dddd1ebb0 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd1d710 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd1d5d0 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd1ca90 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd1dc10 .concat [ 1 1 1 1], L_0000017dddd1ca90, L_0000017dddd1d5d0, L_0000017dddd1d710, L_0000017dddd1ebb0;
+L_0000017dddd1e930 .part v0000017dddcf1ae0_0, 4, 2;
+L_0000017dddd1ec50 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd1c770 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd1e570 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd1cb30 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd1c4f0 .concat [ 1 1 1 1], L_0000017dddd1cb30, L_0000017dddd1e570, L_0000017dddd1c770, L_0000017dddd1ec50;
+L_0000017dddd1cbd0 .part v0000017dddcf1ae0_0, 2, 2;
+L_0000017dddd1e110 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd1df30 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd1e1b0 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd1e610 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd1e6b0 .concat [ 1 1 1 1], L_0000017dddd1e610, L_0000017dddd1e1b0, L_0000017dddd1df30, L_0000017dddd1e110;
+L_0000017dddd1e250 .part v0000017dddcf1ae0_0, 0, 2;
+L_0000017dddd1dcb0 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd1dfd0 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd1d7b0 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd1d670 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd1ce50 .concat [ 1 1 1 1], L_0000017dddd1d670, L_0000017dddd1d7b0, L_0000017dddd1dfd0, L_0000017dddd1dcb0;
+L_0000017dddd1da30 .concat8 [ 1 1 1 1], L_0000017dddd1e070, L_0000017dddd1e390, L_0000017dddd1eb10, L_0000017dddd1d210;
+S_0000017dddce90b0 .scope module, "mux1_0" "MUX4to1" 9 35, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8f260_0 .net "MUX_in", 3 0, L_0000017dddd11230;  1 drivers
+v0000017dddc91740_0 .net "MUX_out", 0 0, L_0000017dddd100b0;  1 drivers
+v0000017dddc91ba0_0 .net "MUX_sel", 1 0, L_0000017dddd10b50;  1 drivers
+L_0000017dddd100b0 .part/v L_0000017dddd11230, L_0000017dddd10b50, 1;
+S_0000017dddce9560 .scope module, "mux1_1" "MUX4to1" 9 36, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc92500_0 .net "MUX_in", 3 0, L_0000017dddd11690;  1 drivers
+v0000017dddc914c0_0 .net "MUX_out", 0 0, L_0000017dddd114b0;  1 drivers
+v0000017dddc91380_0 .net "MUX_sel", 1 0, L_0000017dddd11550;  1 drivers
+L_0000017dddd114b0 .part/v L_0000017dddd11690, L_0000017dddd11550, 1;
+S_0000017dddce96f0 .scope module, "mux1_2" "MUX4to1" 9 37, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc92820_0 .net "MUX_in", 3 0, L_0000017dddd0b150;  1 drivers
+v0000017dddc91c40_0 .net "MUX_out", 0 0, L_0000017dddd119b0;  1 drivers
+v0000017dddc92280_0 .net "MUX_sel", 1 0, L_0000017dddd11730;  1 drivers
+L_0000017dddd119b0 .part/v L_0000017dddd0b150, L_0000017dddd11730, 1;
+S_0000017dddce9880 .scope module, "mux1_3" "MUX4to1" 9 38, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc917e0_0 .net "MUX_in", 3 0, L_0000017dddd0ad90;  1 drivers
+v0000017dddc92320_0 .net "MUX_out", 0 0, L_0000017dddd0b290;  1 drivers
+v0000017dddc91a60_0 .net "MUX_sel", 1 0, L_0000017dddd09d50;  1 drivers
+L_0000017dddd0b290 .part/v L_0000017dddd0ad90, L_0000017dddd09d50, 1;
+S_0000017dddcee8a0 .scope module, "mux2_0" "MUX4to1" 9 41, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc91ec0_0 .net "MUX_in", 3 0, L_0000017dddd0c050;  1 drivers
+v0000017dddc91f60_0 .net "MUX_out", 0 0, L_0000017dddd0b510;  1 drivers
+v0000017dddc91880_0 .net "MUX_sel", 1 0, L_0000017dddd0b830;  1 drivers
+L_0000017dddd0b510 .part/v L_0000017dddd0c050, L_0000017dddd0b830, 1;
+S_0000017dddcef520 .scope module, "mux2_1" "MUX4to1" 9 42, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc91920_0 .net "MUX_in", 3 0, L_0000017dddd0b790;  1 drivers
+v0000017dddc91420_0 .net "MUX_out", 0 0, L_0000017dddd0c0f0;  1 drivers
+v0000017dddc91ce0_0 .net "MUX_sel", 1 0, L_0000017dddd0c230;  1 drivers
+L_0000017dddd0c0f0 .part/v L_0000017dddd0b790, L_0000017dddd0c230, 1;
+S_0000017dddcef9d0 .scope module, "mux2_2" "MUX4to1" 9 43, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc91240_0 .net "MUX_in", 3 0, L_0000017dddd0b8d0;  1 drivers
+v0000017dddc92140_0 .net "MUX_out", 0 0, L_0000017dddd0b6f0;  1 drivers
+v0000017dddc92460_0 .net "MUX_sel", 1 0, L_0000017dddd0bdd0;  1 drivers
+L_0000017dddd0b6f0 .part/v L_0000017dddd0b8d0, L_0000017dddd0bdd0, 1;
+S_0000017dddceea30 .scope module, "mux2_3" "MUX4to1" 9 44, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc919c0_0 .net "MUX_in", 3 0, L_0000017dddd0bc90;  1 drivers
+v0000017dddc920a0_0 .net "MUX_out", 0 0, L_0000017dddd0bf10;  1 drivers
+v0000017dddc91d80_0 .net "MUX_sel", 1 0, L_0000017dddd0a570;  1 drivers
+L_0000017dddd0bf10 .part/v L_0000017dddd0bc90, L_0000017dddd0a570, 1;
+S_0000017dddcef390 .scope module, "mux3_0" "MUX4to1" 9 47, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc91b00_0 .net "MUX_in", 3 0, L_0000017dddd09f30;  1 drivers
+v0000017dddc921e0_0 .net "MUX_out", 0 0, L_0000017dddd0be70;  1 drivers
+v0000017dddc926e0_0 .net "MUX_sel", 1 0, L_0000017dddd0bfb0;  1 drivers
+L_0000017dddd0be70 .part/v L_0000017dddd09f30, L_0000017dddd0bfb0, 1;
+S_0000017dddcef6b0 .scope module, "mux3_1" "MUX4to1" 9 48, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc91600_0 .net "MUX_in", 3 0, L_0000017dddd0b1f0;  1 drivers
+v0000017dddc925a0_0 .net "MUX_out", 0 0, L_0000017dddd0c410;  1 drivers
+v0000017dddc92780_0 .net "MUX_sel", 1 0, L_0000017dddd09cb0;  1 drivers
+L_0000017dddd0c410 .part/v L_0000017dddd0b1f0, L_0000017dddd09cb0, 1;
+S_0000017dddcef840 .scope module, "mux3_2" "MUX4to1" 9 49, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc928c0_0 .net "MUX_in", 3 0, L_0000017dddd0a6b0;  1 drivers
+v0000017dddc923c0_0 .net "MUX_out", 0 0, L_0000017dddd0a4d0;  1 drivers
+v0000017dddc92640_0 .net "MUX_sel", 1 0, L_0000017dddd0a9d0;  1 drivers
+L_0000017dddd0a4d0 .part/v L_0000017dddd0a6b0, L_0000017dddd0a9d0, 1;
+S_0000017dddcef070 .scope module, "mux3_3" "MUX4to1" 9 50, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc912e0_0 .net "MUX_in", 3 0, L_0000017dddd1cf90;  1 drivers
+v0000017dddc91e20_0 .net "MUX_out", 0 0, L_0000017dddd0aa70;  1 drivers
+v0000017dddc91560_0 .net "MUX_sel", 1 0, L_0000017dddd0b470;  1 drivers
+L_0000017dddd0aa70 .part/v L_0000017dddd1cf90, L_0000017dddd0b470, 1;
+S_0000017dddcee260 .scope module, "mux4_0" "MUX4to1" 9 53, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc916a0_0 .net "MUX_in", 3 0, L_0000017dddd1dc10;  1 drivers
+v0000017dddc92000_0 .net "MUX_out", 0 0, L_0000017dddd1e070;  1 drivers
+v0000017dddc673f0_0 .net "MUX_sel", 1 0, L_0000017dddd1e4d0;  1 drivers
+L_0000017dddd1e070 .part/v L_0000017dddd1dc10, L_0000017dddd1e4d0, 1;
+S_0000017dddceebc0 .scope module, "mux4_1" "MUX4to1" 9 54, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc68250_0 .net "MUX_in", 3 0, L_0000017dddd1c4f0;  1 drivers
+v0000017dddc66770_0 .net "MUX_out", 0 0, L_0000017dddd1e390;  1 drivers
+v0000017dddc67710_0 .net "MUX_sel", 1 0, L_0000017dddd1e930;  1 drivers
+L_0000017dddd1e390 .part/v L_0000017dddd1c4f0, L_0000017dddd1e930, 1;
+S_0000017dddcee3f0 .scope module, "mux4_2" "MUX4to1" 9 55, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8ab80_0 .net "MUX_in", 3 0, L_0000017dddd1e6b0;  1 drivers
+v0000017dddc8acc0_0 .net "MUX_out", 0 0, L_0000017dddd1eb10;  1 drivers
+v0000017dddc8af40_0 .net "MUX_sel", 1 0, L_0000017dddd1cbd0;  1 drivers
+L_0000017dddd1eb10 .part/v L_0000017dddd1e6b0, L_0000017dddd1cbd0, 1;
+S_0000017dddcef200 .scope module, "mux4_3" "MUX4to1" 9 56, 10 3 0, S_0000017dddce9240;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddc8bb20_0 .net "MUX_in", 3 0, L_0000017dddd1ce50;  1 drivers
+v0000017dddc00930_0 .net "MUX_out", 0 0, L_0000017dddd1d210;  1 drivers
+v0000017dddc00c50_0 .net "MUX_sel", 1 0, L_0000017dddd1e250;  1 drivers
+L_0000017dddd1d210 .part/v L_0000017dddd1ce50, L_0000017dddd1e250, 1;
+S_0000017dddceed50 .scope module, "uut1" "CBTest" 2 46, 11 4 0, S_0000017dddb04e70;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 69 "prog";
+    .port_info 1 /INPUT 1 "clb_clk";
+    .port_info 2 /INPUT 4 "in1";
+    .port_info 3 /INPUT 4 "in2";
+    .port_info 4 /INPUT 4 "in3";
+    .port_info 5 /INPUT 4 "in4";
+    .port_info 6 /OUTPUT 4 "out1";
+    .port_info 7 /OUTPUT 4 "out2";
+    .port_info 8 /OUTPUT 4 "out3";
+    .port_info 9 /OUTPUT 4 "out4";
+v0000017dddcfe7a0_0 .net *"_ivl_11", 0 0, L_0000017dddd1f830;  1 drivers
+v0000017dddcfe980_0 .net *"_ivl_13", 0 0, L_0000017dddd1ffb0;  1 drivers
+v0000017dddcff880_0 .net *"_ivl_15", 0 0, L_0000017dddd1f150;  1 drivers
+v0000017dddcfea20_0 .net *"_ivl_17", 0 0, L_0000017dddd213b0;  1 drivers
+v0000017dddcff240_0 .net *"_ivl_19", 0 0, L_0000017dddd1ee30;  1 drivers
+v0000017dddcfec00_0 .net *"_ivl_21", 0 0, L_0000017dddd20d70;  1 drivers
+v0000017dddcfeca0_0 .net *"_ivl_23", 0 0, L_0000017dddd209b0;  1 drivers
+v0000017dddcff100_0 .net *"_ivl_44", 0 0, L_0000017dddd204b0;  1 drivers
+v0000017dddcff2e0_0 .net *"_ivl_48", 0 0, L_0000017dddd21130;  1 drivers
+v0000017dddcff1a0_0 .net *"_ivl_52", 0 0, L_0000017dddd211d0;  1 drivers
+v0000017dddd03890_0 .net *"_ivl_56", 0 0, L_0000017dddd1f290;  1 drivers
+v0000017dddd03610_0 .net *"_ivl_60", 0 0, L_0000017dddd20c30;  1 drivers
+v0000017dddd03f70_0 .net *"_ivl_64", 0 0, L_0000017dddd1fd30;  1 drivers
+v0000017dddd02cb0_0 .net *"_ivl_68", 0 0, L_0000017dddd1fa10;  1 drivers
+v0000017dddd028f0_0 .net *"_ivl_72", 0 0, L_0000017dddd1fe70;  1 drivers
+v0000017dddd02f30_0 .net *"_ivl_9", 0 0, L_0000017dddd20230;  1 drivers
+v0000017dddd03430_0 .net "clb_clk", 0 0, v0000017dddd03c50_0;  alias, 1 drivers
+v0000017dddd04010_0 .net "clb_input", 3 0, L_0000017dddd20e10;  1 drivers
+v0000017dddd03ed0_0 .net "clb_output", 0 0, L_0000017dddc79a20;  1 drivers
+v0000017dddd040b0_0 .net "in0_mux", 1 0, L_0000017dddd20b90;  1 drivers
+v0000017dddd02530_0 .net "in1", 3 0, v0000017dddd04790_0;  alias, 1 drivers
+v0000017dddd04470_0 .net "in1_mux", 1 0, L_0000017dddd20550;  1 drivers
+v0000017dddd02d50_0 .net "in2", 3 0, v0000017dddd031b0_0;  alias, 1 drivers
+v0000017dddd02df0_0 .net "in2_mux", 1 0, L_0000017dddd1f8d0;  1 drivers
+v0000017dddd02a30_0 .net "in3", 3 0, v0000017dddd03070_0;  alias, 1 drivers
+v0000017dddd03bb0_0 .net "in3_mux", 1 0, L_0000017dddd1ff10;  1 drivers
+v0000017dddd03250_0 .net "in4", 3 0, v0000017dddd032f0_0;  alias, 1 drivers
+v0000017dddd03930_0 .net "in_out", 7 0, L_0000017dddd1fab0;  1 drivers
+v0000017dddd045b0_0 .net "lut_prog", 16 0, L_0000017dddd1d170;  1 drivers
+v0000017dddd048d0_0 .net "out0_mux", 1 0, L_0000017dddd1f790;  1 drivers
+v0000017dddd03e30_0 .net "out1", 3 0, L_0000017dddd1b230;  alias, 1 drivers
+v0000017dddd04510_0 .net "out1_mux", 1 0, L_0000017dddd1f0b0;  1 drivers
+v0000017dddd04150_0 .net "out2", 3 0, L_0000017dddd1af10;  alias, 1 drivers
+v0000017dddd04bf0_0 .net "out2_mux", 1 0, L_0000017dddd20690;  1 drivers
+v0000017dddd03cf0_0 .net "out3", 3 0, L_0000017dddd2b370;  alias, 1 drivers
+v0000017dddd02990_0 .net "out3_mux", 1 0, L_0000017dddd21450;  1 drivers
+v0000017dddd036b0_0 .net "out4", 3 0, L_0000017dddd1ecf0;  alias, 1 drivers
+v0000017dddd041f0_0 .net "prog", 68 0, v0000017dddd02490_0;  1 drivers
+v0000017dddd037f0_0 .net "sb_in4", 3 0, L_0000017dddd1fc90;  1 drivers
+v0000017dddd04650_0 .net "sb_out4", 3 0, L_0000017dddd2d350;  1 drivers
+v0000017dddd046f0_0 .net "sb_prog", 31 0, L_0000017dddd1d2b0;  1 drivers
+v0000017dddd02e90_0 .net "sel_in_out", 7 0, L_0000017dddd21270;  1 drivers
+v0000017dddd02fd0_0 .net "sel_index", 11 0, L_0000017dddd1d3f0;  1 drivers
+L_0000017dddd1d170 .part v0000017dddd02490_0, 52, 17;
+L_0000017dddd1d2b0 .part v0000017dddd02490_0, 20, 32;
+L_0000017dddd1d3f0 .part v0000017dddd02490_0, 8, 12;
+L_0000017dddd21270 .part v0000017dddd02490_0, 0, 8;
+L_0000017dddd20230 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd1f830 .part L_0000017dddd1b230, 3, 1;
+L_0000017dddd1ffb0 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd1f150 .part L_0000017dddd1b230, 2, 1;
+L_0000017dddd213b0 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd1ee30 .part L_0000017dddd1b230, 1, 1;
+L_0000017dddd20d70 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd209b0 .part L_0000017dddd1b230, 0, 1;
+LS_0000017dddd1fab0_0_0 .concat [ 1 1 1 1], L_0000017dddd209b0, L_0000017dddd20d70, L_0000017dddd1ee30, L_0000017dddd213b0;
+LS_0000017dddd1fab0_0_4 .concat [ 1 1 1 1], L_0000017dddd1f150, L_0000017dddd1ffb0, L_0000017dddd1f830, L_0000017dddd20230;
+L_0000017dddd1fab0 .concat [ 4 4 0 0], LS_0000017dddd1fab0_0_0, LS_0000017dddd1fab0_0_4;
+L_0000017dddd20370 .part L_0000017dddd1d3f0, 9, 3;
+L_0000017dddd20050 .part L_0000017dddd1d3f0, 6, 3;
+L_0000017dddd1f330 .part L_0000017dddd1d3f0, 3, 3;
+L_0000017dddd1f1f0 .part L_0000017dddd1d3f0, 0, 3;
+L_0000017dddd20e10 .concat8 [ 1 1 1 1], L_0000017dddd20410, L_0000017dddd20190, L_0000017dddd1f5b0, L_0000017dddd21090;
+L_0000017dddd204b0 .part L_0000017dddd2d350, 3, 1;
+L_0000017dddd21450 .concat [ 1 1 0 0], L_0000017dddd204b0, L_0000017dddc79a20;
+L_0000017dddd21130 .part v0000017dddd032f0_0, 3, 1;
+L_0000017dddd1ff10 .concat [ 1 1 0 0], L_0000017dddd21130, L_0000017dddc79a20;
+L_0000017dddd211d0 .part L_0000017dddd2d350, 2, 1;
+L_0000017dddd20690 .concat [ 1 1 0 0], L_0000017dddd211d0, L_0000017dddc79a20;
+L_0000017dddd1f290 .part v0000017dddd032f0_0, 2, 1;
+L_0000017dddd1f8d0 .concat [ 1 1 0 0], L_0000017dddd1f290, L_0000017dddc79a20;
+L_0000017dddd20c30 .part L_0000017dddd2d350, 1, 1;
+L_0000017dddd1f0b0 .concat [ 1 1 0 0], L_0000017dddd20c30, L_0000017dddc79a20;
+L_0000017dddd1fd30 .part v0000017dddd032f0_0, 1, 1;
+L_0000017dddd20550 .concat [ 1 1 0 0], L_0000017dddd1fd30, L_0000017dddc79a20;
+L_0000017dddd1fa10 .part L_0000017dddd2d350, 0, 1;
+L_0000017dddd1f790 .concat [ 1 1 0 0], L_0000017dddd1fa10, L_0000017dddc79a20;
+L_0000017dddd1fe70 .part v0000017dddd032f0_0, 0, 1;
+L_0000017dddd20b90 .concat [ 1 1 0 0], L_0000017dddd1fe70, L_0000017dddc79a20;
+L_0000017dddd20cd0 .part L_0000017dddd21270, 7, 1;
+L_0000017dddd205f0 .part L_0000017dddd21270, 6, 1;
+L_0000017dddd1f970 .part L_0000017dddd21270, 5, 1;
+L_0000017dddd20eb0 .part L_0000017dddd21270, 4, 1;
+L_0000017dddd20f50 .part L_0000017dddd21270, 3, 1;
+L_0000017dddd1f510 .part L_0000017dddd21270, 2, 1;
+L_0000017dddd20870 .part L_0000017dddd21270, 1, 1;
+L_0000017dddd1ecf0 .concat8 [ 1 1 1 1], L_0000017dddd21310, L_0000017dddd1f470, L_0000017dddd1f010, L_0000017dddd1eed0;
+L_0000017dddd1fbf0 .part L_0000017dddd21270, 0, 1;
+L_0000017dddd1fc90 .concat8 [ 1 1 1 1], L_0000017dddd20910, L_0000017dddd207d0, L_0000017dddd1f3d0, L_0000017dddd1fb50;
+S_0000017dddcedf40 .scope module, "clb_sel0" "MUX8to1" 11 34, 8 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf77b0_0 .net "MUX_in", 7 0, L_0000017dddd1fab0;  alias, 1 drivers
+v0000017dddcf7990_0 .net "MUX_out", 0 0, L_0000017dddd20410;  1 drivers
+v0000017dddcf6db0_0 .net "MUX_sel", 2 0, L_0000017dddd1f1f0;  1 drivers
+L_0000017dddd20410 .part/v L_0000017dddd1fab0, L_0000017dddd1f1f0, 1;
+S_0000017dddcee580 .scope module, "clb_sel1" "MUX8to1" 11 33, 8 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf7490_0 .net "MUX_in", 7 0, L_0000017dddd1fab0;  alias, 1 drivers
+v0000017dddcf70d0_0 .net "MUX_out", 0 0, L_0000017dddd20190;  1 drivers
+v0000017dddcf6d10_0 .net "MUX_sel", 2 0, L_0000017dddd1f330;  1 drivers
+L_0000017dddd20190 .part/v L_0000017dddd1fab0, L_0000017dddd1f330, 1;
+S_0000017dddcedc20 .scope module, "clb_sel2" "MUX8to1" 11 32, 8 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf6a90_0 .net "MUX_in", 7 0, L_0000017dddd1fab0;  alias, 1 drivers
+v0000017dddcf7850_0 .net "MUX_out", 0 0, L_0000017dddd1f5b0;  1 drivers
+v0000017dddcf78f0_0 .net "MUX_sel", 2 0, L_0000017dddd20050;  1 drivers
+L_0000017dddd1f5b0 .part/v L_0000017dddd1fab0, L_0000017dddd20050, 1;
+S_0000017dddcee710 .scope module, "clb_sel3" "MUX8to1" 11 31, 8 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "MUX_sel";
+    .port_info 1 /INPUT 8 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf73f0_0 .net "MUX_in", 7 0, L_0000017dddd1fab0;  alias, 1 drivers
+v0000017dddcf6f90_0 .net "MUX_out", 0 0, L_0000017dddd21090;  1 drivers
+v0000017dddcf7030_0 .net "MUX_sel", 2 0, L_0000017dddd20370;  1 drivers
+L_0000017dddd21090 .part/v L_0000017dddd1fab0, L_0000017dddd20370, 1;
+S_0000017dddceeee0 .scope module, "clb_test" "CLBTest" 11 37, 12 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 17 "prog";
+    .port_info 1 /INPUT 1 "clb_clk";
+    .port_info 2 /INPUT 4 "clb_input";
+    .port_info 3 /OUTPUT 1 "clb_output";
+L_0000017dddc79a20 .functor BUFZ 1, L_0000017dddd1ef70, C4<0>, C4<0>, C4<0>;
+v0000017dddcf40b0_0 .net "clb_clk", 0 0, v0000017dddd03c50_0;  alias, 1 drivers
+v0000017dddcf46f0_0 .net "clb_input", 3 0, L_0000017dddd20e10;  alias, 1 drivers
+v0000017dddcf4510_0 .net "clb_output", 0 0, L_0000017dddc79a20;  alias, 1 drivers
+v0000017dddcf3c50_0 .net "ff_out", 0 0, v0000017dddcf75d0_0;  1 drivers
+v0000017dddcf45b0_0 .net "lut_out", 0 0, L_0000017dddd1f650;  1 drivers
+v0000017dddcf5b90_0 .net "mux_in", 1 0, L_0000017dddd20730;  1 drivers
+v0000017dddcf5c30_0 .net "mux_out", 0 0, L_0000017dddd1ef70;  1 drivers
+v0000017dddcf6310_0 .net "prog", 16 0, L_0000017dddd1d170;  alias, 1 drivers
+L_0000017dddd20730 .concat [ 1 1 0 0], L_0000017dddd1f650, v0000017dddcf75d0_0;
+L_0000017dddd200f0 .part L_0000017dddd1d170, 1, 16;
+L_0000017dddd202d0 .part L_0000017dddd1d170, 0, 1;
+S_0000017dddceddb0 .scope module, "d" "DFlipFlop" 12 28, 5 3 0, S_0000017dddceeee0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "d";
+    .port_info 2 /OUTPUT 1 "q";
+v0000017dddcf7530_0 .net "clk", 0 0, v0000017dddd03c50_0;  alias, 1 drivers
+v0000017dddcf7ad0_0 .net "d", 0 0, L_0000017dddd1f650;  alias, 1 drivers
+v0000017dddcf75d0_0 .var "q", 0 0;
+S_0000017dddcee0d0 .scope module, "lut16to1" "LUT16to1" 12 21, 6 3 0, S_0000017dddceeee0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 4 "LUT_sel";
+    .port_info 1 /INPUT 16 "LUT_input";
+    .port_info 2 /OUTPUT 1 "LUT_output";
+v0000017dddcf64f0_0 .net "LUT_input", 15 0, L_0000017dddd200f0;  1 drivers
+v0000017dddcf6590_0 .net "LUT_output", 0 0, L_0000017dddd1f650;  alias, 1 drivers
+v0000017dddcf66d0_0 .net "LUT_sel", 3 0, L_0000017dddd20e10;  alias, 1 drivers
+L_0000017dddd1f650 .part/v L_0000017dddd200f0, L_0000017dddd20e10, 1;
+S_0000017dddcf90a0 .scope module, "mux2to1" "MUX2to1" 12 35, 7 3 0, S_0000017dddceeee0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf6770_0 .net "MUX_in", 1 0, L_0000017dddd20730;  alias, 1 drivers
+v0000017dddcf6810_0 .net "MUX_out", 0 0, L_0000017dddd1ef70;  alias, 1 drivers
+v0000017dddcf4650_0 .net "MUX_sel", 0 0, L_0000017dddd202d0;  1 drivers
+L_0000017dddd1ef70 .part/v L_0000017dddd20730, L_0000017dddd202d0, 1;
+S_0000017dddcf8d80 .scope module, "mux_in0" "MUX2to1" 11 61, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf6090_0 .net "MUX_in", 1 0, L_0000017dddd20b90;  alias, 1 drivers
+v0000017dddcf4a10_0 .net "MUX_out", 0 0, L_0000017dddd20910;  1 drivers
+v0000017dddcf4c90_0 .net "MUX_sel", 0 0, L_0000017dddd1fbf0;  1 drivers
+L_0000017dddd20910 .part/v L_0000017dddd20b90, L_0000017dddd1fbf0, 1;
+S_0000017dddcf9550 .scope module, "mux_in1" "MUX2to1" 11 59, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf63b0_0 .net "MUX_in", 1 0, L_0000017dddd20550;  alias, 1 drivers
+v0000017dddcf4830_0 .net "MUX_out", 0 0, L_0000017dddd207d0;  1 drivers
+v0000017dddcf6270_0 .net "MUX_sel", 0 0, L_0000017dddd1f510;  1 drivers
+L_0000017dddd207d0 .part/v L_0000017dddd20550, L_0000017dddd1f510, 1;
+S_0000017dddcf9230 .scope module, "mux_in2" "MUX2to1" 11 57, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5870_0 .net "MUX_in", 1 0, L_0000017dddd1f8d0;  alias, 1 drivers
+v0000017dddcf5e10_0 .net "MUX_out", 0 0, L_0000017dddd1f3d0;  1 drivers
+v0000017dddcf5eb0_0 .net "MUX_sel", 0 0, L_0000017dddd20eb0;  1 drivers
+L_0000017dddd1f3d0 .part/v L_0000017dddd1f8d0, L_0000017dddd20eb0, 1;
+S_0000017dddcf93c0 .scope module, "mux_in3" "MUX2to1" 11 55, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5050_0 .net "MUX_in", 1 0, L_0000017dddd1ff10;  alias, 1 drivers
+v0000017dddcf5ff0_0 .net "MUX_out", 0 0, L_0000017dddd1fb50;  1 drivers
+v0000017dddcf4790_0 .net "MUX_sel", 0 0, L_0000017dddd205f0;  1 drivers
+L_0000017dddd1fb50 .part/v L_0000017dddd1ff10, L_0000017dddd205f0, 1;
+S_0000017dddcf8bf0 .scope module, "mux_out0" "MUX2to1" 11 60, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf41f0_0 .net "MUX_in", 1 0, L_0000017dddd1f790;  alias, 1 drivers
+v0000017dddcf3ed0_0 .net "MUX_out", 0 0, L_0000017dddd21310;  1 drivers
+v0000017dddcf5cd0_0 .net "MUX_sel", 0 0, L_0000017dddd20870;  1 drivers
+L_0000017dddd21310 .part/v L_0000017dddd1f790, L_0000017dddd20870, 1;
+S_0000017dddcf8740 .scope module, "mux_out1" "MUX2to1" 11 58, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf4e70_0 .net "MUX_in", 1 0, L_0000017dddd1f0b0;  alias, 1 drivers
+v0000017dddcf5190_0 .net "MUX_out", 0 0, L_0000017dddd1f470;  1 drivers
+v0000017dddcf55f0_0 .net "MUX_sel", 0 0, L_0000017dddd20f50;  1 drivers
+L_0000017dddd1f470 .part/v L_0000017dddd1f0b0, L_0000017dddd20f50, 1;
+S_0000017dddcf7c50 .scope module, "mux_out2" "MUX2to1" 11 56, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf4470_0 .net "MUX_in", 1 0, L_0000017dddd20690;  alias, 1 drivers
+v0000017dddcf5690_0 .net "MUX_out", 0 0, L_0000017dddd1f010;  1 drivers
+v0000017dddcf5d70_0 .net "MUX_sel", 0 0, L_0000017dddd1f970;  1 drivers
+L_0000017dddd1f010 .part/v L_0000017dddd20690, L_0000017dddd1f970, 1;
+S_0000017dddcf88d0 .scope module, "mux_out3" "MUX2to1" 11 54, 7 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "MUX_sel";
+    .port_info 1 /INPUT 2 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5230_0 .net "MUX_in", 1 0, L_0000017dddd21450;  alias, 1 drivers
+v0000017dddcf5af0_0 .net "MUX_out", 0 0, L_0000017dddd1eed0;  1 drivers
+v0000017dddcf4290_0 .net "MUX_sel", 0 0, L_0000017dddd20cd0;  1 drivers
+L_0000017dddd1eed0 .part/v L_0000017dddd21450, L_0000017dddd20cd0, 1;
+S_0000017dddcf96e0 .scope module, "sb_test" "SBTest" 11 64, 13 3 0, S_0000017dddceed50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 4 "in1";
+    .port_info 1 /INPUT 4 "in2";
+    .port_info 2 /INPUT 4 "in3";
+    .port_info 3 /INPUT 4 "in4";
+    .port_info 4 /INPUT 32 "prog";
+    .port_info 5 /OUTPUT 4 "out1";
+    .port_info 6 /OUTPUT 4 "out2";
+    .port_info 7 /OUTPUT 4 "out3";
+    .port_info 8 /OUTPUT 4 "out4";
+v0000017dddcfd620_0 .net *"_ivl_102", 0 0, L_0000017dddd1c090;  1 drivers
+v0000017dddcfdda0_0 .net *"_ivl_104", 0 0, L_0000017dddd1b370;  1 drivers
+v0000017dddcfc0e0_0 .net *"_ivl_106", 0 0, L_0000017dddd1ab50;  1 drivers
+v0000017dddcfbf00_0 .net *"_ivl_108", 0 0, L_0000017dddd1a1f0;  1 drivers
+v0000017dddcfc2c0_0 .net *"_ivl_117", 0 0, L_0000017dddd1add0;  1 drivers
+v0000017dddcfe3e0_0 .net *"_ivl_119", 0 0, L_0000017dddd1c1d0;  1 drivers
+v0000017dddcfd6c0_0 .net *"_ivl_121", 0 0, L_0000017dddd1bc30;  1 drivers
+v0000017dddcfc180_0 .net *"_ivl_123", 0 0, L_0000017dddd1afb0;  1 drivers
+v0000017dddcfce00_0 .net *"_ivl_131", 0 0, L_0000017dddd1b730;  1 drivers
+v0000017dddcfcb80_0 .net *"_ivl_133", 0 0, L_0000017dddd1c270;  1 drivers
+v0000017dddcfd8a0_0 .net *"_ivl_135", 0 0, L_0000017dddd1b7d0;  1 drivers
+v0000017dddcfdee0_0 .net *"_ivl_137", 0 0, L_0000017dddd1c3b0;  1 drivers
+v0000017dddcfc360_0 .net *"_ivl_145", 0 0, L_0000017dddd1b190;  1 drivers
+v0000017dddcfd260_0 .net *"_ivl_147", 0 0, L_0000017dddd1c450;  1 drivers
+v0000017dddcfd940_0 .net *"_ivl_149", 0 0, L_0000017dddd19e30;  1 drivers
+v0000017dddcfcd60_0 .net *"_ivl_151", 0 0, L_0000017dddd19ed0;  1 drivers
+v0000017dddcfd3a0_0 .net *"_ivl_159", 0 0, L_0000017dddd1a970;  1 drivers
+v0000017dddcfcf40_0 .net *"_ivl_161", 0 0, L_0000017dddd2c9f0;  1 drivers
+v0000017dddcfd440_0 .net *"_ivl_163", 0 0, L_0000017dddd2b870;  1 drivers
+v0000017dddcfc680_0 .net *"_ivl_165", 0 0, L_0000017dddd2bc30;  1 drivers
+v0000017dddcfcfe0_0 .net *"_ivl_17", 0 0, L_0000017dddd218b0;  1 drivers
+v0000017dddcfbdc0_0 .net *"_ivl_174", 0 0, L_0000017dddd2bd70;  1 drivers
+v0000017dddcfc4a0_0 .net *"_ivl_176", 0 0, L_0000017dddd2afb0;  1 drivers
+v0000017dddcfd080_0 .net *"_ivl_178", 0 0, L_0000017dddd2b050;  1 drivers
+v0000017dddcfe0c0_0 .net *"_ivl_180", 0 0, L_0000017dddd2cf90;  1 drivers
+v0000017dddcfbfa0_0 .net *"_ivl_188", 0 0, L_0000017dddd2c450;  1 drivers
+v0000017dddcfbc80_0 .net *"_ivl_19", 0 0, L_0000017dddd21b30;  1 drivers
+v0000017dddcfc040_0 .net *"_ivl_190", 0 0, L_0000017dddd2b730;  1 drivers
+v0000017dddcfd1c0_0 .net *"_ivl_192", 0 0, L_0000017dddd2b7d0;  1 drivers
+v0000017dddcfd300_0 .net *"_ivl_194", 0 0, L_0000017dddd2c6d0;  1 drivers
+v0000017dddcfc540_0 .net *"_ivl_202", 0 0, L_0000017dddd2d0d0;  1 drivers
+v0000017dddcfbd20_0 .net *"_ivl_204", 0 0, L_0000017dddd2bcd0;  1 drivers
+v0000017dddcfc5e0_0 .net *"_ivl_206", 0 0, L_0000017dddd2beb0;  1 drivers
+v0000017dddcfe160_0 .net *"_ivl_208", 0 0, L_0000017dddd2c770;  1 drivers
+v0000017dddcfdf80_0 .net *"_ivl_21", 0 0, L_0000017dddd21630;  1 drivers
+v0000017dddcfc7c0_0 .net *"_ivl_216", 0 0, L_0000017dddd2b230;  1 drivers
+v0000017dddcfc860_0 .net *"_ivl_218", 0 0, L_0000017dddd2add0;  1 drivers
+v0000017dddcfd760_0 .net *"_ivl_220", 0 0, L_0000017dddd2b2d0;  1 drivers
+v0000017dddcfe200_0 .net *"_ivl_222", 0 0, L_0000017dddd2c810;  1 drivers
+v0000017dddcfd800_0 .net *"_ivl_23", 0 0, L_0000017dddd21950;  1 drivers
+v0000017dddcfd9e0_0 .net *"_ivl_3", 0 0, L_0000017dddd20ff0;  1 drivers
+v0000017dddcfc900_0 .net *"_ivl_31", 0 0, L_0000017dddd216d0;  1 drivers
+v0000017dddcfca40_0 .net *"_ivl_33", 0 0, L_0000017dddd21bd0;  1 drivers
+v0000017dddcfda80_0 .net *"_ivl_35", 0 0, L_0000017dddd1bd70;  1 drivers
+v0000017dddcfe2a0_0 .net *"_ivl_37", 0 0, L_0000017dddd1a290;  1 drivers
+v0000017dddcfdb20_0 .net *"_ivl_45", 0 0, L_0000017dddd1abf0;  1 drivers
+v0000017dddcfede0_0 .net *"_ivl_47", 0 0, L_0000017dddd1b910;  1 drivers
+v0000017dddcfe5c0_0 .net *"_ivl_49", 0 0, L_0000017dddd1b550;  1 drivers
+v0000017dddcfed40_0 .net *"_ivl_5", 0 0, L_0000017dddd1ed90;  1 drivers
+v0000017dddcfe840_0 .net *"_ivl_51", 0 0, L_0000017dddd1b9b0;  1 drivers
+v0000017dddcff740_0 .net *"_ivl_60", 0 0, L_0000017dddd1b870;  1 drivers
+v0000017dddcff920_0 .net *"_ivl_62", 0 0, L_0000017dddd19cf0;  1 drivers
+v0000017dddcff420_0 .net *"_ivl_64", 0 0, L_0000017dddd1a5b0;  1 drivers
+v0000017dddcfef20_0 .net *"_ivl_66", 0 0, L_0000017dddd1aa10;  1 drivers
+v0000017dddcfe660_0 .net *"_ivl_7", 0 0, L_0000017dddd1f6f0;  1 drivers
+v0000017dddcfefc0_0 .net *"_ivl_74", 0 0, L_0000017dddd1aab0;  1 drivers
+v0000017dddcfe480_0 .net *"_ivl_76", 0 0, L_0000017dddd1b5f0;  1 drivers
+v0000017dddcfee80_0 .net *"_ivl_78", 0 0, L_0000017dddd1bb90;  1 drivers
+v0000017dddcffb00_0 .net *"_ivl_80", 0 0, L_0000017dddd1be10;  1 drivers
+v0000017dddcff380_0 .net *"_ivl_88", 0 0, L_0000017dddd1ba50;  1 drivers
+v0000017dddcff4c0_0 .net *"_ivl_9", 0 0, L_0000017dddd1fdd0;  1 drivers
+v0000017dddcff9c0_0 .net *"_ivl_90", 0 0, L_0000017dddd1b690;  1 drivers
+v0000017dddcfeb60_0 .net *"_ivl_92", 0 0, L_0000017dddd1c310;  1 drivers
+v0000017dddcff560_0 .net *"_ivl_94", 0 0, L_0000017dddd1bf50;  1 drivers
+v0000017dddcfe520_0 .net "in1", 3 0, v0000017dddd04790_0;  alias, 1 drivers
+v0000017dddcff600_0 .net "in2", 3 0, v0000017dddd031b0_0;  alias, 1 drivers
+v0000017dddcff6a0_0 .net "in3", 3 0, v0000017dddd03070_0;  alias, 1 drivers
+v0000017dddcfe8e0_0 .net "in4", 3 0, L_0000017dddd1fc90;  alias, 1 drivers
+v0000017dddcff060_0 .net "out1", 3 0, L_0000017dddd1b230;  alias, 1 drivers
+v0000017dddcfeac0_0 .net "out2", 3 0, L_0000017dddd1af10;  alias, 1 drivers
+v0000017dddcffa60_0 .net "out3", 3 0, L_0000017dddd2b370;  alias, 1 drivers
+v0000017dddcfe700_0 .net "out4", 3 0, L_0000017dddd2d350;  alias, 1 drivers
+v0000017dddcff7e0_0 .net "prog", 31 0, L_0000017dddd1d2b0;  alias, 1 drivers
+L_0000017dddd20af0 .part L_0000017dddd1d2b0, 30, 2;
+L_0000017dddd20ff0 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd1ed90 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd1f6f0 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd1fdd0 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd21810 .concat [ 1 1 1 1], L_0000017dddd1fdd0, L_0000017dddd1f6f0, L_0000017dddd1ed90, L_0000017dddd20ff0;
+L_0000017dddd21590 .part L_0000017dddd1d2b0, 28, 2;
+L_0000017dddd218b0 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd21b30 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd21630 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd21950 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd21770 .concat [ 1 1 1 1], L_0000017dddd21950, L_0000017dddd21630, L_0000017dddd21b30, L_0000017dddd218b0;
+L_0000017dddd219f0 .part L_0000017dddd1d2b0, 26, 2;
+L_0000017dddd216d0 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd21bd0 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd1bd70 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd1a290 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd19f70 .concat [ 1 1 1 1], L_0000017dddd1a290, L_0000017dddd1bd70, L_0000017dddd21bd0, L_0000017dddd216d0;
+L_0000017dddd1a790 .part L_0000017dddd1d2b0, 24, 2;
+L_0000017dddd1abf0 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd1b910 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd1b550 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd1b9b0 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd1a330 .concat [ 1 1 1 1], L_0000017dddd1b9b0, L_0000017dddd1b550, L_0000017dddd1b910, L_0000017dddd1abf0;
+L_0000017dddd1b230 .concat8 [ 1 1 1 1], L_0000017dddd20a50, L_0000017dddd214f0, L_0000017dddd21a90, L_0000017dddd1a150;
+L_0000017dddd1ac90 .part L_0000017dddd1d2b0, 22, 2;
+L_0000017dddd1b870 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd19cf0 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd1a5b0 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd1aa10 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd19d90 .concat [ 1 1 1 1], L_0000017dddd1aa10, L_0000017dddd1a5b0, L_0000017dddd19cf0, L_0000017dddd1b870;
+L_0000017dddd1b410 .part L_0000017dddd1d2b0, 20, 2;
+L_0000017dddd1aab0 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd1b5f0 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd1bb90 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd1be10 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd1ad30 .concat [ 1 1 1 1], L_0000017dddd1be10, L_0000017dddd1bb90, L_0000017dddd1b5f0, L_0000017dddd1aab0;
+L_0000017dddd1a010 .part L_0000017dddd1d2b0, 18, 2;
+L_0000017dddd1ba50 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd1b690 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd1c310 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd1bf50 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd1ae70 .concat [ 1 1 1 1], L_0000017dddd1bf50, L_0000017dddd1c310, L_0000017dddd1b690, L_0000017dddd1ba50;
+L_0000017dddd1bff0 .part L_0000017dddd1d2b0, 16, 2;
+L_0000017dddd1c090 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd1b370 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd1ab50 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd1a1f0 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd1c130 .concat [ 1 1 1 1], L_0000017dddd1a1f0, L_0000017dddd1ab50, L_0000017dddd1b370, L_0000017dddd1c090;
+L_0000017dddd1af10 .concat8 [ 1 1 1 1], L_0000017dddd1b0f0, L_0000017dddd1a510, L_0000017dddd1beb0, L_0000017dddd1baf0;
+L_0000017dddd1b2d0 .part L_0000017dddd1d2b0, 14, 2;
+L_0000017dddd1add0 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd1c1d0 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd1bc30 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd1afb0 .part L_0000017dddd1fc90, 0, 1;
+L_0000017dddd1a650 .concat [ 1 1 1 1], L_0000017dddd1afb0, L_0000017dddd1bc30, L_0000017dddd1c1d0, L_0000017dddd1add0;
+L_0000017dddd1b4b0 .part L_0000017dddd1d2b0, 12, 2;
+L_0000017dddd1b730 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd1c270 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd1b7d0 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd1c3b0 .part L_0000017dddd1fc90, 1, 1;
+L_0000017dddd1a3d0 .concat [ 1 1 1 1], L_0000017dddd1c3b0, L_0000017dddd1b7d0, L_0000017dddd1c270, L_0000017dddd1b730;
+L_0000017dddd1a830 .part L_0000017dddd1d2b0, 10, 2;
+L_0000017dddd1b190 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd1c450 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd19e30 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd19ed0 .part L_0000017dddd1fc90, 2, 1;
+L_0000017dddd1a0b0 .concat [ 1 1 1 1], L_0000017dddd19ed0, L_0000017dddd19e30, L_0000017dddd1c450, L_0000017dddd1b190;
+L_0000017dddd1a8d0 .part L_0000017dddd1d2b0, 8, 2;
+L_0000017dddd1a970 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd2c9f0 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd2b870 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd2bc30 .part L_0000017dddd1fc90, 3, 1;
+L_0000017dddd2b0f0 .concat [ 1 1 1 1], L_0000017dddd2bc30, L_0000017dddd2b870, L_0000017dddd2c9f0, L_0000017dddd1a970;
+L_0000017dddd2b370 .concat8 [ 1 1 1 1], L_0000017dddd1a6f0, L_0000017dddd1b050, L_0000017dddd1bcd0, L_0000017dddd1a470;
+L_0000017dddd2cc70 .part L_0000017dddd1d2b0, 6, 2;
+L_0000017dddd2bd70 .part v0000017dddd04790_0, 0, 1;
+L_0000017dddd2afb0 .part v0000017dddd031b0_0, 0, 1;
+L_0000017dddd2b050 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd2cf90 .part v0000017dddd03070_0, 0, 1;
+L_0000017dddd2ac90 .concat [ 1 1 1 1], L_0000017dddd2cf90, L_0000017dddd2b050, L_0000017dddd2afb0, L_0000017dddd2bd70;
+L_0000017dddd2c590 .part L_0000017dddd1d2b0, 4, 2;
+L_0000017dddd2c450 .part v0000017dddd04790_0, 1, 1;
+L_0000017dddd2b730 .part v0000017dddd031b0_0, 1, 1;
+L_0000017dddd2b7d0 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd2c6d0 .part v0000017dddd03070_0, 1, 1;
+L_0000017dddd2b190 .concat [ 1 1 1 1], L_0000017dddd2c6d0, L_0000017dddd2b7d0, L_0000017dddd2b730, L_0000017dddd2c450;
+L_0000017dddd2c130 .part L_0000017dddd1d2b0, 2, 2;
+L_0000017dddd2d0d0 .part v0000017dddd04790_0, 2, 1;
+L_0000017dddd2bcd0 .part v0000017dddd031b0_0, 2, 1;
+L_0000017dddd2beb0 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd2c770 .part v0000017dddd03070_0, 2, 1;
+L_0000017dddd2ce50 .concat [ 1 1 1 1], L_0000017dddd2c770, L_0000017dddd2beb0, L_0000017dddd2bcd0, L_0000017dddd2d0d0;
+L_0000017dddd2c8b0 .part L_0000017dddd1d2b0, 0, 2;
+L_0000017dddd2b230 .part v0000017dddd04790_0, 3, 1;
+L_0000017dddd2add0 .part v0000017dddd031b0_0, 3, 1;
+L_0000017dddd2b2d0 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd2c810 .part v0000017dddd03070_0, 3, 1;
+L_0000017dddd2c950 .concat [ 1 1 1 1], L_0000017dddd2c810, L_0000017dddd2b2d0, L_0000017dddd2add0, L_0000017dddd2b230;
+L_0000017dddd2d350 .concat8 [ 1 1 1 1], L_0000017dddd2d030, L_0000017dddd2c310, L_0000017dddd2ad30, L_0000017dddd2c630;
+S_0000017dddcf8a60 .scope module, "mux1_0" "MUX4to1" 13 14, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf48d0_0 .net "MUX_in", 3 0, L_0000017dddd21810;  1 drivers
+v0000017dddcf6130_0 .net "MUX_out", 0 0, L_0000017dddd20a50;  1 drivers
+v0000017dddcf4bf0_0 .net "MUX_sel", 1 0, L_0000017dddd20af0;  1 drivers
+L_0000017dddd20a50 .part/v L_0000017dddd21810, L_0000017dddd20af0, 1;
+S_0000017dddcf85b0 .scope module, "mux1_1" "MUX4to1" 13 15, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf57d0_0 .net "MUX_in", 3 0, L_0000017dddd21770;  1 drivers
+v0000017dddcf50f0_0 .net "MUX_out", 0 0, L_0000017dddd214f0;  1 drivers
+v0000017dddcf4970_0 .net "MUX_sel", 1 0, L_0000017dddd21590;  1 drivers
+L_0000017dddd214f0 .part/v L_0000017dddd21770, L_0000017dddd21590, 1;
+S_0000017dddcf9870 .scope module, "mux1_2" "MUX4to1" 13 16, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf4ab0_0 .net "MUX_in", 3 0, L_0000017dddd19f70;  1 drivers
+v0000017dddcf5f50_0 .net "MUX_out", 0 0, L_0000017dddd21a90;  1 drivers
+v0000017dddcf61d0_0 .net "MUX_sel", 1 0, L_0000017dddd219f0;  1 drivers
+L_0000017dddd21a90 .part/v L_0000017dddd19f70, L_0000017dddd219f0, 1;
+S_0000017dddcf8420 .scope module, "mux1_3" "MUX4to1" 13 17, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5730_0 .net "MUX_in", 3 0, L_0000017dddd1a330;  1 drivers
+v0000017dddcf3d90_0 .net "MUX_out", 0 0, L_0000017dddd1a150;  1 drivers
+v0000017dddcf3e30_0 .net "MUX_sel", 1 0, L_0000017dddd1a790;  1 drivers
+L_0000017dddd1a150 .part/v L_0000017dddd1a330, L_0000017dddd1a790, 1;
+S_0000017dddcf8100 .scope module, "mux2_0" "MUX4to1" 13 20, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf4b50_0 .net "MUX_in", 3 0, L_0000017dddd19d90;  1 drivers
+v0000017dddcf3f70_0 .net "MUX_out", 0 0, L_0000017dddd1b0f0;  1 drivers
+v0000017dddcf5550_0 .net "MUX_sel", 1 0, L_0000017dddd1ac90;  1 drivers
+L_0000017dddd1b0f0 .part/v L_0000017dddd19d90, L_0000017dddd1ac90, 1;
+S_0000017dddcf9a00 .scope module, "mux2_1" "MUX4to1" 13 21, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf4010_0 .net "MUX_in", 3 0, L_0000017dddd1ad30;  1 drivers
+v0000017dddcf4d30_0 .net "MUX_out", 0 0, L_0000017dddd1a510;  1 drivers
+v0000017dddcf4150_0 .net "MUX_sel", 1 0, L_0000017dddd1b410;  1 drivers
+L_0000017dddd1a510 .part/v L_0000017dddd1ad30, L_0000017dddd1b410, 1;
+S_0000017dddcf8f10 .scope module, "mux2_2" "MUX4to1" 13 22, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf52d0_0 .net "MUX_in", 3 0, L_0000017dddd1ae70;  1 drivers
+v0000017dddcf4330_0 .net "MUX_out", 0 0, L_0000017dddd1beb0;  1 drivers
+v0000017dddcf4dd0_0 .net "MUX_sel", 1 0, L_0000017dddd1a010;  1 drivers
+L_0000017dddd1beb0 .part/v L_0000017dddd1ae70, L_0000017dddd1a010, 1;
+S_0000017dddcf7de0 .scope module, "mux2_3" "MUX4to1" 13 23, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5910_0 .net "MUX_in", 3 0, L_0000017dddd1c130;  1 drivers
+v0000017dddcf4f10_0 .net "MUX_out", 0 0, L_0000017dddd1baf0;  1 drivers
+v0000017dddcf59b0_0 .net "MUX_sel", 1 0, L_0000017dddd1bff0;  1 drivers
+L_0000017dddd1baf0 .part/v L_0000017dddd1c130, L_0000017dddd1bff0, 1;
+S_0000017dddcf7f70 .scope module, "mux3_0" "MUX4to1" 13 26, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5370_0 .net "MUX_in", 3 0, L_0000017dddd1a650;  1 drivers
+v0000017dddcf43d0_0 .net "MUX_out", 0 0, L_0000017dddd1a6f0;  1 drivers
+v0000017dddcf4fb0_0 .net "MUX_sel", 1 0, L_0000017dddd1b2d0;  1 drivers
+L_0000017dddd1a6f0 .part/v L_0000017dddd1a650, L_0000017dddd1b2d0, 1;
+S_0000017dddcf8290 .scope module, "mux3_1" "MUX4to1" 13 27, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcf5410_0 .net "MUX_in", 3 0, L_0000017dddd1a3d0;  1 drivers
+v0000017dddcf54b0_0 .net "MUX_out", 0 0, L_0000017dddd1b050;  1 drivers
+v0000017dddcf5a50_0 .net "MUX_sel", 1 0, L_0000017dddd1b4b0;  1 drivers
+L_0000017dddd1b050 .part/v L_0000017dddd1a3d0, L_0000017dddd1b4b0, 1;
+S_0000017dddcfb3d0 .scope module, "mux3_2" "MUX4to1" 13 28, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfccc0_0 .net "MUX_in", 3 0, L_0000017dddd1a0b0;  1 drivers
+v0000017dddcfd120_0 .net "MUX_out", 0 0, L_0000017dddd1bcd0;  1 drivers
+v0000017dddcfc9a0_0 .net "MUX_sel", 1 0, L_0000017dddd1a830;  1 drivers
+L_0000017dddd1bcd0 .part/v L_0000017dddd1a0b0, L_0000017dddd1a830, 1;
+S_0000017dddcfb560 .scope module, "mux3_3" "MUX4to1" 13 29, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfbe60_0 .net "MUX_in", 3 0, L_0000017dddd2b0f0;  1 drivers
+v0000017dddcfdbc0_0 .net "MUX_out", 0 0, L_0000017dddd1a470;  1 drivers
+v0000017dddcfcae0_0 .net "MUX_sel", 1 0, L_0000017dddd1a8d0;  1 drivers
+L_0000017dddd1a470 .part/v L_0000017dddd2b0f0, L_0000017dddd1a8d0, 1;
+S_0000017dddcfa430 .scope module, "mux4_0" "MUX4to1" 13 32, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfc400_0 .net "MUX_in", 3 0, L_0000017dddd2ac90;  1 drivers
+v0000017dddcfd4e0_0 .net "MUX_out", 0 0, L_0000017dddd2d030;  1 drivers
+v0000017dddcfc220_0 .net "MUX_sel", 1 0, L_0000017dddd2cc70;  1 drivers
+L_0000017dddd2d030 .part/v L_0000017dddd2ac90, L_0000017dddd2cc70, 1;
+S_0000017dddcf9df0 .scope module, "mux4_1" "MUX4to1" 13 33, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfe020_0 .net "MUX_in", 3 0, L_0000017dddd2b190;  1 drivers
+v0000017dddcfd580_0 .net "MUX_out", 0 0, L_0000017dddd2c310;  1 drivers
+v0000017dddcfdd00_0 .net "MUX_sel", 1 0, L_0000017dddd2c590;  1 drivers
+L_0000017dddd2c310 .part/v L_0000017dddd2b190, L_0000017dddd2c590, 1;
+S_0000017dddcfb240 .scope module, "mux4_2" "MUX4to1" 13 34, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfde40_0 .net "MUX_in", 3 0, L_0000017dddd2ce50;  1 drivers
+v0000017dddcfc720_0 .net "MUX_out", 0 0, L_0000017dddd2ad30;  1 drivers
+v0000017dddcfcc20_0 .net "MUX_sel", 1 0, L_0000017dddd2c130;  1 drivers
+L_0000017dddd2ad30 .part/v L_0000017dddd2ce50, L_0000017dddd2c130, 1;
+S_0000017dddcfa5c0 .scope module, "mux4_3" "MUX4to1" 13 35, 10 3 0, S_0000017dddcf96e0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfdc60_0 .net "MUX_in", 3 0, L_0000017dddd2c950;  1 drivers
+v0000017dddcfcea0_0 .net "MUX_out", 0 0, L_0000017dddd2c630;  1 drivers
+v0000017dddcfe340_0 .net "MUX_sel", 1 0, L_0000017dddd2c8b0;  1 drivers
+L_0000017dddd2c630 .part/v L_0000017dddd2c950, L_0000017dddd2c8b0, 1;
+S_0000017dddb6a940 .scope module, "IO" "IO" 14 5;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 8 "in1";
+    .port_info 5 /INPUT 8 "in2";
+    .port_info 6 /INPUT 8 "in3";
+    .port_info 7 /INPUT 8 "in4";
+    .port_info 8 /OUTPUT 1 "prog_out";
+    .port_info 9 /OUTPUT 8 "out1";
+    .port_info 10 /OUTPUT 8 "out2";
+    .port_info 11 /OUTPUT 8 "out3";
+    .port_info 12 /OUTPUT 8 "out4";
+o0000017dddc99de8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000017dddd10290_0 .net "clb_clk", 0 0, o0000017dddc99de8;  0 drivers
+v0000017dddd101f0_0 .net "core_in1", 31 0, L_0000017dddd2f290;  1 drivers
+v0000017dddd10e70_0 .net "core_in2", 31 0, L_0000017dddd2f0b0;  1 drivers
+v0000017dddd0f750_0 .net "core_in3", 31 0, L_0000017dddd30550;  1 drivers
+v0000017dddd0fc50_0 .net "core_in4", 31 0, L_0000017dddd325d0;  1 drivers
+o0000017dddc99ed8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000017dddd0ecb0_0 .net "core_out1", 31 0, o0000017dddc99ed8;  0 drivers
+o0000017dddc99f08 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000017dddd10830_0 .net "core_out2", 31 0, o0000017dddc99f08;  0 drivers
+o0000017dddc99f38 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000017dddd0ed50_0 .net "core_out3", 31 0, o0000017dddc99f38;  0 drivers
+o0000017dddc99f68 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000017dddd0f890_0 .net "core_out4", 31 0, o0000017dddc99f68;  0 drivers
+o0000017dddc9a028 .functor BUFZ 1, C4<z>; HiZ drive
+v0000017dddd0f4d0_0 .net "core_prog_out", 0 0, o0000017dddc9a028;  0 drivers
+o0000017dddc9aec8 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0000017dddd11370_0 .net "in1", 7 0, o0000017dddc9aec8;  0 drivers
+o0000017dddc9bd38 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0000017dddd103d0_0 .net "in2", 7 0, o0000017dddc9bd38;  0 drivers
+o0000017dddc9cba8 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0000017dddd0fa70_0 .net "in3", 7 0, o0000017dddc9cba8;  0 drivers
+o0000017dddc9da18 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0000017dddd10150_0 .net "in4", 7 0, o0000017dddc9da18;  0 drivers
+v0000017dddd10dd0_0 .net "io1_prog_out", 0 0, L_0000017dddd2d5d0;  1 drivers
+v0000017dddd0fcf0_0 .net "io2_prog_out", 0 0, L_0000017dddd2f150;  1 drivers
+v0000017dddd0f110_0 .net "io3_prog_out", 0 0, L_0000017dddd320d0;  1 drivers
+v0000017dddd0ef30_0 .net "out1", 7 0, L_0000017dddd2ba50;  1 drivers
+v0000017dddd10470_0 .net "out2", 7 0, L_0000017dddd2f510;  1 drivers
+v0000017dddd11410_0 .net "out3", 7 0, L_0000017dddd31090;  1 drivers
+v0000017dddd108d0_0 .net "out4", 7 0, L_0000017dddd30af0;  1 drivers
+o0000017dddc99f98 .functor BUFZ 1, C4<z>; HiZ drive
+v0000017dddd0f250_0 .net "prog_clk", 0 0, o0000017dddc99f98;  0 drivers
+o0000017dddc99fc8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000017dddd112d0_0 .net "prog_en", 0 0, o0000017dddc99fc8;  0 drivers
+o0000017dddc99ff8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000017dddd0f1b0_0 .net "prog_in", 0 0, o0000017dddc99ff8;  0 drivers
+v0000017dddd0efd0_0 .net "prog_out", 0 0, L_0000017dddd358b0;  1 drivers
+S_0000017dddcfb0b0 .scope module, "core" "Core" 14 37, 15 5 0, S_0000017dddb6a940;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 32 "in1";
+    .port_info 5 /INPUT 32 "in2";
+    .port_info 6 /INPUT 32 "in3";
+    .port_info 7 /INPUT 32 "in4";
+    .port_info 8 /OUTPUT 1 "prog_out";
+    .port_info 9 /OUTPUT 32 "out1";
+    .port_info 10 /OUTPUT 32 "out2";
+    .port_info 11 /OUTPUT 32 "out3";
+    .port_info 12 /OUTPUT 32 "out4";
+v0000017dddd03d90_0 .net "clb_clk", 0 0, o0000017dddc99de8;  alias, 0 drivers
+v0000017dddd04a10_0 .net "in1", 31 0, L_0000017dddd2f290;  alias, 1 drivers
+v0000017dddd03110_0 .net "in2", 31 0, L_0000017dddd2f0b0;  alias, 1 drivers
+v0000017dddd04ab0_0 .net "in3", 31 0, L_0000017dddd30550;  alias, 1 drivers
+v0000017dddd02670_0 .net "in4", 31 0, L_0000017dddd325d0;  alias, 1 drivers
+v0000017dddd03390_0 .net "out1", 31 0, o0000017dddc99ed8;  alias, 0 drivers
+v0000017dddd04b50_0 .net "out2", 31 0, o0000017dddc99f08;  alias, 0 drivers
+v0000017dddd034d0_0 .net "out3", 31 0, o0000017dddc99f38;  alias, 0 drivers
+v0000017dddd02710_0 .net "out4", 31 0, o0000017dddc99f68;  alias, 0 drivers
+v0000017dddd027b0_0 .net "prog_clk", 0 0, o0000017dddc99f98;  alias, 0 drivers
+v0000017dddd02850_0 .net "prog_en", 0 0, o0000017dddc99fc8;  alias, 0 drivers
+v0000017dddd02ad0_0 .net "prog_in", 0 0, o0000017dddc99ff8;  alias, 0 drivers
+v0000017dddd02b70_0 .net "prog_out", 0 0, o0000017dddc9a028;  alias, 0 drivers
+S_0000017dddcf9c60 .scope module, "io1" "IOSwitch" 14 54, 16 5 0, S_0000017dddb6a940;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 32 "core_out";
+    .port_info 5 /INPUT 8 "in";
+    .port_info 6 /OUTPUT 1 "prog_out";
+    .port_info 7 /OUTPUT 32 "core_in";
+    .port_info 8 /OUTPUT 8 "out";
+v0000017dddd05c30_0 .net *"_ivl_52", 0 0, L_0000017dddd2bb90;  1 drivers
+v0000017dddd04d30_0 .net *"_ivl_53", 3 0, L_0000017dddd2c1d0;  1 drivers
+v0000017dddd05b90_0 .net *"_ivl_58", 0 0, L_0000017dddd2c270;  1 drivers
+v0000017dddd06c70_0 .net *"_ivl_59", 3 0, L_0000017dddd2c4f0;  1 drivers
+v0000017dddd05550_0 .net *"_ivl_64", 0 0, L_0000017dddd2d170;  1 drivers
+v0000017dddd073f0_0 .net *"_ivl_65", 3 0, L_0000017dddd2db70;  1 drivers
+v0000017dddd06450_0 .net *"_ivl_70", 0 0, L_0000017dddd2d850;  1 drivers
+v0000017dddd05ff0_0 .net *"_ivl_71", 3 0, L_0000017dddd2e390;  1 drivers
+v0000017dddd061d0_0 .net *"_ivl_76", 0 0, L_0000017dddd2f330;  1 drivers
+v0000017dddd066d0_0 .net *"_ivl_77", 3 0, L_0000017dddd2f3d0;  1 drivers
+v0000017dddd050f0_0 .net *"_ivl_82", 0 0, L_0000017dddd2e430;  1 drivers
+v0000017dddd04f10_0 .net *"_ivl_83", 3 0, L_0000017dddd2eb10;  1 drivers
+v0000017dddd06770_0 .net *"_ivl_88", 0 0, L_0000017dddd2e110;  1 drivers
+v0000017dddd04e70_0 .net *"_ivl_89", 3 0, L_0000017dddd2ec50;  1 drivers
+v0000017dddd068b0_0 .net *"_ivl_95", 0 0, L_0000017dddd2f1f0;  1 drivers
+v0000017dddd052d0_0 .net *"_ivl_96", 3 0, L_0000017dddd2e070;  1 drivers
+v0000017dddd06e50_0 .net "clb_clk", 0 0, o0000017dddc99de8;  alias, 0 drivers
+v0000017dddd05370_0 .net "core_in", 31 0, L_0000017dddd2f290;  alias, 1 drivers
+v0000017dddd06090_0 .net "core_out", 31 0, o0000017dddc99ed8;  alias, 0 drivers
+v0000017dddd06950_0 .net "in", 7 0, o0000017dddc9aec8;  alias, 0 drivers
+v0000017dddd06db0_0 .net "out", 7 0, L_0000017dddd2ba50;  alias, 1 drivers
+v0000017dddd055f0_0 .net "prog_clk", 0 0, o0000017dddc99f98;  alias, 0 drivers
+v0000017dddd06ef0_0 .net "prog_en", 0 0, o0000017dddc99fc8;  alias, 0 drivers
+v0000017dddd06310_0 .net "prog_in", 0 0, o0000017dddc9a028;  alias, 0 drivers
+v0000017dddd05190_0 .net "prog_out", 0 0, L_0000017dddd2d5d0;  alias, 1 drivers
+v0000017dddd069f0_0 .var "shift_reg", 15 0;
+E_0000017dddc587b0 .event posedge, v0000017dddd027b0_0;
+L_0000017dddd2b910 .part v0000017dddd069f0_0, 14, 2;
+L_0000017dddd2cbd0 .part o0000017dddc99ed8, 0, 4;
+L_0000017dddd2b410 .part v0000017dddd069f0_0, 12, 2;
+L_0000017dddd2ca90 .part o0000017dddc99ed8, 4, 4;
+L_0000017dddd2be10 .part v0000017dddd069f0_0, 10, 2;
+L_0000017dddd2d2b0 .part o0000017dddc99ed8, 8, 4;
+L_0000017dddd2abf0 .part v0000017dddd069f0_0, 8, 2;
+L_0000017dddd2b9b0 .part o0000017dddc99ed8, 12, 4;
+L_0000017dddd2b550 .part v0000017dddd069f0_0, 6, 2;
+L_0000017dddd2baf0 .part o0000017dddc99ed8, 16, 4;
+L_0000017dddd2cd10 .part v0000017dddd069f0_0, 4, 2;
+L_0000017dddd2b5f0 .part o0000017dddc99ed8, 20, 4;
+L_0000017dddd2af10 .part v0000017dddd069f0_0, 2, 2;
+L_0000017dddd2cdb0 .part o0000017dddc99ed8, 24, 4;
+L_0000017dddd2cef0 .part v0000017dddd069f0_0, 0, 2;
+L_0000017dddd2b690 .part o0000017dddc99ed8, 28, 4;
+LS_0000017dddd2ba50_0_0 .concat8 [ 1 1 1 1], L_0000017dddd2bff0, L_0000017dddd2b4b0, L_0000017dddd2c090, L_0000017dddd2ae70;
+LS_0000017dddd2ba50_0_4 .concat8 [ 1 1 1 1], L_0000017dddd2d210, L_0000017dddd2cb30, L_0000017dddd2c3b0, L_0000017dddd2bf50;
+L_0000017dddd2ba50 .concat8 [ 4 4 0 0], LS_0000017dddd2ba50_0_0, LS_0000017dddd2ba50_0_4;
+L_0000017dddd2bb90 .part o0000017dddc9aec8, 0, 1;
+L_0000017dddd2c1d0 .concat [ 1 1 1 1], L_0000017dddd2bb90, L_0000017dddd2bb90, L_0000017dddd2bb90, L_0000017dddd2bb90;
+L_0000017dddd2c270 .part o0000017dddc9aec8, 1, 1;
+L_0000017dddd2c4f0 .concat [ 1 1 1 1], L_0000017dddd2c270, L_0000017dddd2c270, L_0000017dddd2c270, L_0000017dddd2c270;
+L_0000017dddd2d170 .part o0000017dddc9aec8, 2, 1;
+L_0000017dddd2db70 .concat [ 1 1 1 1], L_0000017dddd2d170, L_0000017dddd2d170, L_0000017dddd2d170, L_0000017dddd2d170;
+L_0000017dddd2d850 .part o0000017dddc9aec8, 3, 1;
+L_0000017dddd2e390 .concat [ 1 1 1 1], L_0000017dddd2d850, L_0000017dddd2d850, L_0000017dddd2d850, L_0000017dddd2d850;
+L_0000017dddd2f330 .part o0000017dddc9aec8, 4, 1;
+L_0000017dddd2f3d0 .concat [ 1 1 1 1], L_0000017dddd2f330, L_0000017dddd2f330, L_0000017dddd2f330, L_0000017dddd2f330;
+L_0000017dddd2e430 .part o0000017dddc9aec8, 5, 1;
+L_0000017dddd2eb10 .concat [ 1 1 1 1], L_0000017dddd2e430, L_0000017dddd2e430, L_0000017dddd2e430, L_0000017dddd2e430;
+L_0000017dddd2e110 .part o0000017dddc9aec8, 6, 1;
+L_0000017dddd2ec50 .concat [ 1 1 1 1], L_0000017dddd2e110, L_0000017dddd2e110, L_0000017dddd2e110, L_0000017dddd2e110;
+LS_0000017dddd2f290_0_0 .concat8 [ 4 4 4 4], L_0000017dddd2c1d0, L_0000017dddd2c4f0, L_0000017dddd2db70, L_0000017dddd2e390;
+LS_0000017dddd2f290_0_4 .concat8 [ 4 4 4 4], L_0000017dddd2f3d0, L_0000017dddd2eb10, L_0000017dddd2ec50, L_0000017dddd2e070;
+L_0000017dddd2f290 .concat8 [ 16 16 0 0], LS_0000017dddd2f290_0_0, LS_0000017dddd2f290_0_4;
+L_0000017dddd2f1f0 .part o0000017dddc9aec8, 7, 1;
+L_0000017dddd2e070 .concat [ 1 1 1 1], L_0000017dddd2f1f0, L_0000017dddd2f1f0, L_0000017dddd2f1f0, L_0000017dddd2f1f0;
+L_0000017dddd2d5d0 .part v0000017dddd069f0_0, 0, 1;
+S_0000017dddcfb6f0 .scope module, "mux0" "MUX4to1" 16 26, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd070d0_0 .net "MUX_in", 3 0, L_0000017dddd2cbd0;  1 drivers
+v0000017dddd05230_0 .net "MUX_out", 0 0, L_0000017dddd2bff0;  1 drivers
+v0000017dddd05d70_0 .net "MUX_sel", 1 0, L_0000017dddd2b910;  1 drivers
+L_0000017dddd2bff0 .part/v L_0000017dddd2cbd0, L_0000017dddd2b910, 1;
+S_0000017dddcfb880 .scope module, "mux1" "MUX4to1" 16 27, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd05e10_0 .net "MUX_in", 3 0, L_0000017dddd2ca90;  1 drivers
+v0000017dddd04c90_0 .net "MUX_out", 0 0, L_0000017dddd2b4b0;  1 drivers
+v0000017dddd07170_0 .net "MUX_sel", 1 0, L_0000017dddd2b410;  1 drivers
+L_0000017dddd2b4b0 .part/v L_0000017dddd2ca90, L_0000017dddd2b410, 1;
+S_0000017dddcfa750 .scope module, "mux2" "MUX4to1" 16 28, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd054b0_0 .net "MUX_in", 3 0, L_0000017dddd2d2b0;  1 drivers
+v0000017dddd059b0_0 .net "MUX_out", 0 0, L_0000017dddd2c090;  1 drivers
+v0000017dddd064f0_0 .net "MUX_sel", 1 0, L_0000017dddd2be10;  1 drivers
+L_0000017dddd2c090 .part/v L_0000017dddd2d2b0, L_0000017dddd2be10, 1;
+S_0000017dddcfa8e0 .scope module, "mux3" "MUX4to1" 16 29, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd06bd0_0 .net "MUX_in", 3 0, L_0000017dddd2b9b0;  1 drivers
+v0000017dddd05af0_0 .net "MUX_out", 0 0, L_0000017dddd2ae70;  1 drivers
+v0000017dddd05eb0_0 .net "MUX_sel", 1 0, L_0000017dddd2abf0;  1 drivers
+L_0000017dddd2ae70 .part/v L_0000017dddd2b9b0, L_0000017dddd2abf0, 1;
+S_0000017dddcfba10 .scope module, "mux4" "MUX4to1" 16 30, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd06590_0 .net "MUX_in", 3 0, L_0000017dddd2baf0;  1 drivers
+v0000017dddd063b0_0 .net "MUX_out", 0 0, L_0000017dddd2d210;  1 drivers
+v0000017dddd06d10_0 .net "MUX_sel", 1 0, L_0000017dddd2b550;  1 drivers
+L_0000017dddd2d210 .part/v L_0000017dddd2baf0, L_0000017dddd2b550, 1;
+S_0000017dddcf9f80 .scope module, "mux5" "MUX4to1" 16 31, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd06270_0 .net "MUX_in", 3 0, L_0000017dddd2b5f0;  1 drivers
+v0000017dddd07350_0 .net "MUX_out", 0 0, L_0000017dddd2cb30;  1 drivers
+v0000017dddd06630_0 .net "MUX_sel", 1 0, L_0000017dddd2cd10;  1 drivers
+L_0000017dddd2cb30 .part/v L_0000017dddd2b5f0, L_0000017dddd2cd10, 1;
+S_0000017dddcfad90 .scope module, "mux6" "MUX4to1" 16 32, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd06810_0 .net "MUX_in", 3 0, L_0000017dddd2cdb0;  1 drivers
+v0000017dddd06130_0 .net "MUX_out", 0 0, L_0000017dddd2c3b0;  1 drivers
+v0000017dddd05a50_0 .net "MUX_sel", 1 0, L_0000017dddd2af10;  1 drivers
+L_0000017dddd2c3b0 .part/v L_0000017dddd2cdb0, L_0000017dddd2af10, 1;
+S_0000017dddcfa110 .scope module, "mux7" "MUX4to1" 16 33, 10 3 0, S_0000017dddcf9c60;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd05f50_0 .net "MUX_in", 3 0, L_0000017dddd2b690;  1 drivers
+v0000017dddd05410_0 .net "MUX_out", 0 0, L_0000017dddd2bf50;  1 drivers
+v0000017dddd05cd0_0 .net "MUX_sel", 1 0, L_0000017dddd2cef0;  1 drivers
+L_0000017dddd2bf50 .part/v L_0000017dddd2b690, L_0000017dddd2cef0, 1;
+S_0000017dddcfa2a0 .scope module, "io2" "IOSwitch" 14 66, 16 5 0, S_0000017dddb6a940;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 32 "core_out";
+    .port_info 5 /INPUT 8 "in";
+    .port_info 6 /OUTPUT 1 "prog_out";
+    .port_info 7 /OUTPUT 32 "core_in";
+    .port_info 8 /OUTPUT 8 "out";
+v0000017dddd00d70_0 .net *"_ivl_52", 0 0, L_0000017dddd2f6f0;  1 drivers
+v0000017dddd01ef0_0 .net *"_ivl_53", 3 0, L_0000017dddd2e250;  1 drivers
+v0000017dddd01db0_0 .net *"_ivl_58", 0 0, L_0000017dddd2dad0;  1 drivers
+v0000017dddd01d10_0 .net *"_ivl_59", 3 0, L_0000017dddd2ee30;  1 drivers
+v0000017dddd020d0_0 .net *"_ivl_64", 0 0, L_0000017dddd2f5b0;  1 drivers
+v0000017dddd02030_0 .net *"_ivl_65", 3 0, L_0000017dddd2f790;  1 drivers
+v0000017dddd00e10_0 .net *"_ivl_70", 0 0, L_0000017dddd2e9d0;  1 drivers
+v0000017dddd00410_0 .net *"_ivl_71", 3 0, L_0000017dddd2fa10;  1 drivers
+v0000017dddd02170_0 .net *"_ivl_76", 0 0, L_0000017dddd2fb50;  1 drivers
+v0000017dddd01270_0 .net *"_ivl_77", 3 0, L_0000017dddd2eed0;  1 drivers
+v0000017dddd02210_0 .net *"_ivl_82", 0 0, L_0000017dddd2ef70;  1 drivers
+v0000017dddd00c30_0 .net *"_ivl_83", 3 0, L_0000017dddd2f010;  1 drivers
+v0000017dddd007d0_0 .net *"_ivl_88", 0 0, L_0000017dddd2e6b0;  1 drivers
+v0000017dddd014f0_0 .net *"_ivl_89", 3 0, L_0000017dddd2d8f0;  1 drivers
+v0000017dddd00eb0_0 .net *"_ivl_95", 0 0, L_0000017dddd2da30;  1 drivers
+v0000017dddd01770_0 .net *"_ivl_96", 3 0, L_0000017dddd2d530;  1 drivers
+v0000017dddd01f90_0 .net "clb_clk", 0 0, o0000017dddc99de8;  alias, 0 drivers
+v0000017dddd02350_0 .net "core_in", 31 0, L_0000017dddd2f0b0;  alias, 1 drivers
+v0000017dddcffdd0_0 .net "core_out", 31 0, o0000017dddc99f08;  alias, 0 drivers
+v0000017dddd01e50_0 .net "in", 7 0, o0000017dddc9bd38;  alias, 0 drivers
+v0000017dddd01950_0 .net "out", 7 0, L_0000017dddd2f510;  alias, 1 drivers
+v0000017dddd00190_0 .net "prog_clk", 0 0, o0000017dddc99f98;  alias, 0 drivers
+v0000017dddd00f50_0 .net "prog_en", 0 0, o0000017dddc99fc8;  alias, 0 drivers
+v0000017dddcffc90_0 .net "prog_in", 0 0, L_0000017dddd2d5d0;  alias, 1 drivers
+v0000017dddd022b0_0 .net "prog_out", 0 0, L_0000017dddd2f150;  alias, 1 drivers
+v0000017dddd023f0_0 .var "shift_reg", 15 0;
+L_0000017dddd2dc10 .part v0000017dddd023f0_0, 14, 2;
+L_0000017dddd2ecf0 .part o0000017dddc99f08, 0, 4;
+L_0000017dddd2e750 .part v0000017dddd023f0_0, 12, 2;
+L_0000017dddd2dcb0 .part o0000017dddc99f08, 4, 4;
+L_0000017dddd2f830 .part v0000017dddd023f0_0, 10, 2;
+L_0000017dddd2e4d0 .part o0000017dddc99f08, 8, 4;
+L_0000017dddd2fab0 .part v0000017dddd023f0_0, 8, 2;
+L_0000017dddd2ea70 .part o0000017dddc99f08, 12, 4;
+L_0000017dddd2f970 .part v0000017dddd023f0_0, 6, 2;
+L_0000017dddd2ddf0 .part o0000017dddc99f08, 16, 4;
+L_0000017dddd2f470 .part v0000017dddd023f0_0, 4, 2;
+L_0000017dddd2de90 .part o0000017dddc99f08, 20, 4;
+L_0000017dddd2e1b0 .part v0000017dddd023f0_0, 2, 2;
+L_0000017dddd2ed90 .part o0000017dddc99f08, 24, 4;
+L_0000017dddd2dfd0 .part v0000017dddd023f0_0, 0, 2;
+L_0000017dddd2df30 .part o0000017dddc99f08, 28, 4;
+LS_0000017dddd2f510_0_0 .concat8 [ 1 1 1 1], L_0000017dddd2f650, L_0000017dddd2d990, L_0000017dddd2f8d0, L_0000017dddd2dd50;
+LS_0000017dddd2f510_0_4 .concat8 [ 1 1 1 1], L_0000017dddd2e930, L_0000017dddd2d7b0, L_0000017dddd2ebb0, L_0000017dddd2d490;
+L_0000017dddd2f510 .concat8 [ 4 4 0 0], LS_0000017dddd2f510_0_0, LS_0000017dddd2f510_0_4;
+L_0000017dddd2f6f0 .part o0000017dddc9bd38, 0, 1;
+L_0000017dddd2e250 .concat [ 1 1 1 1], L_0000017dddd2f6f0, L_0000017dddd2f6f0, L_0000017dddd2f6f0, L_0000017dddd2f6f0;
+L_0000017dddd2dad0 .part o0000017dddc9bd38, 1, 1;
+L_0000017dddd2ee30 .concat [ 1 1 1 1], L_0000017dddd2dad0, L_0000017dddd2dad0, L_0000017dddd2dad0, L_0000017dddd2dad0;
+L_0000017dddd2f5b0 .part o0000017dddc9bd38, 2, 1;
+L_0000017dddd2f790 .concat [ 1 1 1 1], L_0000017dddd2f5b0, L_0000017dddd2f5b0, L_0000017dddd2f5b0, L_0000017dddd2f5b0;
+L_0000017dddd2e9d0 .part o0000017dddc9bd38, 3, 1;
+L_0000017dddd2fa10 .concat [ 1 1 1 1], L_0000017dddd2e9d0, L_0000017dddd2e9d0, L_0000017dddd2e9d0, L_0000017dddd2e9d0;
+L_0000017dddd2fb50 .part o0000017dddc9bd38, 4, 1;
+L_0000017dddd2eed0 .concat [ 1 1 1 1], L_0000017dddd2fb50, L_0000017dddd2fb50, L_0000017dddd2fb50, L_0000017dddd2fb50;
+L_0000017dddd2ef70 .part o0000017dddc9bd38, 5, 1;
+L_0000017dddd2f010 .concat [ 1 1 1 1], L_0000017dddd2ef70, L_0000017dddd2ef70, L_0000017dddd2ef70, L_0000017dddd2ef70;
+L_0000017dddd2e6b0 .part o0000017dddc9bd38, 6, 1;
+L_0000017dddd2d8f0 .concat [ 1 1 1 1], L_0000017dddd2e6b0, L_0000017dddd2e6b0, L_0000017dddd2e6b0, L_0000017dddd2e6b0;
+LS_0000017dddd2f0b0_0_0 .concat8 [ 4 4 4 4], L_0000017dddd2e250, L_0000017dddd2ee30, L_0000017dddd2f790, L_0000017dddd2fa10;
+LS_0000017dddd2f0b0_0_4 .concat8 [ 4 4 4 4], L_0000017dddd2eed0, L_0000017dddd2f010, L_0000017dddd2d8f0, L_0000017dddd2d530;
+L_0000017dddd2f0b0 .concat8 [ 16 16 0 0], LS_0000017dddd2f0b0_0_0, LS_0000017dddd2f0b0_0_4;
+L_0000017dddd2da30 .part o0000017dddc9bd38, 7, 1;
+L_0000017dddd2d530 .concat [ 1 1 1 1], L_0000017dddd2da30, L_0000017dddd2da30, L_0000017dddd2da30, L_0000017dddd2da30;
+L_0000017dddd2f150 .part v0000017dddd023f0_0, 0, 1;
+S_0000017dddcfaa70 .scope module, "mux0" "MUX4to1" 16 26, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd04fb0_0 .net "MUX_in", 3 0, L_0000017dddd2ecf0;  1 drivers
+v0000017dddd06a90_0 .net "MUX_out", 0 0, L_0000017dddd2f650;  1 drivers
+v0000017dddd07210_0 .net "MUX_sel", 1 0, L_0000017dddd2dc10;  1 drivers
+L_0000017dddd2f650 .part/v L_0000017dddd2ecf0, L_0000017dddd2dc10, 1;
+S_0000017dddcfac00 .scope module, "mux1" "MUX4to1" 16 27, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd05050_0 .net "MUX_in", 3 0, L_0000017dddd2dcb0;  1 drivers
+v0000017dddd06b30_0 .net "MUX_out", 0 0, L_0000017dddd2d990;  1 drivers
+v0000017dddd05690_0 .net "MUX_sel", 1 0, L_0000017dddd2e750;  1 drivers
+L_0000017dddd2d990 .part/v L_0000017dddd2dcb0, L_0000017dddd2e750, 1;
+S_0000017dddcfaf20 .scope module, "mux2" "MUX4to1" 16 28, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd06f90_0 .net "MUX_in", 3 0, L_0000017dddd2e4d0;  1 drivers
+v0000017dddd07030_0 .net "MUX_out", 0 0, L_0000017dddd2f8d0;  1 drivers
+v0000017dddd072b0_0 .net "MUX_sel", 1 0, L_0000017dddd2f830;  1 drivers
+L_0000017dddd2f8d0 .part/v L_0000017dddd2e4d0, L_0000017dddd2f830, 1;
+S_0000017dddd07fb0 .scope module, "mux3" "MUX4to1" 16 29, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd05730_0 .net "MUX_in", 3 0, L_0000017dddd2ea70;  1 drivers
+v0000017dddd057d0_0 .net "MUX_out", 0 0, L_0000017dddd2dd50;  1 drivers
+v0000017dddd05910_0 .net "MUX_sel", 1 0, L_0000017dddd2fab0;  1 drivers
+L_0000017dddd2dd50 .part/v L_0000017dddd2ea70, L_0000017dddd2fab0, 1;
+S_0000017dddd09590 .scope module, "mux4" "MUX4to1" 16 30, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd07530_0 .net "MUX_in", 3 0, L_0000017dddd2ddf0;  1 drivers
+v0000017dddd07490_0 .net "MUX_out", 0 0, L_0000017dddd2e930;  1 drivers
+v0000017dddd07b70_0 .net "MUX_sel", 1 0, L_0000017dddd2f970;  1 drivers
+L_0000017dddd2e930 .part/v L_0000017dddd2ddf0, L_0000017dddd2f970, 1;
+S_0000017dddd07e20 .scope module, "mux5" "MUX4to1" 16 31, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd07990_0 .net "MUX_in", 3 0, L_0000017dddd2de90;  1 drivers
+v0000017dddd075d0_0 .net "MUX_out", 0 0, L_0000017dddd2d7b0;  1 drivers
+v0000017dddd07a30_0 .net "MUX_sel", 1 0, L_0000017dddd2f470;  1 drivers
+L_0000017dddd2d7b0 .part/v L_0000017dddd2de90, L_0000017dddd2f470, 1;
+S_0000017dddd08f50 .scope module, "mux6" "MUX4to1" 16 32, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd07670_0 .net "MUX_in", 3 0, L_0000017dddd2ed90;  1 drivers
+v0000017dddd07710_0 .net "MUX_out", 0 0, L_0000017dddd2ebb0;  1 drivers
+v0000017dddd077b0_0 .net "MUX_sel", 1 0, L_0000017dddd2e1b0;  1 drivers
+L_0000017dddd2ebb0 .part/v L_0000017dddd2ed90, L_0000017dddd2e1b0, 1;
+S_0000017dddd090e0 .scope module, "mux7" "MUX4to1" 16 33, 10 3 0, S_0000017dddcfa2a0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd07ad0_0 .net "MUX_in", 3 0, L_0000017dddd2df30;  1 drivers
+v0000017dddd078f0_0 .net "MUX_out", 0 0, L_0000017dddd2d490;  1 drivers
+v0000017dddd07850_0 .net "MUX_sel", 1 0, L_0000017dddd2dfd0;  1 drivers
+L_0000017dddd2d490 .part/v L_0000017dddd2df30, L_0000017dddd2dfd0, 1;
+S_0000017dddd08780 .scope module, "io3" "IOSwitch" 14 78, 16 5 0, S_0000017dddb6a940;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 32 "core_out";
+    .port_info 5 /INPUT 8 "in";
+    .port_info 6 /OUTPUT 1 "prog_out";
+    .port_info 7 /OUTPUT 32 "core_in";
+    .port_info 8 /OUTPUT 8 "out";
+v0000017dddd01450_0 .net *"_ivl_52", 0 0, L_0000017dddd2fc90;  1 drivers
+v0000017dddd00690_0 .net *"_ivl_53", 3 0, L_0000017dddd31130;  1 drivers
+v0000017dddd01c70_0 .net *"_ivl_58", 0 0, L_0000017dddd311d0;  1 drivers
+v0000017dddd005f0_0 .net *"_ivl_59", 3 0, L_0000017dddd319f0;  1 drivers
+v0000017dddd00870_0 .net *"_ivl_64", 0 0, L_0000017dddd31310;  1 drivers
+v0000017dddd004b0_0 .net *"_ivl_65", 3 0, L_0000017dddd313b0;  1 drivers
+v0000017dddd00730_0 .net *"_ivl_70", 0 0, L_0000017dddd31bd0;  1 drivers
+v0000017dddd009b0_0 .net *"_ivl_71", 3 0, L_0000017dddd318b0;  1 drivers
+v0000017dddd00a50_0 .net *"_ivl_76", 0 0, L_0000017dddd31630;  1 drivers
+v0000017dddd019f0_0 .net *"_ivl_77", 3 0, L_0000017dddd31f90;  1 drivers
+v0000017dddd01a90_0 .net *"_ivl_82", 0 0, L_0000017dddd305f0;  1 drivers
+v0000017dddd01b30_0 .net *"_ivl_83", 3 0, L_0000017dddd2fd30;  1 drivers
+v0000017dddd00af0_0 .net *"_ivl_88", 0 0, L_0000017dddd309b0;  1 drivers
+v0000017dddd0cff0_0 .net *"_ivl_89", 3 0, L_0000017dddd314f0;  1 drivers
+v0000017dddd0d590_0 .net *"_ivl_95", 0 0, L_0000017dddd30730;  1 drivers
+v0000017dddd0e3f0_0 .net *"_ivl_96", 3 0, L_0000017dddd322b0;  1 drivers
+v0000017dddd0cd70_0 .net "clb_clk", 0 0, o0000017dddc99de8;  alias, 0 drivers
+v0000017dddd0d4f0_0 .net "core_in", 31 0, L_0000017dddd30550;  alias, 1 drivers
+v0000017dddd0ccd0_0 .net "core_out", 31 0, o0000017dddc99f38;  alias, 0 drivers
+v0000017dddd0dd10_0 .net "in", 7 0, o0000017dddc9cba8;  alias, 0 drivers
+v0000017dddd0cf50_0 .net "out", 7 0, L_0000017dddd31090;  alias, 1 drivers
+v0000017dddd0c550_0 .net "prog_clk", 0 0, o0000017dddc99f98;  alias, 0 drivers
+v0000017dddd0d630_0 .net "prog_en", 0 0, o0000017dddc99fc8;  alias, 0 drivers
+v0000017dddd0d090_0 .net "prog_in", 0 0, L_0000017dddd2f150;  alias, 1 drivers
+v0000017dddd0c5f0_0 .net "prog_out", 0 0, L_0000017dddd320d0;  alias, 1 drivers
+v0000017dddd0caf0_0 .var "shift_reg", 15 0;
+L_0000017dddd2e7f0 .part v0000017dddd0caf0_0, 14, 2;
+L_0000017dddd2d670 .part o0000017dddc99f38, 0, 4;
+L_0000017dddd2e2f0 .part v0000017dddd0caf0_0, 12, 2;
+L_0000017dddd2e570 .part o0000017dddc99f38, 4, 4;
+L_0000017dddd2e890 .part v0000017dddd0caf0_0, 10, 2;
+L_0000017dddd30ff0 .part o0000017dddc99f38, 8, 4;
+L_0000017dddd31d10 .part v0000017dddd0caf0_0, 8, 2;
+L_0000017dddd30050 .part o0000017dddc99f38, 12, 4;
+L_0000017dddd31810 .part v0000017dddd0caf0_0, 6, 2;
+L_0000017dddd32350 .part o0000017dddc99f38, 16, 4;
+L_0000017dddd2ff10 .part v0000017dddd0caf0_0, 4, 2;
+L_0000017dddd30690 .part o0000017dddc99f38, 20, 4;
+L_0000017dddd31db0 .part v0000017dddd0caf0_0, 2, 2;
+L_0000017dddd31e50 .part o0000017dddc99f38, 24, 4;
+L_0000017dddd31b30 .part v0000017dddd0caf0_0, 0, 2;
+L_0000017dddd2fbf0 .part o0000017dddc99f38, 28, 4;
+LS_0000017dddd31090_0_0 .concat8 [ 1 1 1 1], L_0000017dddd2d3f0, L_0000017dddd2d710, L_0000017dddd2e610, L_0000017dddd32030;
+LS_0000017dddd31090_0_4 .concat8 [ 1 1 1 1], L_0000017dddd2fe70, L_0000017dddd31450, L_0000017dddd30f50, L_0000017dddd31270;
+L_0000017dddd31090 .concat8 [ 4 4 0 0], LS_0000017dddd31090_0_0, LS_0000017dddd31090_0_4;
+L_0000017dddd2fc90 .part o0000017dddc9cba8, 0, 1;
+L_0000017dddd31130 .concat [ 1 1 1 1], L_0000017dddd2fc90, L_0000017dddd2fc90, L_0000017dddd2fc90, L_0000017dddd2fc90;
+L_0000017dddd311d0 .part o0000017dddc9cba8, 1, 1;
+L_0000017dddd319f0 .concat [ 1 1 1 1], L_0000017dddd311d0, L_0000017dddd311d0, L_0000017dddd311d0, L_0000017dddd311d0;
+L_0000017dddd31310 .part o0000017dddc9cba8, 2, 1;
+L_0000017dddd313b0 .concat [ 1 1 1 1], L_0000017dddd31310, L_0000017dddd31310, L_0000017dddd31310, L_0000017dddd31310;
+L_0000017dddd31bd0 .part o0000017dddc9cba8, 3, 1;
+L_0000017dddd318b0 .concat [ 1 1 1 1], L_0000017dddd31bd0, L_0000017dddd31bd0, L_0000017dddd31bd0, L_0000017dddd31bd0;
+L_0000017dddd31630 .part o0000017dddc9cba8, 4, 1;
+L_0000017dddd31f90 .concat [ 1 1 1 1], L_0000017dddd31630, L_0000017dddd31630, L_0000017dddd31630, L_0000017dddd31630;
+L_0000017dddd305f0 .part o0000017dddc9cba8, 5, 1;
+L_0000017dddd2fd30 .concat [ 1 1 1 1], L_0000017dddd305f0, L_0000017dddd305f0, L_0000017dddd305f0, L_0000017dddd305f0;
+L_0000017dddd309b0 .part o0000017dddc9cba8, 6, 1;
+L_0000017dddd314f0 .concat [ 1 1 1 1], L_0000017dddd309b0, L_0000017dddd309b0, L_0000017dddd309b0, L_0000017dddd309b0;
+LS_0000017dddd30550_0_0 .concat8 [ 4 4 4 4], L_0000017dddd31130, L_0000017dddd319f0, L_0000017dddd313b0, L_0000017dddd318b0;
+LS_0000017dddd30550_0_4 .concat8 [ 4 4 4 4], L_0000017dddd31f90, L_0000017dddd2fd30, L_0000017dddd314f0, L_0000017dddd322b0;
+L_0000017dddd30550 .concat8 [ 16 16 0 0], LS_0000017dddd30550_0_0, LS_0000017dddd30550_0_4;
+L_0000017dddd30730 .part o0000017dddc9cba8, 7, 1;
+L_0000017dddd322b0 .concat [ 1 1 1 1], L_0000017dddd30730, L_0000017dddd30730, L_0000017dddd30730, L_0000017dddd30730;
+L_0000017dddd320d0 .part v0000017dddd0caf0_0, 0, 1;
+S_0000017dddd098b0 .scope module, "mux0" "MUX4to1" 16 26, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcffd30_0 .net "MUX_in", 3 0, L_0000017dddd2d670;  1 drivers
+v0000017dddd00050_0 .net "MUX_out", 0 0, L_0000017dddd2d3f0;  1 drivers
+v0000017dddd00ff0_0 .net "MUX_sel", 1 0, L_0000017dddd2e7f0;  1 drivers
+L_0000017dddd2d3f0 .part/v L_0000017dddd2d670, L_0000017dddd2e7f0, 1;
+S_0000017dddd09a40 .scope module, "mux1" "MUX4to1" 16 27, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcffe70_0 .net "MUX_in", 3 0, L_0000017dddd2e570;  1 drivers
+v0000017dddd01590_0 .net "MUX_out", 0 0, L_0000017dddd2d710;  1 drivers
+v0000017dddd01090_0 .net "MUX_sel", 1 0, L_0000017dddd2e2f0;  1 drivers
+L_0000017dddd2d710 .part/v L_0000017dddd2e570, L_0000017dddd2e2f0, 1;
+S_0000017dddd08c30 .scope module, "mux2" "MUX4to1" 16 28, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd016d0_0 .net "MUX_in", 3 0, L_0000017dddd30ff0;  1 drivers
+v0000017dddd01630_0 .net "MUX_out", 0 0, L_0000017dddd2e610;  1 drivers
+v0000017dddd01130_0 .net "MUX_sel", 1 0, L_0000017dddd2e890;  1 drivers
+L_0000017dddd2e610 .part/v L_0000017dddd30ff0, L_0000017dddd2e890, 1;
+S_0000017dddd09720 .scope module, "mux3" "MUX4to1" 16 29, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd000f0_0 .net "MUX_in", 3 0, L_0000017dddd30050;  1 drivers
+v0000017dddd01310_0 .net "MUX_out", 0 0, L_0000017dddd32030;  1 drivers
+v0000017dddd00550_0 .net "MUX_sel", 1 0, L_0000017dddd31d10;  1 drivers
+L_0000017dddd32030 .part/v L_0000017dddd30050, L_0000017dddd31d10, 1;
+S_0000017dddd09400 .scope module, "mux4" "MUX4to1" 16 30, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddcfff10_0 .net "MUX_in", 3 0, L_0000017dddd32350;  1 drivers
+v0000017dddd011d0_0 .net "MUX_out", 0 0, L_0000017dddd2fe70;  1 drivers
+v0000017dddd00910_0 .net "MUX_sel", 1 0, L_0000017dddd31810;  1 drivers
+L_0000017dddd2fe70 .part/v L_0000017dddd32350, L_0000017dddd31810, 1;
+S_0000017dddd07c90 .scope module, "mux5" "MUX4to1" 16 31, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd00cd0_0 .net "MUX_in", 3 0, L_0000017dddd30690;  1 drivers
+v0000017dddd01810_0 .net "MUX_out", 0 0, L_0000017dddd31450;  1 drivers
+v0000017dddcfffb0_0 .net "MUX_sel", 1 0, L_0000017dddd2ff10;  1 drivers
+L_0000017dddd31450 .part/v L_0000017dddd30690, L_0000017dddd2ff10, 1;
+S_0000017dddd08910 .scope module, "mux6" "MUX4to1" 16 32, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd00230_0 .net "MUX_in", 3 0, L_0000017dddd31e50;  1 drivers
+v0000017dddd002d0_0 .net "MUX_out", 0 0, L_0000017dddd30f50;  1 drivers
+v0000017dddd00b90_0 .net "MUX_sel", 1 0, L_0000017dddd31db0;  1 drivers
+L_0000017dddd30f50 .part/v L_0000017dddd31e50, L_0000017dddd31db0, 1;
+S_0000017dddd08140 .scope module, "mux7" "MUX4to1" 16 33, 10 3 0, S_0000017dddd08780;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd013b0_0 .net "MUX_in", 3 0, L_0000017dddd2fbf0;  1 drivers
+v0000017dddd00370_0 .net "MUX_out", 0 0, L_0000017dddd31270;  1 drivers
+v0000017dddd018b0_0 .net "MUX_sel", 1 0, L_0000017dddd31b30;  1 drivers
+L_0000017dddd31270 .part/v L_0000017dddd2fbf0, L_0000017dddd31b30, 1;
+S_0000017dddd082d0 .scope module, "io4" "IOSwitch" 14 90, 16 5 0, S_0000017dddb6a940;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "prog_in";
+    .port_info 1 /INPUT 1 "prog_en";
+    .port_info 2 /INPUT 1 "prog_clk";
+    .port_info 3 /INPUT 1 "clb_clk";
+    .port_info 4 /INPUT 32 "core_out";
+    .port_info 5 /INPUT 8 "in";
+    .port_info 6 /OUTPUT 1 "prog_out";
+    .port_info 7 /OUTPUT 32 "core_in";
+    .port_info 8 /OUTPUT 8 "out";
+v0000017dddd0e0d0_0 .net *"_ivl_52", 0 0, L_0000017dddd30cd0;  1 drivers
+v0000017dddd0e030_0 .net *"_ivl_53", 3 0, L_0000017dddd30d70;  1 drivers
+v0000017dddd0ead0_0 .net *"_ivl_58", 0 0, L_0000017dddd30e10;  1 drivers
+v0000017dddd0d810_0 .net *"_ivl_59", 3 0, L_0000017dddd30eb0;  1 drivers
+v0000017dddd0e170_0 .net *"_ivl_64", 0 0, L_0000017dddd323f0;  1 drivers
+v0000017dddd0e210_0 .net *"_ivl_65", 3 0, L_0000017dddd32850;  1 drivers
+v0000017dddd0e850_0 .net *"_ivl_70", 0 0, L_0000017dddd32ad0;  1 drivers
+v0000017dddd0cb90_0 .net *"_ivl_71", 3 0, L_0000017dddd32490;  1 drivers
+v0000017dddd0db30_0 .net *"_ivl_76", 0 0, L_0000017dddd32530;  1 drivers
+v0000017dddd0cc30_0 .net *"_ivl_77", 3 0, L_0000017dddd32710;  1 drivers
+v0000017dddd0e2b0_0 .net *"_ivl_82", 0 0, L_0000017dddd327b0;  1 drivers
+v0000017dddd0d8b0_0 .net *"_ivl_83", 3 0, L_0000017dddd328f0;  1 drivers
+v0000017dddd0da90_0 .net *"_ivl_88", 0 0, L_0000017dddd32990;  1 drivers
+v0000017dddd0dc70_0 .net *"_ivl_89", 3 0, L_0000017dddd32a30;  1 drivers
+v0000017dddd0ceb0_0 .net *"_ivl_95", 0 0, L_0000017dddd32670;  1 drivers
+v0000017dddd0dbd0_0 .net *"_ivl_96", 3 0, L_0000017dddd35770;  1 drivers
+v0000017dddd0ce10_0 .net "clb_clk", 0 0, o0000017dddc99de8;  alias, 0 drivers
+v0000017dddd0df90_0 .net "core_in", 31 0, L_0000017dddd325d0;  alias, 1 drivers
+v0000017dddd0d310_0 .net "core_out", 31 0, o0000017dddc99f68;  alias, 0 drivers
+v0000017dddd0ea30_0 .net "in", 7 0, o0000017dddc9da18;  alias, 0 drivers
+v0000017dddd0d3b0_0 .net "out", 7 0, L_0000017dddd30af0;  alias, 1 drivers
+v0000017dddd0e350_0 .net "prog_clk", 0 0, o0000017dddc99f98;  alias, 0 drivers
+v0000017dddd0d450_0 .net "prog_en", 0 0, o0000017dddc99fc8;  alias, 0 drivers
+v0000017dddd0eb70_0 .net "prog_in", 0 0, L_0000017dddd320d0;  alias, 1 drivers
+v0000017dddd0ec10_0 .net "prog_out", 0 0, L_0000017dddd358b0;  alias, 1 drivers
+v0000017dddd0c4b0_0 .var "shift_reg", 15 0;
+L_0000017dddd300f0 .part v0000017dddd0c4b0_0, 14, 2;
+L_0000017dddd2ffb0 .part o0000017dddc99f68, 0, 4;
+L_0000017dddd304b0 .part v0000017dddd0c4b0_0, 12, 2;
+L_0000017dddd31590 .part o0000017dddc99f68, 4, 4;
+L_0000017dddd31770 .part v0000017dddd0c4b0_0, 10, 2;
+L_0000017dddd307d0 .part o0000017dddc99f68, 8, 4;
+L_0000017dddd31ef0 .part v0000017dddd0c4b0_0, 8, 2;
+L_0000017dddd32170 .part o0000017dddc99f68, 12, 4;
+L_0000017dddd30910 .part v0000017dddd0c4b0_0, 6, 2;
+L_0000017dddd32210 .part o0000017dddc99f68, 16, 4;
+L_0000017dddd2fdd0 .part v0000017dddd0c4b0_0, 4, 2;
+L_0000017dddd30190 .part o0000017dddc99f68, 20, 4;
+L_0000017dddd31a90 .part v0000017dddd0c4b0_0, 2, 2;
+L_0000017dddd302d0 .part o0000017dddc99f68, 24, 4;
+L_0000017dddd30b90 .part v0000017dddd0c4b0_0, 0, 2;
+L_0000017dddd30a50 .part o0000017dddc99f68, 28, 4;
+LS_0000017dddd30af0_0_0 .concat8 [ 1 1 1 1], L_0000017dddd30370, L_0000017dddd31c70, L_0000017dddd316d0, L_0000017dddd30870;
+LS_0000017dddd30af0_0_4 .concat8 [ 1 1 1 1], L_0000017dddd30c30, L_0000017dddd31950, L_0000017dddd30230, L_0000017dddd30410;
+L_0000017dddd30af0 .concat8 [ 4 4 0 0], LS_0000017dddd30af0_0_0, LS_0000017dddd30af0_0_4;
+L_0000017dddd30cd0 .part o0000017dddc9da18, 0, 1;
+L_0000017dddd30d70 .concat [ 1 1 1 1], L_0000017dddd30cd0, L_0000017dddd30cd0, L_0000017dddd30cd0, L_0000017dddd30cd0;
+L_0000017dddd30e10 .part o0000017dddc9da18, 1, 1;
+L_0000017dddd30eb0 .concat [ 1 1 1 1], L_0000017dddd30e10, L_0000017dddd30e10, L_0000017dddd30e10, L_0000017dddd30e10;
+L_0000017dddd323f0 .part o0000017dddc9da18, 2, 1;
+L_0000017dddd32850 .concat [ 1 1 1 1], L_0000017dddd323f0, L_0000017dddd323f0, L_0000017dddd323f0, L_0000017dddd323f0;
+L_0000017dddd32ad0 .part o0000017dddc9da18, 3, 1;
+L_0000017dddd32490 .concat [ 1 1 1 1], L_0000017dddd32ad0, L_0000017dddd32ad0, L_0000017dddd32ad0, L_0000017dddd32ad0;
+L_0000017dddd32530 .part o0000017dddc9da18, 4, 1;
+L_0000017dddd32710 .concat [ 1 1 1 1], L_0000017dddd32530, L_0000017dddd32530, L_0000017dddd32530, L_0000017dddd32530;
+L_0000017dddd327b0 .part o0000017dddc9da18, 5, 1;
+L_0000017dddd328f0 .concat [ 1 1 1 1], L_0000017dddd327b0, L_0000017dddd327b0, L_0000017dddd327b0, L_0000017dddd327b0;
+L_0000017dddd32990 .part o0000017dddc9da18, 6, 1;
+L_0000017dddd32a30 .concat [ 1 1 1 1], L_0000017dddd32990, L_0000017dddd32990, L_0000017dddd32990, L_0000017dddd32990;
+LS_0000017dddd325d0_0_0 .concat8 [ 4 4 4 4], L_0000017dddd30d70, L_0000017dddd30eb0, L_0000017dddd32850, L_0000017dddd32490;
+LS_0000017dddd325d0_0_4 .concat8 [ 4 4 4 4], L_0000017dddd32710, L_0000017dddd328f0, L_0000017dddd32a30, L_0000017dddd35770;
+L_0000017dddd325d0 .concat8 [ 16 16 0 0], LS_0000017dddd325d0_0_0, LS_0000017dddd325d0_0_4;
+L_0000017dddd32670 .part o0000017dddc9da18, 7, 1;
+L_0000017dddd35770 .concat [ 1 1 1 1], L_0000017dddd32670, L_0000017dddd32670, L_0000017dddd32670, L_0000017dddd32670;
+L_0000017dddd358b0 .part v0000017dddd0c4b0_0, 0, 1;
+S_0000017dddd09270 .scope module, "mux0" "MUX4to1" 16 26, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0e8f0_0 .net "MUX_in", 3 0, L_0000017dddd2ffb0;  1 drivers
+v0000017dddd0d130_0 .net "MUX_out", 0 0, L_0000017dddd30370;  1 drivers
+v0000017dddd0c690_0 .net "MUX_sel", 1 0, L_0000017dddd300f0;  1 drivers
+L_0000017dddd30370 .part/v L_0000017dddd2ffb0, L_0000017dddd300f0, 1;
+S_0000017dddd08aa0 .scope module, "mux1" "MUX4to1" 16 27, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0e5d0_0 .net "MUX_in", 3 0, L_0000017dddd31590;  1 drivers
+v0000017dddd0d6d0_0 .net "MUX_out", 0 0, L_0000017dddd31c70;  1 drivers
+v0000017dddd0c7d0_0 .net "MUX_sel", 1 0, L_0000017dddd304b0;  1 drivers
+L_0000017dddd31c70 .part/v L_0000017dddd31590, L_0000017dddd304b0, 1;
+S_0000017dddd08460 .scope module, "mux2" "MUX4to1" 16 28, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0ca50_0 .net "MUX_in", 3 0, L_0000017dddd307d0;  1 drivers
+v0000017dddd0e530_0 .net "MUX_out", 0 0, L_0000017dddd316d0;  1 drivers
+v0000017dddd0e7b0_0 .net "MUX_sel", 1 0, L_0000017dddd31770;  1 drivers
+L_0000017dddd316d0 .part/v L_0000017dddd307d0, L_0000017dddd31770, 1;
+S_0000017dddd085f0 .scope module, "mux3" "MUX4to1" 16 29, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0e990_0 .net "MUX_in", 3 0, L_0000017dddd32170;  1 drivers
+v0000017dddd0de50_0 .net "MUX_out", 0 0, L_0000017dddd30870;  1 drivers
+v0000017dddd0def0_0 .net "MUX_sel", 1 0, L_0000017dddd31ef0;  1 drivers
+L_0000017dddd30870 .part/v L_0000017dddd32170, L_0000017dddd31ef0, 1;
+S_0000017dddd08dc0 .scope module, "mux4" "MUX4to1" 16 30, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0d950_0 .net "MUX_in", 3 0, L_0000017dddd32210;  1 drivers
+v0000017dddd0c870_0 .net "MUX_out", 0 0, L_0000017dddd30c30;  1 drivers
+v0000017dddd0e670_0 .net "MUX_sel", 1 0, L_0000017dddd30910;  1 drivers
+L_0000017dddd30c30 .part/v L_0000017dddd32210, L_0000017dddd30910, 1;
+S_0000017dddd12160 .scope module, "mux5" "MUX4to1" 16 31, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0e710_0 .net "MUX_in", 3 0, L_0000017dddd30190;  1 drivers
+v0000017dddd0c910_0 .net "MUX_out", 0 0, L_0000017dddd31950;  1 drivers
+v0000017dddd0d1d0_0 .net "MUX_sel", 1 0, L_0000017dddd2fdd0;  1 drivers
+L_0000017dddd31950 .part/v L_0000017dddd30190, L_0000017dddd2fdd0, 1;
+S_0000017dddd13100 .scope module, "mux6" "MUX4to1" 16 32, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0e490_0 .net "MUX_in", 3 0, L_0000017dddd302d0;  1 drivers
+v0000017dddd0d270_0 .net "MUX_out", 0 0, L_0000017dddd30230;  1 drivers
+v0000017dddd0d770_0 .net "MUX_sel", 1 0, L_0000017dddd31a90;  1 drivers
+L_0000017dddd30230 .part/v L_0000017dddd302d0, L_0000017dddd31a90, 1;
+S_0000017dddd13290 .scope module, "mux7" "MUX4to1" 16 33, 10 3 0, S_0000017dddd082d0;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 2 "MUX_sel";
+    .port_info 1 /INPUT 4 "MUX_in";
+    .port_info 2 /OUTPUT 1 "MUX_out";
+v0000017dddd0d9f0_0 .net "MUX_in", 3 0, L_0000017dddd30a50;  1 drivers
+v0000017dddd0ddb0_0 .net "MUX_out", 0 0, L_0000017dddd30410;  1 drivers
+v0000017dddd0c9b0_0 .net "MUX_sel", 1 0, L_0000017dddd30b90;  1 drivers
+L_0000017dddd30410 .part/v L_0000017dddd30a50, L_0000017dddd30b90, 1;
+    .scope S_0000017dddb3edc0;
+T_2 ;
+    %wait E_0000017dddc5f1b0;
+    %load/vec4 v0000017dddc8f580_0;
+    %assign/vec4 v0000017dddc908e0_0, 0;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0000017dddb3ec30;
+T_3 ;
+    %pushi/vec4 0, 0, 17;
+    %store/vec4 v0000017dddc90840_0, 0, 17;
+    %end;
+    .thread T_3;
+    .scope S_0000017dddb3ec30;
+T_4 ;
+    %wait E_0000017dddc5f770;
+    %load/vec4 v0000017dddc8fbc0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_4.0, 8;
+    %load/vec4 v0000017dddc90660_0;
+    %load/vec4 v0000017dddc90840_0;
+    %parti/s 16, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddc90840_0, 0;
+T_4.0 ;
+    %jmp T_4;
+    .thread T_4;
+    .scope S_0000017dddce9240;
+T_5 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000017dddcf1ae0_0, 0, 32;
+    %end;
+    .thread T_5;
+    .scope S_0000017dddce9240;
+T_6 ;
+    %wait E_0000017dddc5f770;
+    %load/vec4 v0000017dddcf10e0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_6.0, 8;
+    %load/vec4 v0000017dddcf0aa0_0;
+    %load/vec4 v0000017dddcf1ae0_0;
+    %parti/s 31, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddcf1ae0_0, 0;
+T_6.0 ;
+    %jmp T_6;
+    .thread T_6;
+    .scope S_0000017dddb415a0;
+T_7 ;
+    %pushi/vec4 0, 0, 20;
+    %store/vec4 v0000017dddcf6c70_0, 0, 20;
+    %end;
+    .thread T_7;
+    .scope S_0000017dddb415a0;
+T_8 ;
+    %wait E_0000017dddc5f770;
+    %load/vec4 v0000017dddcf6950_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_8.0, 8;
+    %load/vec4 v0000017dddcf6630_0;
+    %load/vec4 v0000017dddcf6c70_0;
+    %parti/s 19, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddcf6c70_0, 0;
+T_8.0 ;
+    %jmp T_8;
+    .thread T_8;
+    .scope S_0000017dddceddb0;
+T_9 ;
+    %wait E_0000017dddc5f1b0;
+    %load/vec4 v0000017dddcf7ad0_0;
+    %assign/vec4 v0000017dddcf75d0_0, 0;
+    %jmp T_9;
+    .thread T_9;
+    .scope S_0000017dddb04e70;
+T_10 ;
+    %pushi/vec4 4008587818, 0, 32;
+    %concati/vec4 3869376512, 0, 34;
+    %concati/vec4 0, 0, 3;
+    %store/vec4 v0000017dddd02490_0, 0, 69;
+    %end;
+    .thread T_10;
+    .scope S_0000017dddb04e70;
+T_11 ;
+    %delay 5000, 0;
+    %load/vec4 v0000017dddd03c50_0;
+    %inv;
+    %store/vec4 v0000017dddd03c50_0, 0, 1;
+    %jmp T_11;
+    .thread T_11;
+    .scope S_0000017dddb04e70;
+T_12 ;
+    %delay 5000, 0;
+    %load/vec4 v0000017dddd04970_0;
+    %inv;
+    %store/vec4 v0000017dddd04970_0, 0, 1;
+    %jmp T_12;
+    .thread T_12;
+    .scope S_0000017dddb04e70;
+T_13 ;
+    %vpi_call 2 92 "$dumpfile", "CB_Simul.vcd" {0 0 0};
+    %vpi_call 2 93 "$dumpvars", 32'sb00000000000000000000000000000000, S_0000017dddb04e70 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000017dddd03c50_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000017dddd04970_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000017dddd03570_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000017dddd04330_0, 0, 1;
+    %wait E_0000017dddc5f770;
+    %pushi/vec4 4008587818, 0, 32;
+    %concati/vec4 3869376512, 0, 34;
+    %concati/vec4 0, 0, 3;
+    %store/vec4 v0000017dddc911a0_0, 0, 69;
+    %fork TD_CBTestBench.program_cb, S_0000017dddb6aad0;
+    %join;
+    %fork TD_CBTestBench.test_cb, S_0000017dddb41410;
+    %join;
+    %delay 100000, 0;
+    %vpi_call 2 112 "$finish" {0 0 0};
+    %end;
+    .thread T_13;
+    .scope S_0000017dddcf9c60;
+T_14 ;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000017dddd069f0_0, 0, 16;
+    %end;
+    .thread T_14;
+    .scope S_0000017dddcf9c60;
+T_15 ;
+    %wait E_0000017dddc587b0;
+    %load/vec4 v0000017dddd06ef0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_15.0, 8;
+    %load/vec4 v0000017dddd06310_0;
+    %load/vec4 v0000017dddd069f0_0;
+    %parti/s 15, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddd069f0_0, 0;
+T_15.0 ;
+    %jmp T_15;
+    .thread T_15;
+    .scope S_0000017dddcfa2a0;
+T_16 ;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000017dddd023f0_0, 0, 16;
+    %end;
+    .thread T_16;
+    .scope S_0000017dddcfa2a0;
+T_17 ;
+    %wait E_0000017dddc587b0;
+    %load/vec4 v0000017dddd00f50_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_17.0, 8;
+    %load/vec4 v0000017dddcffc90_0;
+    %load/vec4 v0000017dddd023f0_0;
+    %parti/s 15, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddd023f0_0, 0;
+T_17.0 ;
+    %jmp T_17;
+    .thread T_17;
+    .scope S_0000017dddd08780;
+T_18 ;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000017dddd0caf0_0, 0, 16;
+    %end;
+    .thread T_18;
+    .scope S_0000017dddd08780;
+T_19 ;
+    %wait E_0000017dddc587b0;
+    %load/vec4 v0000017dddd0d630_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_19.0, 8;
+    %load/vec4 v0000017dddd0d090_0;
+    %load/vec4 v0000017dddd0caf0_0;
+    %parti/s 15, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddd0caf0_0, 0;
+T_19.0 ;
+    %jmp T_19;
+    .thread T_19;
+    .scope S_0000017dddd082d0;
+T_20 ;
+    %pushi/vec4 0, 0, 16;
+    %store/vec4 v0000017dddd0c4b0_0, 0, 16;
+    %end;
+    .thread T_20;
+    .scope S_0000017dddd082d0;
+T_21 ;
+    %wait E_0000017dddc587b0;
+    %load/vec4 v0000017dddd0d450_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_21.0, 8;
+    %load/vec4 v0000017dddd0eb70_0;
+    %load/vec4 v0000017dddd0c4b0_0;
+    %parti/s 15, 1, 2;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v0000017dddd0c4b0_0, 0;
+T_21.0 ;
+    %jmp T_21;
+    .thread T_21;
+# The file index is used to find the file name in the following table.
+:file_names 17;
+    "N/A";
+    "<interactive>";
+    "CBTestBench.v";
+    "CBModule.v";
+    "CLBModule.v";
+    "DFlipFlop.v";
+    "LUT16to1.v";
+    "MUX2to1.v";
+    "MUX8to1.v";
+    "SBModule.v";
+    "MUX4to1.v";
+    "CBTest.v";
+    "CLBTest.v";
+    "SBTest.v";
+    "IO.v";
+    "Core.v";
+    "IOSwitch.v";

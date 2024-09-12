@@ -50,10 +50,10 @@ module CBTestBench;
         .in2(in2),
         .in3(in3),
         .in4(in4),
-        .out1(out1),
-        .out2(out2),
-        .out3(out3),
-        .out4(out4)
+        .out1(exp_out1),
+        .out2(exp_out2),
+        .out3(exp_out3),
+        .out4(exp_out4)
     );
 
     // Clock generation
@@ -89,6 +89,9 @@ module CBTestBench;
     endtask
 
     initial begin
+        $dumpfile("CB_Simul.vcd");
+        $dumpvars(0, CBTestBench);
+
         // Initialize signals
         clb_clk = 0;
         prog_clk = 0;
@@ -105,6 +108,7 @@ module CBTestBench;
         test_cb;
         
         // Finish simulation
+        #100;
         $finish;
     end
 

@@ -16,7 +16,7 @@ module CBTest(
 
     // Splitting the configuration bits into different parts
     wire [16:0] lut_prog = prog[68:52];  // 17-bit LUT configuration for CLB
-    wire [31:0] sb_index = prog[51:20];  // 32-bit configuration for switch box
+    wire [31:0] sb_prog = prog[51:20];  // 32-bit configuration for switch box
     wire [11:0] sel_index = prog[19:8];  // 12-bit selection configuration for inputs
     wire [7:0] sel_in_out = prog[7:0];   // 8-bit configuration for input/output selection
 
