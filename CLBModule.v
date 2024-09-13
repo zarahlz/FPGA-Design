@@ -61,5 +61,4 @@ module CLBModule (
     
     // Output logic
     assign clb_output = mux_out;
-
 endmodule

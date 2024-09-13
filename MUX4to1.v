@@ -7,9 +7,6 @@ module MUX4to1 (
 );
 
     // MUX logic using a case statement
-    assign MUX_out = (MUX_sel == 2'b00) ? MUX_in[0] :
-                     (MUX_sel == 2'b01) ? MUX_in[1] :
-                     (MUX_sel == 2'b10) ? MUX_in[2] :
-                                          MUX_in[3];
+    assign MUX_out = MUX_in[MUX_sel];
 
 endmodule

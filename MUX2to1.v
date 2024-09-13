@@ -6,6 +6,6 @@ module MUX2to1 (
     output wire MUX_out       // MUX output
 );
     // MUX logic
-    assign MUX_out = MUX_sel ? MUX_in[1] : MUX_in[0];
+    assign MUX_out = MUX_in[MUX_sel];
 
 endmodule
