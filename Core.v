@@ -191,11 +191,11 @@ module Core(
         .clb_clk(clb_clk),
         .in1(in1[31:28]),
         .in3(in3[3:0]),
-        .in4(reversed_row7_out2),
+        .in4(reverse_row7_out2),
         .prog_out(prog_out),
         .out1(out1[31:28]),
         .out2(row8_out2),
         .out3(in3[3:0]),
-        .out4(reversed_row7_in2)
+        .out4(reverse_row7_in2)
     );
 endmodule

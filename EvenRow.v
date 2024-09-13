@@ -172,7 +172,7 @@ module EvenRow(
         .in4(in4[7:4]),
         .prog_out(cell7_prog_out),
         .out1(reverse_cell6_in3),
-        .out2(out2[27:23]),
+        .out2(out2[27:24]),
         .out3(cell7_out3),
         .out4(out4[7:4])
     );
