@@ -1,29 +1,29 @@
 `timescale 1ns / 1ps
 
-module IOTestBench;
+module CoreTestBench;
     // The bitstream
-    reg [4479:0] prog;
+    reg [4415:0] prog;
     
     // Inputs
     reg prog_in;
     reg prog_en;
     reg prog_clk;
     reg clb_clk;
-    reg [7:0] in1;
-    reg [7:0] in2;
-    reg [7:0] in3;
-    reg [7:0] in4;
+    reg [31:0] in1;
+    reg [31:0] in2;
+    reg [31:0] in3;
+    reg [31:0] in4;
 
     // Outputs
     wire prog_out;
-    wire [7:0] out1;
-    wire [7:0] out2;
-    wire [7:0] out3;
-    wire [7:0] out4;
+    wire [31:0] out1;
+    wire [31:0] out2;
+    wire [31:0] out3;
+    wire [31:0] out4;
 
 
     // Instantiate the Unit Under Test (UUT)
-    IO io (
+    Core core (
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -45,16 +45,17 @@ module IOTestBench;
    
 
     // Task to program the shift register with the bitstream
-    task program_io;
+    task program_core;
         integer i;
         begin
-            $display("Programming IO...");
+            $display("Programming Core...");
             prog[68:52] = 17'b0000000000000000_0;
-            prog[51:20] = 32'b10_10_10_10_10_10_10_10_10_10_10_10_10_10_10_10;
+            prog[51:20] = 32'b10_10_10_10_11_11_11_11_00_00_00_00_01_01_01_01;
             prog[19:0] = 20'b111_101_011_001_00000000;
+            prog = {64{prog[68:0]}};
             prog = 0;
             prog_en = 1;
-            for (i = 0; i <= 4479; i = i + 1) begin
+            for (i = 0; i <= 4415; i = i + 1) begin
                 prog_in = prog[i];
                 @(posedge prog_clk);
             end
@@ -62,16 +63,16 @@ module IOTestBench;
         end
     endtask
     
-    // Task to test the IO with the given test cases for CLB and SB
-    task test_io;
+    // Task to test the Core with the given test cases
+    task test_core;
         begin
-            $display("Testing IO...");
+            $display("Testing Core...");
             @(posedge clb_clk);
             in1 = $random;
             in2 = $random;
             in3 = $random;
             in4 = $random;
-            #1000000; // Wait for output to stabilize
+            #100; // Wait for output to stabilize
             $display("Input: %b_%b_%b_%b", in4, in3, in2, in1);
             $display("Output: %b_%b_%b_%b", out4, out3, out2, out1);
         end
@@ -87,13 +88,12 @@ module IOTestBench;
 
         // Wait for the clock to stabilize
         @(posedge prog_clk);
-        
 
-        // Program the CB      
-        program_io;
+        // Program the Core
+        program_core;
 
-        // Test the CB
-        test_io;
+        // Test the Core
+        test_core;
         
         // Finish simulation
         #100;

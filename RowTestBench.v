@@ -1,29 +1,29 @@
 `timescale 1ns / 1ps
 
-module IOTestBench;
+module RowTestBench;
     // The bitstream
-    reg [4479:0] prog;
+    reg [551:0] prog;
     
     // Inputs
     reg prog_in;
     reg prog_en;
     reg prog_clk;
     reg clb_clk;
-    reg [7:0] in1;
-    reg [7:0] in2;
-    reg [7:0] in3;
-    reg [7:0] in4;
+    reg [3:0] in1;
+    reg [31:0] in2;
+    reg [3:0] in3;
+    reg [31:0] in4;
 
     // Outputs
     wire prog_out;
-    wire [7:0] out1;
-    wire [7:0] out2;
-    wire [7:0] out3;
-    wire [7:0] out4;
+    wire [3:0] out1;
+    wire [31:0] out2;
+    wire [3:0] out3;
+    wire [31:0] out4;
 
 
     // Instantiate the Unit Under Test (UUT)
-    IO io (
+    OddRow row (
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -45,16 +45,16 @@ module IOTestBench;
    
 
     // Task to program the shift register with the bitstream
-    task program_io;
+    task program_row;
         integer i;
         begin
-            $display("Programming IO...");
+            $display("Programming Row...");
             prog[68:52] = 17'b0000000000000000_0;
-            prog[51:20] = 32'b10_10_10_10_10_10_10_10_10_10_10_10_10_10_10_10;
+            prog[51:20] = 32'b10_10_10_10_11_11_11_11_00_00_00_00_01_01_01_01;
             prog[19:0] = 20'b111_101_011_001_00000000;
-            prog = 0;
+            prog = {8{prog[68:0]}};
             prog_en = 1;
-            for (i = 0; i <= 4479; i = i + 1) begin
+            for (i = 0; i <= 551; i = i + 1) begin
                 prog_in = prog[i];
                 @(posedge prog_clk);
             end
@@ -62,10 +62,10 @@ module IOTestBench;
         end
     endtask
     
-    // Task to test the IO with the given test cases for CLB and SB
-    task test_io;
+    // Task to test the Row with the given test case
+    task test_row;
         begin
-            $display("Testing IO...");
+            $display("Testing Row...");
             @(posedge clb_clk);
             in1 = $random;
             in2 = $random;
@@ -89,11 +89,11 @@ module IOTestBench;
         @(posedge prog_clk);
         
 
-        // Program the CB      
-        program_io;
+        // Program the Row  
+        program_row;
 
-        // Test the CB
-        test_io;
+        // Test the Row
+        test_row;
         
         // Finish simulation
         #100;
