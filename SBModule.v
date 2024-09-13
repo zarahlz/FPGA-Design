@@ -18,6 +18,10 @@ module SBModule (
 
     reg [31:0] shift_reg;  
     
+    initial begin
+        shift_reg <= 32'b0;
+    end
+    
     always @(posedge prog_clk or negedge rst) begin
         if (!rst) begin
             shift_reg <= 32'b0; 

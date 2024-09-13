@@ -2,14 +2,14 @@
 
 module DFlipFlop(
     input clk,             
-    input d,   
-    input rst,           
+    input d,          
     output reg q           
 );
-    always @(posedge clk or negedge rst) begin
+    initial begin
+        q <= 0;
+    end
+    
+    always @(posedge clk) begin
         q <= d;      
-        if (!rst) begin
-            q <= 0;
-        end     
     end
 endmodule

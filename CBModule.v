@@ -9,7 +9,6 @@ module CBModule(
     input wire prog_en,           // Programming enable signal
     input wire prog_clk,          // Programming clock
     input wire clb_clk,           // Clock for the CLB (Configurable Logic Block)
-    input wire rst,               // Reset signal
     input wire [3:0] in1,         // Input signal 1 (4 bits)
     input wire [3:0] in2,         // Input signal 2 (4 bits)
     input wire [3:0] in3,         // Input signal 3 (4 bits)
@@ -49,7 +48,6 @@ module CBModule(
         .prog_en(prog_en),
         .clb_clk(clb_clk),
         .prog_clk(prog_clk),
-        .rst(rst),
         .clb_input(clb_in),
         .prog_out(sb_prog_in),
         .clb_output(clb_out)
@@ -64,7 +62,6 @@ module CBModule(
         .prog_in(sb_prog_in),        
         .prog_clk(prog_clk),       
         .prog_en(prog_en),     
-        .rst(rst),   
         .out1(out1),   
         .out2(out2),    
         .out3(out3),    
@@ -88,12 +85,13 @@ module CBModule(
     MUX2to1 mux_out0 (.MUX_sel(shift_reg[1]), .MUX_in(out0_mux), .MUX_out(out4[0]));
     MUX2to1 mux_in0 (.MUX_sel(shift_reg[0]), .MUX_in(in0_mux), .MUX_out(sb_in4[0]));
     
+    initial begin
+        shift_reg <= 20'b0;
+    end
+    
     // Shift register logic to store configuration data
-    always @(posedge prog_clk or negedge rst) begin
-        if (!rst) begin
-            shift_reg <= 20'b0;
-        end
-        else if (prog_en) begin
+    always @(posedge prog_clk) begin
+        if (prog_en) begin
             // Shift the register and load sb_prog_out
             shift_reg <= {sb_prog_out, shift_reg[19:1]};
         end

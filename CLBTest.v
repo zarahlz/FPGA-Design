@@ -3,7 +3,6 @@
 module CLBTest (
     input wire [16:0] prog,
     input wire clb_clk,
-    input wire rst,
     input wire [3:0] clb_input,
     output wire clb_output
 );
@@ -15,7 +14,7 @@ module CLBTest (
     wire ff_out;
 
     // MUX output
-    wire [1:0] mux_in = !rst? 0 : {ff_out, lut_out};
+    wire [1:0] mux_in = {ff_out, lut_out};
     wire mux_out;
     
     // LUT instanciation
