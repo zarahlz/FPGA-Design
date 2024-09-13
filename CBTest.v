@@ -4,6 +4,7 @@
 module CBTest(
     input wire [68:0] prog,     // 69-bit configuration input
     input wire clb_clk,         // Clock signal for the CLB
+    input wire rst,
     input wire [3:0] in1,       // 4-bit input from source 1
     input wire [3:0] in2,       // 4-bit input from source 2
     input wire [3:0] in3,       // 4-bit input from source 3
@@ -34,7 +35,7 @@ module CBTest(
     MUX8to1 clb_sel0 (.MUX_sel(sel_index[2:0]), .MUX_in(in_out), .MUX_out(clb_input[0]));
 
     // Instantiating the CLB module
-    CLBTest clb_test (.prog(lut_prog), .clb_clk(clb_clk), .clb_input(clb_input), .clb_output(clb_output));
+    CLBTest clb_test (.prog(lut_prog), .clb_clk(clb_clk), .rst(rst), .clb_input(clb_input), .clb_output(clb_output));
 
     // Wires for switch box input and output
     wire [3:0] sb_in4;

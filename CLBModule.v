@@ -5,6 +5,7 @@ module CLBModule (
     input wire prog_en,
     input wire prog_clk,
     input wire clb_clk,
+    input wire rst,
     input wire [3:0] clb_input,
     output wire prog_out,
     output wire clb_output
@@ -23,10 +24,6 @@ module CLBModule (
     wire [1:0] mux_in = {ff_out, lut_out};
     wire mux_out;
     
-    initial begin
-        shift_reg = 17'b0;
-    end
-    
     // LUT instanciation
     LUT16to1 lut16to1 (
         .LUT_sel(clb_input),
@@ -37,6 +34,7 @@ module CLBModule (
     // Flip flop instantiation
     DFlipFlop d (
         .clk(clb_clk),
+        .rst(rst),
         .d(lut_out),
         .q(ff_out)
     );
@@ -49,9 +47,12 @@ module CLBModule (
     );
 
     // Shift register logic
-    always @(posedge prog_clk) begin
+    always @(posedge prog_clk or negedge rst) begin
         if (prog_en) begin
             shift_reg <= {prog_in, shift_reg[16:1]};
+        end
+        if (!rst) begin
+            shift_reg <= 17'b0;
         end
     end
     

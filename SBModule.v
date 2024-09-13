@@ -7,7 +7,8 @@ module SBModule (
     input [3:0] in4,      
     input prog_in,        
     input prog_clk,       
-    input prog_en,        
+    input prog_en,    
+    input rst,    
     output [3:0] out1,   
     output [3:0] out2,    
     output [3:0] out3,    
@@ -17,14 +18,12 @@ module SBModule (
 
     reg [31:0] shift_reg;  
     
-    initial begin
-        shift_reg = 32'b0;
-    end
-
-    
-    always @(posedge prog_clk) begin
+    always @(posedge prog_clk or negedge rst) begin
         if (prog_en) begin
             shift_reg <= {prog_in, shift_reg[31:1]}; 
+        end
+        if (!rst) begin
+            shift_reg <= 32'b0; 
         end
     end
 

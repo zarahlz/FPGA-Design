@@ -9,6 +9,7 @@ module CBModule(
     input wire prog_en,           // Programming enable signal
     input wire prog_clk,          // Programming clock
     input wire clb_clk,           // Clock for the CLB (Configurable Logic Block)
+    input wire rst,               // Reset signal
     input wire [3:0] in1,         // Input signal 1 (4 bits)
     input wire [3:0] in2,         // Input signal 2 (4 bits)
     input wire [3:0] in3,         // Input signal 3 (4 bits)
@@ -29,7 +30,7 @@ module CBModule(
     wire [3:0] sb_out4;           // Switch box output 4
     
     // Muxes to route input/output signals through the switch box
-    wire [7:0] clb_in_mux = {out1[3], in1[3], out1[2], in1[2], out1[1], in1[1], out1[0], in1[0]};
+    wire [7:0] clb_in_mux = {in1[3], out1[3], in1[2], out1[2], in1[1], out1[1], in1[0], out1[0]};
     wire [1:0] out3_mux = {clb_out, sb_out4[3]};
     wire [1:0] in3_mux = {clb_out, in4[3]};
     wire [1:0] out2_mux = {clb_out, sb_out4[2]};
@@ -42,17 +43,13 @@ module CBModule(
     // 20-bit shift register used for configuration
     reg [19:0] shift_reg;
     
-    // Initialize the shift register to zero
-    initial begin
-        shift_reg = 20'b0;
-    end
-    
     // Instantiate the CLB module
     CLBModule clb (
         .prog_in(prog_in),
         .prog_en(prog_en),
         .clb_clk(clb_clk),
         .prog_clk(prog_clk),
+        .rst(rst),
         .clb_input(clb_in),
         .prog_out(sb_prog_in),
         .clb_output(clb_out)
@@ -66,7 +63,8 @@ module CBModule(
         .in4(sb_in4),      
         .prog_in(sb_prog_in),        
         .prog_clk(prog_clk),       
-        .prog_en(prog_en),        
+        .prog_en(prog_en),     
+        .rst(rst),   
         .out1(out1),   
         .out2(out2),    
         .out3(out3),    
@@ -91,10 +89,13 @@ module CBModule(
     MUX2to1 mux_in0 (.MUX_sel(shift_reg[0]), .MUX_in(in0_mux), .MUX_out(sb_in4[0]));
     
     // Shift register logic to store configuration data
-    always @(posedge prog_clk) begin
+    always @(posedge prog_clk or negedge rst) begin
         if (prog_en) begin
             // Shift the register and load sb_prog_out
             shift_reg <= {sb_prog_out, shift_reg[19:1]};
+        end
+        if (!rst) begin
+            shift_reg <= 20'b0;
         end
     end
     
