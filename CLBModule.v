@@ -48,11 +48,11 @@ module CLBModule (
 
     // Shift register logic
     always @(posedge prog_clk or negedge rst) begin
-        if (prog_en) begin
-            shift_reg <= {prog_in, shift_reg[16:1]};
-        end
         if (!rst) begin
             shift_reg <= 17'b0;
+        end
+        else if (prog_en) begin
+            shift_reg <= {prog_in, shift_reg[16:1]};
         end
     end
     

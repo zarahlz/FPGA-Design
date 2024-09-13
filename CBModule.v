@@ -90,12 +90,12 @@ module CBModule(
     
     // Shift register logic to store configuration data
     always @(posedge prog_clk or negedge rst) begin
-        if (prog_en) begin
-            // Shift the register and load sb_prog_out
-            shift_reg <= {sb_prog_out, shift_reg[19:1]};
-        end
         if (!rst) begin
             shift_reg <= 20'b0;
+        end
+        else if (prog_en) begin
+            // Shift the register and load sb_prog_out
+            shift_reg <= {sb_prog_out, shift_reg[19:1]};
         end
     end
     

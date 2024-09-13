@@ -19,11 +19,11 @@ module SBModule (
     reg [31:0] shift_reg;  
     
     always @(posedge prog_clk or negedge rst) begin
-        if (prog_en) begin
-            shift_reg <= {prog_in, shift_reg[31:1]}; 
-        end
         if (!rst) begin
             shift_reg <= 32'b0; 
+        end
+        else if (prog_en) begin
+            shift_reg <= {prog_in, shift_reg[31:1]}; 
         end
     end
 

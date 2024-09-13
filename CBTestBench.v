@@ -68,8 +68,9 @@ module CBTestBench;
         begin
             $display("Reseting CB...");
             rst = 0;
-            #100
+            #100;
             rst = 1;
+            #100;
         end
     endtask
 
@@ -80,7 +81,7 @@ module CBTestBench;
             $display("Programming CB...");
             prog[68:52] = $random;
             prog[51:20] = $random;
-            prog[19:0] = {$random, 8'b0};
+            prog[19:0] = {$random, 8'b10101010};
             $display("Bitstream: %b_%b_%b", prog[68:52],prog[51:20], prog[19:0]);
             prog_en = 1;
             for (i = 0; i <= 68; i = i + 1) begin
