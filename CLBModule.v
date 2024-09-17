@@ -20,7 +20,7 @@ module CLBModule (
     wire ff_out;
 
     // MUX output
-    wire [1:0] mux_in = {ff_out, lut_out};
+    wire [1:0] mux_in = {lut_out, ff_out};
     wire mux_out;
     
     // LUT instanciation

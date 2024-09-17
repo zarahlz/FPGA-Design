@@ -54,6 +54,10 @@ module CLBTestBench;
     endtask
 
     initial begin
+        // Save the waveform
+        $dumpfile("CLBTestBench.vcd");
+        $dumpvars(0, CLBTestBench);
+        
         // Initialize signals
         Clb_clk = 0;
         Prog_clk = 0;

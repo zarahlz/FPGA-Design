@@ -42,13 +42,13 @@ module CBTest(
 
     // Mux for selecting between CLB output and switch box output for each bit of out3, in3, etc.
     wire [1:0] out3_mux = {clb_output, sb_out4[3]};
-    wire [1:0] in3_mux = {clb_output, in4[3]};
+    wire [1:0] in3_mux = {in4[3], clb_output};
     wire [1:0] out2_mux = {clb_output, sb_out4[2]};
-    wire [1:0] in2_mux = {clb_output, in4[2]};
+    wire [1:0] in2_mux = {in4[2], clb_output};
     wire [1:0] out1_mux = {clb_output, sb_out4[1]};
-    wire [1:0] in1_mux = {clb_output, in4[1]};
+    wire [1:0] in1_mux = {in4[1], clb_output};
     wire [1:0] out0_mux = {clb_output, sb_out4[0]};
-    wire [1:0] in0_mux = {clb_output, in4[0]};
+    wire [1:0] in0_mux = {in4[0], clb_output};
 
     // 2-to-1 multiplexers for routing the input/output based on the selection bits
     MUX2to1 mux_out3 (.MUX_sel(sel_in_out[7]), .MUX_in(out3_mux), .MUX_out(out4[3]));

@@ -27,7 +27,7 @@ module CBTestBench;
     wire [3:0] exp_out4;
 
     // Instantiate the Unit Under Test (UUT)
-    CBModule cb_serial (
+    CBModule cb (
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -44,7 +44,7 @@ module CBTestBench;
     );
     
     // Instantiate the Unit Under Test (UUT)
-    CBTest cb_parallel (
+    CBTest cb_test (
         .prog(prog),
         .clb_clk(clb_clk),
         .in1(in1),
@@ -96,7 +96,7 @@ module CBTestBench;
     endtask
 
     initial begin
-        $dumpfile("CB_Simul.vcd");
+        $dumpfile("CBTestBench.vcd");
         $dumpvars(0, CBTestBench);
 
         // Initialize signals

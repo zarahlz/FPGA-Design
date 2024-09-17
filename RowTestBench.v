@@ -78,7 +78,10 @@ module RowTestBench;
     endtask
 
     initial begin
-
+        // Save the waveform
+        $dumpfile("RowTestBench.vcd");
+        $dumpvars(0, RowTestBench);
+        
         // Initialize signals
         clb_clk = 0;
         prog_clk = 0;
