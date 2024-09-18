@@ -3,6 +3,7 @@
 // IOSwitch Module
 // Switches and multiplexes I/O signals between the Core module and external I/O
 module IOSwitch(
+    input wire rst,            // Reset signal
     input wire prog_in,        // Input for programming data
     input wire prog_en,        // Enable signal for programming
     input wire prog_clk,       // Clock signal for programming
@@ -17,24 +18,22 @@ module IOSwitch(
     // Internal 16-bit shift register for managing programming data
     reg [15:0] shift_reg;
     
-    // Initialize shift register to zero
-    initial begin
-        shift_reg = 16'b0;
-    end
-    
     // Multiplexer instances to select the output based on shift register value
-    MUX4to1 mux0 (.MUX_in(core_out[3:0]), .MUX_sel(shift_reg[15:14]), .MUX_out(out[0]));
-    MUX4to1 mux1 (.MUX_in(core_out[7:4]), .MUX_sel(shift_reg[13:12]), .MUX_out(out[1]));
-    MUX4to1 mux2 (.MUX_in(core_out[11:8]), .MUX_sel(shift_reg[11:10]), .MUX_out(out[2]));
-    MUX4to1 mux3 (.MUX_in(core_out[15:12]), .MUX_sel(shift_reg[9:8]), .MUX_out(out[3]));
-    MUX4to1 mux4 (.MUX_in(core_out[19:16]), .MUX_sel(shift_reg[7:6]), .MUX_out(out[4]));
-    MUX4to1 mux5 (.MUX_in(core_out[23:20]), .MUX_sel(shift_reg[5:4]), .MUX_out(out[5]));
-    MUX4to1 mux6 (.MUX_in(core_out[27:24]), .MUX_sel(shift_reg[3:2]), .MUX_out(out[6]));
-    MUX4to1 mux7 (.MUX_in(core_out[31:28]), .MUX_sel(shift_reg[1:0]), .MUX_out(out[7]));
+    MUX4to1 mux0 (.MUX_en(!prog_en), .MUX_in(core_out[3:0]), .MUX_sel(shift_reg[15:14]), .MUX_out(out[0]));
+    MUX4to1 mux1 (.MUX_en(!prog_en), .MUX_in(core_out[7:4]), .MUX_sel(shift_reg[13:12]), .MUX_out(out[1]));
+    MUX4to1 mux2 (.MUX_en(!prog_en), .MUX_in(core_out[11:8]), .MUX_sel(shift_reg[11:10]), .MUX_out(out[2]));
+    MUX4to1 mux3 (.MUX_en(!prog_en), .MUX_in(core_out[15:12]), .MUX_sel(shift_reg[9:8]), .MUX_out(out[3]));
+    MUX4to1 mux4 (.MUX_en(!prog_en), .MUX_in(core_out[19:16]), .MUX_sel(shift_reg[7:6]), .MUX_out(out[4]));
+    MUX4to1 mux5 (.MUX_en(!prog_en), .MUX_in(core_out[23:20]), .MUX_sel(shift_reg[5:4]), .MUX_out(out[5]));
+    MUX4to1 mux6 (.MUX_en(!prog_en), .MUX_in(core_out[27:24]), .MUX_sel(shift_reg[3:2]), .MUX_out(out[6]));
+    MUX4to1 mux7 (.MUX_en(!prog_en), .MUX_in(core_out[31:28]), .MUX_sel(shift_reg[1:0]), .MUX_out(out[7]));
     
     // Update shift register on positive edge of prog_clk if prog_en is high
     always @(posedge prog_clk) begin
-        if (prog_en) begin
+        if (!rst) begin
+            shift_reg <= 16'b0;
+        end
+        else if (prog_en) begin
             shift_reg <= {prog_in, shift_reg[15:1]};
         end
     end

@@ -3,6 +3,7 @@
 // Core Module
 // Handles the main functionality and processing
 module Core(
+    input wire rst,            // Reset signal
     input wire prog_in,        // Input for programming data
     input wire prog_en,        // Enable signal for programming
     input wire prog_clk,       // Clock signal for programming
@@ -71,6 +72,7 @@ module Core(
     wire [31:0] reverse_row8_out4 = reverse_bits(row8_out4);
 
     OddRow row1 (
+        .rst(rst),
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -87,6 +89,7 @@ module Core(
     );
 
     EvenRow row2 (
+        .rst(rst),
         .prog_in(row1_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -103,6 +106,7 @@ module Core(
     );
 
     OddRow row3 (
+        .rst(rst),
         .prog_in(row2_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -119,6 +123,7 @@ module Core(
     );
 
     EvenRow row4 (
+        .rst(rst),
         .prog_in(row3_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -135,6 +140,7 @@ module Core(
     );
 
     OddRow row5 (
+        .rst(rst),
         .prog_in(row4_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -151,6 +157,7 @@ module Core(
     );
 
     EvenRow row6 (
+        .rst(rst),
         .prog_in(row5_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -167,6 +174,7 @@ module Core(
     );
 
     OddRow row7 (
+        .rst(rst),
         .prog_in(row6_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -183,6 +191,7 @@ module Core(
     );
 
     EvenRow row8 (
+        .rst(rst),
         .prog_in(row7_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),

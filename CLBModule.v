@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module CLBModule (
+    input wire rst,
     input wire prog_in,
     input wire prog_en,
     input wire prog_clk,
@@ -25,6 +26,7 @@ module CLBModule (
     
     // LUT instanciation
     LUT16to1 lut16to1 (
+        .LUT_en(!prog_en),
         .LUT_sel(clb_input),
         .LUT_input(shift_reg[16:1]),
         .LUT_output(lut_out)
@@ -39,18 +41,18 @@ module CLBModule (
     
     // MUX instantiation
     MUX2to1 mux2to1 (
+        .MUX_en(!prog_en),
         .MUX_sel(shift_reg[0]),
         .MUX_in(mux_in),
         .MUX_out(mux_out)
     );
-    
-    initial begin
-        shift_reg <= 17'b0;
-    end
-
+   
     // Shift register logic
     always @(posedge prog_clk) begin
-        if (prog_en) begin
+        if (!rst) begin
+            shift_reg <= 17'b0;
+        end
+        else if (prog_en) begin
             shift_reg <= {prog_in, shift_reg[16:1]};
         end
     end

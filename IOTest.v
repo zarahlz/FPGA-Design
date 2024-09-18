@@ -3,7 +3,8 @@
 // IO Module
 // Integrates Core and IOSwitch modules for managing multiple I/O operations
 module IOTest(
-    input wire [4479:0] prog,           // Input for programming data
+    input wire prog_en,
+    input wire [4479:0] prog,  // Input for programming data
     input wire clb_clk,        // Clock signal for Configurable Logic Block
     input wire [7:0] in1,      // 8-bit input data to be sent to IOSwitch
     input wire [7:0] in2,      // 8-bit input data to be sent to IOSwitch
@@ -27,6 +28,7 @@ module IOTest(
     
     // Instantiate Core module
     CoreTest core(
+        .prog_en(prog_en),
         .prog(prog[4479:64]),
         .clb_clk(clb_clk),
         .in1(core_in1),
@@ -41,6 +43,7 @@ module IOTest(
     
     // Instantiate IOSwitch modules for each set of inputs
     IOSwitchTest io1(
+        .prog_en(prog_en),
         .prog(prog[63:48]),
         .clb_clk(clb_clk),
         .core_out(core_out1),
@@ -50,6 +53,7 @@ module IOTest(
     );
     
     IOSwitchTest io2(
+        .prog_en(prog_en),
         .prog(prog[47:32]),
         .clb_clk(clb_clk),
         .core_out(core_out2),
@@ -59,6 +63,7 @@ module IOTest(
     );
 
     IOSwitchTest io3(
+        .prog_en(prog_en),
         .prog(prog[31:16]),
         .clb_clk(clb_clk),
         .core_out(core_out3),
@@ -68,6 +73,7 @@ module IOTest(
     );
     
     IOSwitchTest io4(
+        .prog_en(prog_en),
         .prog(prog[15:0]),
         .clb_clk(clb_clk),
         .core_out(core_out4),

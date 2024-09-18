@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module EvenRow(
+    input wire rst,               // Reset signal
     input wire prog_in,           // Programming input for configuration
     input wire prog_en,           // Programming enable signal
     input wire prog_clk,          // Programming clock
@@ -66,6 +67,7 @@ module EvenRow(
     wire [3:0] reverse_cell7_out3 = reverse_bits(cell7_out3);
 
     CBModule cell1 (
+        .rst(rst),
         .prog_in(cell2_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -82,6 +84,7 @@ module EvenRow(
     );
     
     CBModule cell2 (
+        .rst(rst),
         .prog_in(cell3_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -98,6 +101,7 @@ module EvenRow(
     );
     
     CBModule cell3 (
+        .rst(rst),
         .prog_in(cell4_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -114,6 +118,7 @@ module EvenRow(
     );
     
      CBModule cell4 (
+        .rst(rst),
         .prog_in(cell5_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -130,6 +135,7 @@ module EvenRow(
     );
     
     CBModule cell5 (
+        .rst(rst),
         .prog_in(cell6_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -146,6 +152,7 @@ module EvenRow(
     );
     
     CBModule cell6 (
+        .rst(rst),
         .prog_in(cell7_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -162,6 +169,7 @@ module EvenRow(
     );
     
     CBModule cell7 (
+        .rst(rst),
         .prog_in(cell8_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -178,6 +186,7 @@ module EvenRow(
     );
     
     CBModule cell8 (
+        .rst(rst),
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),

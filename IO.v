@@ -3,6 +3,7 @@
 // IO Module
 // Integrates Core and IOSwitch modules for managing multiple I/O operations
 module IO(
+    input wire rst,            // Reset signal
     input wire prog_in,        // Input for programming data
     input wire prog_en,        // Enable signal for programming
     input wire prog_clk,       // Clock signal for programming
@@ -35,6 +36,7 @@ module IO(
     
     // Instantiate Core module
     Core core(
+        .rst(rst),
         .prog_in(prog_in),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -52,6 +54,7 @@ module IO(
     
     // Instantiate IOSwitch modules for each set of inputs
     IOSwitch io1(
+        .rst(rst),
         .prog_in(core_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -64,6 +67,7 @@ module IO(
     );
     
     IOSwitch io2(
+        .rst(rst),
         .prog_in(io1_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -76,6 +80,7 @@ module IO(
     );
 
     IOSwitch io3(
+        .rst(rst),
         .prog_in(io2_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),
@@ -88,6 +93,7 @@ module IO(
     );
     
     IOSwitch io4(
+        .rst(rst),
         .prog_in(io3_prog_out),
         .prog_en(prog_en),
         .prog_clk(prog_clk),

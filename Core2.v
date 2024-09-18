@@ -1,6 +1,7 @@
 `timescale 1ns/1ps
 
 module Core2(
+    input wire rst,            // Reset signal
     input wire prog_in,        // Input for programming data
     input wire prog_en,        // Enable signal for programming
     input wire prog_clk,       // Clock signal for programming
@@ -677,7 +678,7 @@ module Core2(
     assign out4[31:28] = out0_3;
     //---------------------------------
     // For cell1
-    assign in1_0 = out0_2;
+    assign in1_0 = reverse_bits(out0_2);
     assign in1_1 = reverse_bits(out14_3); 
     assign in1_2 = reverse_bits(out2_0);
     assign in1_3 = in4[27:24]; 
@@ -685,7 +686,7 @@ module Core2(
     assign out4[27:24] = out1_3; 
     //---------------------------------
     // For cell2
-    assign in2_0 = out1_2;
+    assign in2_0 = reverse_bits(out1_2);
     assign in2_1 = reverse_bits(out13_3); 
     assign in2_2 = reverse_bits(out3_0);
     assign in2_3 = in4[23:20]; 
@@ -693,7 +694,7 @@ module Core2(
     assign out4[23:20] = out2_3; 
     //---------------------------------
     // For cell3
-    assign in3_0 = out2_2;
+    assign in3_0 = reverse_bits(out2_2);
     assign in3_1 = reverse_bits(out12_3); 
     assign in3_2 = reverse_bits(out4_0);
     assign in3_3 = in4[19:16]; 
@@ -701,7 +702,7 @@ module Core2(
     assign out4[19:16] = out3_3; 
     //---------------------------------
     // For cell4
-    assign in4_0 = out3_2;
+    assign in4_0 = reverse_bits(out3_2);
     assign in4_1 = reverse_bits(out11_3); 
     assign in4_2 = reverse_bits(out5_0);
     assign in4_3 = in4[15:12]; 
@@ -709,7 +710,7 @@ module Core2(
     assign out4[15:12] = out4_3; 
     //---------------------------------
     // For cell5
-    assign in5_0 = out4_2;
+    assign in5_0 = reverse_bits(out4_2);
     assign in5_1 = reverse_bits(out10_3); 
     assign in5_2 = reverse_bits(out6_0);
     assign in5_3 = in4[11:8]; 
@@ -717,7 +718,7 @@ module Core2(
     assign out4[11:8] = out5_3;
     //---------------------------------
     // For cell6
-    assign in6_0 = out5_2;
+    assign in6_0 = reverse_bits(out5_2);
     assign in6_1 = reverse_bits(out9_3); 
     assign in6_2 = reverse_bits(out7_0);
     assign in6_3 = in4[7:4]; 
@@ -725,7 +726,7 @@ module Core2(
     assign out4[7:4] = out6_3; 
     //---------------------------------
     // For cell7
-    assign in7_0 = out6_2;
+    assign in7_0 = reverse_bits(out6_2);
     assign in7_1 = reverse_bits(out8_3); 
     assign in7_2 = in3[31:28];
     assign in7_3 = in4[3:0]; 
@@ -784,6 +785,7 @@ module Core2(
     assign in15_1 = reverse_bits(out16_3); 
     assign in15_2 = reverse_bits(out14_0);
     assign in15_3 = reverse_bits(out0_1);
+    
     assign out1[7:4] = out15_0; 
     //---------------------------------
     //===================================================
@@ -793,6 +795,7 @@ module Core2(
     assign in16_1 = reverse_bits(out31_3);
     assign in16_2 = reverse_bits(out17_0);
     assign in16_3 = reverse_bits(out15_1);
+    
     assign out1[11:8] = out16_0;
     //---------------------------------
     // For cell17
@@ -846,6 +849,7 @@ module Core2(
     assign in24_1 = reverse_bits(out39_3);
     assign in24_2 = in3[19:16];
     assign in24_3 = reverse_bits(out23_1);
+    
     assign out3[19:16] = out24_2;
     //---------------------------------
     // For cell25
@@ -889,6 +893,7 @@ module Core2(
     assign in31_1 = reverse_bits(out32_3); 
     assign in31_2 = reverse_bits(out30_0);
     assign in31_3 = reverse_bits(out16_1);
+    
     assign out1[15:12] = out31_0; 
     //---------------------------------
     //===================================================
@@ -898,6 +903,7 @@ module Core2(
     assign in32_1 = reverse_bits(out47_3);
     assign in32_2 = reverse_bits(out33_0);
     assign in32_3 = reverse_bits(out31_1);
+    
     assign out1[19:16] = out32_0;
     //---------------------------------
     // For cell33
@@ -951,6 +957,7 @@ module Core2(
     assign in40_1 = reverse_bits(out55_3);
     assign in40_2 = in3[11:8];
     assign in40_3 = reverse_bits(out39_1);
+    
     assign out3[11:8] = out40_2;
     //---------------------------------
     // For cell41
@@ -992,8 +999,9 @@ module Core2(
     // For cell47
     assign in47_0 = in1[23:20];
     assign in47_1 = reverse_bits(out48_3); 
-    assign in47_2 = reverse_bits(out30_0);
+    assign in47_2 = reverse_bits(out46_0);
     assign in47_3 = reverse_bits(out32_1);
+    
     assign out1[23:20] = out47_0; 
     //---------------------------------
     //===================================================
@@ -1003,6 +1011,7 @@ module Core2(
     assign in48_1 = reverse_bits(out63_3);
     assign in48_2 = reverse_bits(out49_0);
     assign in48_3 = reverse_bits(out47_1);
+    
     assign out1[27:24] = out48_0;
     //---------------------------------
     // For cell49
@@ -1113,6 +1122,7 @@ module Core2(
     assign in63_1 = in2[3:0];
     assign in63_2 = reverse_bits(out62_0);
     assign in63_3 = reverse_bits(out48_1);
+    
     assign out1[31:28] = out63_0; 
     assign out2[3:0] = out63_1;
 
@@ -1121,6 +1131,7 @@ module Core2(
     //---------------------------------
 
     CBModule cell0 (
+        .rst(rst),
         .prog_in(prog_in),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1136,6 +1147,7 @@ module Core2(
         .out4(out0_3)          // Output signal 4 (4 bits)
     );
     CBModule cell1 (
+        .rst(rst),
         .prog_in(prog_out0),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1151,6 +1163,7 @@ module Core2(
         .out4(out1_3)          // Output signal 4 (4 bits)
     );
     CBModule cell2 (
+        .rst(rst),
         .prog_in(prog_out1),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1166,6 +1179,7 @@ module Core2(
         .out4(out2_3)          // Output signal 4 (4 bits)
     );
     CBModule cell3 (
+        .rst(rst),
         .prog_in(prog_out2),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1181,6 +1195,7 @@ module Core2(
         .out4(out3_3)          // Output signal 4 (4 bits)
     );
     CBModule cell4 (
+        .rst(rst),
         .prog_in(prog_out3),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1196,6 +1211,7 @@ module Core2(
         .out4(out4_3)          // Output signal 4 (4 bits)
     );
     CBModule cell5 (
+        .rst(rst),
         .prog_in(prog_out4),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1211,6 +1227,7 @@ module Core2(
         .out4(out5_3)          // Output signal 4 (4 bits)
     );
     CBModule cell6 (
+        .rst(rst),
         .prog_in(prog_out5),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1226,6 +1243,7 @@ module Core2(
         .out4(out6_3)          // Output signal 4 (4 bits)
     );
     CBModule cell7 (
+        .rst(rst),
         .prog_in(prog_out6),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1241,6 +1259,7 @@ module Core2(
         .out4(out7_3)          // Output signal 4 (4 bits)
     );
     CBModule cell8 (
+        .rst(rst),
         .prog_in(prog_out7),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1256,6 +1275,7 @@ module Core2(
         .out4(out8_3)          // Output signal 4 (4 bits)
     );
     CBModule cell9 (
+        .rst(rst),
         .prog_in(prog_out8),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1271,6 +1291,7 @@ module Core2(
         .out4(out9_3)          // Output signal 4 (4 bits)
     );
     CBModule cell10 (
+        .rst(rst),
         .prog_in(prog_out9),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1286,6 +1307,7 @@ module Core2(
         .out4(out10_3)          // Output signal 4 (4 bits)
     );
     CBModule cell11 (
+        .rst(rst),
         .prog_in(prog_out10),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1301,6 +1323,7 @@ module Core2(
         .out4(out11_3)          // Output signal 4 (4 bits)
     );
     CBModule cell12 (
+        .rst(rst),
         .prog_in(prog_out11),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1316,6 +1339,7 @@ module Core2(
         .out4(out12_3)          // Output signal 4 (4 bits)
     );
     CBModule cell13 (
+        .rst(rst),
         .prog_in(prog_out12),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1331,6 +1355,7 @@ module Core2(
         .out4(out13_3)          // Output signal 4 (4 bits)
     );
     CBModule cell14 (
+        .rst(rst),
         .prog_in(prog_out13),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1346,6 +1371,7 @@ module Core2(
         .out4(out14_3)          // Output signal 4 (4 bits)
     );
     CBModule cell15 (
+        .rst(rst),
         .prog_in(prog_out14),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1361,6 +1387,7 @@ module Core2(
         .out4(out15_3)          // Output signal 4 (4 bits)
     );
     CBModule cell16 (
+        .rst(rst),
         .prog_in(prog_out15),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1376,6 +1403,7 @@ module Core2(
         .out4(out16_3)          // Output signal 4 (4 bits)
     );
     CBModule cell17 (
+        .rst(rst),
         .prog_in(prog_out16),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1391,6 +1419,7 @@ module Core2(
         .out4(out17_3)          // Output signal 4 (4 bits)
     );
     CBModule cell18 (
+        .rst(rst),
         .prog_in(prog_out17),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1406,6 +1435,7 @@ module Core2(
         .out4(out18_3)          // Output signal 4 (4 bits)
     );
     CBModule cell19 (
+        .rst(rst),
         .prog_in(prog_out18),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1421,6 +1451,7 @@ module Core2(
         .out4(out19_3)          // Output signal 4 (4 bits)
     );
     CBModule cell20 (
+        .rst(rst),
         .prog_in(prog_out19),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1436,6 +1467,7 @@ module Core2(
         .out4(out20_3)          // Output signal 4 (4 bits)
     );
     CBModule cell21 (
+        .rst(rst),
         .prog_in(prog_out20),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1451,6 +1483,7 @@ module Core2(
         .out4(out21_3)          // Output signal 4 (4 bits)
     );
     CBModule cell22 (
+        .rst(rst),
         .prog_in(prog_out21),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1466,6 +1499,7 @@ module Core2(
         .out4(out22_3)          // Output signal 4 (4 bits)
     );
     CBModule cell23 (
+        .rst(rst),
         .prog_in(prog_out22),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1481,6 +1515,7 @@ module Core2(
         .out4(out23_3)          // Output signal 4 (4 bits)
     );
     CBModule cell24 (
+        .rst(rst),
         .prog_in(prog_out23),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1496,6 +1531,7 @@ module Core2(
         .out4(out24_3)          // Output signal 4 (4 bits)
     );
     CBModule cell25 (
+        .rst(rst),
         .prog_in(prog_out24),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1511,6 +1547,7 @@ module Core2(
         .out4(out25_3)          // Output signal 4 (4 bits)
     );
     CBModule cell26 (
+        .rst(rst),
         .prog_in(prog_out25),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1526,6 +1563,7 @@ module Core2(
         .out4(out26_3)          // Output signal 4 (4 bits)
     );
     CBModule cell27 (
+        .rst(rst),
         .prog_in(prog_out26),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1541,6 +1579,7 @@ module Core2(
         .out4(out27_3)          // Output signal 4 (4 bits)
     );
     CBModule cell28 (
+        .rst(rst),
         .prog_in(prog_out27),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1556,6 +1595,7 @@ module Core2(
         .out4(out28_3)          // Output signal 4 (4 bits)
     );
     CBModule cell29 (
+        .rst(rst),
         .prog_in(prog_out28),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1571,6 +1611,7 @@ module Core2(
         .out4(out29_3)          // Output signal 4 (4 bits)
     );
     CBModule cell30 (
+        .rst(rst),
         .prog_in(prog_out29),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1586,6 +1627,7 @@ module Core2(
         .out4(out30_3)          // Output signal 4 (4 bits)
     );
     CBModule cell31 (
+        .rst(rst),
         .prog_in(prog_out30),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1601,6 +1643,7 @@ module Core2(
         .out4(out31_3)          // Output signal 4 (4 bits)
     );
     CBModule cell32 (
+        .rst(rst),
         .prog_in(prog_out31),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1616,6 +1659,7 @@ module Core2(
         .out4(out32_3)          // Output signal 4 (4 bits)
     );
     CBModule cell33 (
+        .rst(rst),
         .prog_in(prog_out32),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1631,6 +1675,7 @@ module Core2(
         .out4(out33_3)          // Output signal 4 (4 bits)
     );
     CBModule cell34 (
+        .rst(rst),
         .prog_in(prog_out33),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1646,6 +1691,7 @@ module Core2(
         .out4(out34_3)          // Output signal 4 (4 bits)
     );
     CBModule cell35 (
+        .rst(rst),
         .prog_in(prog_out34),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1661,6 +1707,7 @@ module Core2(
         .out4(out35_3)          // Output signal 4 (4 bits)
     );
     CBModule cell36 (
+        .rst(rst),
         .prog_in(prog_out35),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1676,6 +1723,7 @@ module Core2(
         .out4(out36_3)          // Output signal 4 (4 bits)
     );
     CBModule cell37 (
+        .rst(rst),
         .prog_in(prog_out36),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1691,6 +1739,7 @@ module Core2(
         .out4(out37_3)          // Output signal 4 (4 bits)
     );
     CBModule cell38 (
+        .rst(rst),
         .prog_in(prog_out37),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1706,6 +1755,7 @@ module Core2(
         .out4(out38_3)          // Output signal 4 (4 bits)
     );
     CBModule cell39 (
+        .rst(rst),
         .prog_in(prog_out38),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1721,6 +1771,7 @@ module Core2(
         .out4(out39_3)          // Output signal 4 (4 bits)
     );
     CBModule cell40 (
+        .rst(rst),
         .prog_in(prog_out39),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1736,6 +1787,7 @@ module Core2(
         .out4(out40_3)          // Output signal 4 (4 bits)
     );
     CBModule cell41 (
+        .rst(rst),
         .prog_in(prog_out40),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1751,6 +1803,7 @@ module Core2(
         .out4(out41_3)          // Output signal 4 (4 bits)
     );
     CBModule cell42 (
+        .rst(rst),
         .prog_in(prog_out41),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1766,6 +1819,7 @@ module Core2(
         .out4(out42_3)          // Output signal 4 (4 bits)
     );
     CBModule cell43 (
+        .rst(rst),
         .prog_in(prog_out42),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1781,6 +1835,7 @@ module Core2(
         .out4(out43_3)          // Output signal 4 (4 bits)
     );
     CBModule cell44 (
+        .rst(rst),
         .prog_in(prog_out43),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1796,6 +1851,7 @@ module Core2(
         .out4(out44_3)          // Output signal 4 (4 bits)
     );
     CBModule cell45 (
+        .rst(rst),
         .prog_in(prog_out44),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1811,6 +1867,7 @@ module Core2(
         .out4(out45_3)          // Output signal 4 (4 bits)
     );
     CBModule cell46 (
+        .rst(rst),
         .prog_in(prog_out45),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1826,6 +1883,7 @@ module Core2(
         .out4(out46_3)          // Output signal 4 (4 bits)
     );
     CBModule cell47 (
+        .rst(rst),
         .prog_in(prog_out46),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1841,6 +1899,7 @@ module Core2(
         .out4(out47_3)          // Output signal 4 (4 bits)
     );
     CBModule cell48 (
+        .rst(rst),
         .prog_in(prog_out47),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1856,6 +1915,7 @@ module Core2(
         .out4(out48_3)          // Output signal 4 (4 bits)
     );
     CBModule cell49 (
+        .rst(rst),
         .prog_in(prog_out48),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1871,6 +1931,7 @@ module Core2(
         .out4(out49_3)          // Output signal 4 (4 bits)
     );
     CBModule cell50 (
+        .rst(rst),
         .prog_in(prog_out49),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1886,6 +1947,7 @@ module Core2(
         .out4(out50_3)          // Output signal 4 (4 bits)
     );
     CBModule cell51 (
+        .rst(rst),
         .prog_in(prog_out50),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1901,6 +1963,7 @@ module Core2(
         .out4(out51_3)          // Output signal 4 (4 bits)
     );
     CBModule cell52 (
+        .rst(rst),
         .prog_in(prog_out51),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1916,6 +1979,7 @@ module Core2(
         .out4(out52_3)          // Output signal 4 (4 bits)
     );
     CBModule cell53 (
+        .rst(rst),
         .prog_in(prog_out52),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1931,6 +1995,7 @@ module Core2(
         .out4(out53_3)          // Output signal 4 (4 bits)
     );
     CBModule cell54 (
+        .rst(rst),
         .prog_in(prog_out53),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1946,6 +2011,7 @@ module Core2(
         .out4(out54_3)          // Output signal 4 (4 bits)
     );
     CBModule cell55 (
+        .rst(rst),
         .prog_in(prog_out54),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1961,6 +2027,7 @@ module Core2(
         .out4(out55_3)          // Output signal 4 (4 bits)
     );
     CBModule cell56 (
+        .rst(rst),
         .prog_in(prog_out55),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1976,6 +2043,7 @@ module Core2(
         .out4(out56_3)          // Output signal 4 (4 bits)
     );
     CBModule cell57 (
+        .rst(rst),
         .prog_in(prog_out56),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -1991,6 +2059,7 @@ module Core2(
         .out4(out57_3)          // Output signal 4 (4 bits)
     );
     CBModule cell58 (
+        .rst(rst),
         .prog_in(prog_out57),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -2006,6 +2075,7 @@ module Core2(
         .out4(out58_3)          // Output signal 4 (4 bits)
     );
     CBModule cell59 (
+        .rst(rst),
         .prog_in(prog_out58),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -2021,6 +2091,7 @@ module Core2(
         .out4(out59_3)          // Output signal 4 (4 bits)
     );
     CBModule cell60 (
+        .rst(rst),
         .prog_in(prog_out59),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -2036,6 +2107,7 @@ module Core2(
         .out4(out60_3)          // Output signal 4 (4 bits)
     );
     CBModule cell61 (
+        .rst(rst),
         .prog_in(prog_out60),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -2051,6 +2123,7 @@ module Core2(
         .out4(out61_3)          // Output signal 4 (4 bits)
     );
     CBModule cell62 (
+        .rst(rst),
         .prog_in(prog_out61),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
@@ -2066,6 +2139,7 @@ module Core2(
         .out4(out62_3)          // Output signal 4 (4 bits)
     );
     CBModule cell63 (
+        .rst(rst),
         .prog_in(prog_out62),                  // Programming input for configuration
         .prog_en(prog_en),           // Programming enable signal
         .prog_clk(prog_clk),         // Programming clock
